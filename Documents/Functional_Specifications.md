@@ -1,7 +1,7 @@
 # 2022-2023 - PROJECT5 - ALGORITHMS & DATA STRUCTURE - TEAM 2
 
 ## Functional Specifications
-
+<hr>
 <details>
 
 <summary>📖 Table of content</summary>
@@ -21,9 +21,10 @@
 - [9. Software architecture](#9-software-architecture)
 - [10. Evaluation criteria](#10-evaluation-criteria)
 - [11. Conclusion](#11-conclusion)
+- [Glosary](#glosary)
 
 </details>
-
+<hr>
 # 1. Introduction - Overview
 
 Introduction:
@@ -140,3 +141,4 @@ Here are the criteria that will be used to evaluate the software:
 # 11. Conclusion
 
 Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
+# Glosary
