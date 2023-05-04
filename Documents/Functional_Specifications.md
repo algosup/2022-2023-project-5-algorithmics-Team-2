@@ -9,18 +9,18 @@
 - [2022-2023 - PROJECT5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project5---algorithms--data-structure---team-2)
   - [Functional Specifications](#functional-specifications)
 - [1. Introduction - Overview](#1-introduction---overview)
-- [2. Objective (description of the objective of the Krug Champagne software)](#2-objective-description-of-the-objective-of-the-krug-champagne-software)
-- [3. Stages of champagne production (description of the different stages of champagne production)](#3-stages-of-champagne-production-description-of-the-different-stages-of-champagne-production)
+- [2. Objective](#2-objective)
+- [3. Stages of champagne production](#3-stages-of-champagne-production)
 - [4. Personas](#4-personas)
-  - [A. The Tester(Client)](#a-the-testerclient)
+  - [A. The Tester:Client](#a-the-testerclient)
   - [B. The Workers](#b-the-workers)
 - [5. Use case](#5-use-case)
 - [6. Blending step and the formula of Krug Grande Cuvée.](#6-blending-step-and-the-formula-of-krug-grande-cuvée)
-- [7. Functionalities (description of the expected functionalities of the software)](#7-functionalities-description-of-the-expected-functionalities-of-the-software)
-- [8. User interface (description of the desired user interface for the software)](#8-user-interface-description-of-the-desired-user-interface-for-the-software)
+- [7. Functionalities](#7-functionalities)
+- [8. User interface](#8-user-interface)
 - [9. Software architecture](#9-software-architecture)
 - [10. Evaluation criteria](#10-evaluation-criteria)
-- [11. Conclusion (summary of the specifications and expectations of Krug Champagne)](#11-conclusion-summary-of-the-specifications-and-expectations-of-krug-champagne)
+- [11. Conclusion](#11-conclusion)
 
 </details>
 
@@ -36,7 +36,7 @@ Krug Champagne is highly regarded by wine connoisseurs and is often considered o
 Overview:
 The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
 
-# 2. Objective (description of the objective of the Krug Champagne software)
+# 2. Objective
 
 Blending: The still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile:
 
@@ -46,7 +46,7 @@ Blending: The still wines from different vineyards and grape varieties are blend
 4. Develop a database that can store information on the different wines and vineyards, as well as track the inventory of the individual wines and the blending process itself, in order to ensure consistency and quality control.
 5. Implement a testing framework that can validate the consistency of the blended wine over time, as well as its adherence to the desired flavor profile, in order to ensure that the blending process is working effectively.
 
-# 3. Stages of champagne production (description of the different stages of champagne production)
+# 3. Stages of champagne production
 
 There are nine steps for the production :
 
@@ -88,7 +88,7 @@ There are nine steps for the production :
 
 # 4. Personas
 
-## A. The Tester(Client)
+## A. The Tester:Client
 The client will test the flavour of the resulting mixture of several wines that have done.
 
 ## B. The Workers
@@ -106,11 +106,11 @@ The worker will produce several flavour as much as possible by mixing particular
  6. Develop a testing framework that can validate the consistency of the blended wine over time.
  7. Once the system has been developed and tested, it can be used to blend individual batches of wine to create a consistent flavor profile over time. The user can input information on the individual wines and vineyard and the system will generate a customized blend based on the algorithm and database.
 
-# 7. Functionalities (description of the expected functionalities of the software)
+# 7. Functionalities 
 The system will be used to blend individual batches of wine to create a consistent flavor profile over time.
 The information on the individual wines and vineyard and the system will generate a customized blend based on the algorithm and database.
 
-# 8. User interface (description of the desired user interface for the software)
+# 8. User interface
 The programmes will be running on both Windows and MacOS.
 
 # 9. Software architecture
@@ -137,6 +137,6 @@ Here are the criteria that will be used to evaluate the software:
 4. Minimum number of steps to get to the result
 5. Speed of the code
 
-# 11. Conclusion (summary of the specifications and expectations of Krug Champagne)
+# 11. Conclusion
 
 Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
