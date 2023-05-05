@@ -1,31 +1,32 @@
 # 2022-2023 - PROJECT5 - ALGORITHMS & DATA STRUCTURE - TEAM 2
 
 ## Functional Specifications
+
 <hr>
 <details>
-
 <summary>📖 Table of content</summary>
 
 - [2022-2023 - PROJECT5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project5---algorithms--data-structure---team-2)
   - [Functional Specifications](#functional-specifications)
-- [1. Introduction - Overview](#1-introduction---overview)
-- [2. Objective](#2-objective)
-- [3. Stages of champagne production](#3-stages-of-champagne-production)
-- [4. Personas](#4-personas)
-  - [A. The Tester:Client](#a-the-testerclient)
-  - [B. The Workers](#b-the-workers)
-- [5. Use case](#5-use-case)
-- [6. Blending step and the formula of Krug Grande Cuvée.](#6-blending-step-and-the-formula-of-krug-grande-cuvée)
-- [7. Functionalities](#7-functionalities)
-- [8. User interface](#8-user-interface)
-- [9. Software architecture](#9-software-architecture)
-- [10. Evaluation criteria](#10-evaluation-criteria)
-- [11. Conclusion](#11-conclusion)
-- [Glosary](#glosary)
+    - [1. Introduction - Overview](#1-introduction---overview)
+    - [2. Objective](#2-objective)
+    - [3. Stages of champagne production](#3-stages-of-champagne-production)
+    - [4. Personas](#4-personas)
+      - [A. The Tester:Client](#a-the-testerclient)
+      - [B. The Workers](#b-the-workers)
+    - [5. Use case](#5-use-case)
+    - [6. Blending step and the formula of Krug Grande Cuvée](#6-blending-step-and-the-formula-of-krug-grande-cuvée)
+    - [7. Functionalities](#7-functionalities)
+    - [8. User interface](#8-user-interface)
+    - [9. Software architecture](#9-software-architecture)
+    - [10. Evaluation criteria](#10-evaluation-criteria)
+    - [11. Conclusion](#11-conclusion)
+    - [Glosary](#glosary)
 
 </details>
 <hr>
-# 1. Introduction - Overview
+
+### 1. Introduction - Overview
 
 Introduction:
 Krug Champagne is a prestigious brand of champagne that is part of the LVMH group. Known for its high quality and unique flavor profile, Krug Champagne is made using the traditional method, also known as "méthode champenoise", which involves a complex process of fermentation and aging. The grapes used to make Krug Champagne are typically harvested in September or October, and the most commonly used grape varieties are Pinot Noir, Pinot Meunier, and Chardonnay.
@@ -37,7 +38,7 @@ Krug Champagne is highly regarded by wine connoisseurs and is often considered o
 Overview:
 The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
 
-# 2. Objective
+### 2. Objective
 
 Blending: The still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile:
 
@@ -47,7 +48,7 @@ Blending: The still wines from different vineyards and grape varieties are blend
 4. Develop a database that can store information on the different wines and vineyards, as well as track the inventory of the individual wines and the blending process itself, in order to ensure consistency and quality control.
 5. Implement a testing framework that can validate the consistency of the blended wine over time, as well as its adherence to the desired flavor profile, in order to ensure that the blending process is working effectively.
 
-# 3. Stages of champagne production
+### 3. Stages of champagne production
 
 There are nine steps for the production :
 
@@ -59,7 +60,7 @@ There are nine steps for the production :
 
 - We extract the juice of the grape and we stored in tanks or barrels for fermentation.
 
-3. First fermentation:
+1. First fermentation:
 
 - Inside stainless steel tanks or oak barrels, we added yeast to the juice, which convert sugar in alcohol. It's a process that takes two weeks.
 
@@ -87,17 +88,19 @@ There are nine steps for the production :
 
 - After disgorgement, a mixture of wine and sugar (known as the dosage) is added to the champagne to adjust its sweetness level. The bottles are then corked, wired, and labeled.
 
-# 4. Personas
+### 4. Personas
 
-## A. The Tester:Client
+#### A. The Tester:Client
+
 The client will test the flavour of the resulting mixture of several wines that have done.
 
-## B. The Workers
+#### B. The Workers
+
 The worker will produce several flavour as much as possible by mixing particular ammounts of wines in various tanks.
 
-# 5. Use case
+### 5. Use case
 
-# 6. Blending step and the formula of Krug Grande Cuvée.
+### 6. Blending step and the formula of Krug Grande Cuvée
 
  1. Gather data on the different vineyards and grape varieties that will be used in the blend.
  2. Collect data on the individual wines that will be used in the blend. This might include information on the grapes used to make each wine, aging process, and other factors that might impact the flavor profile of the wine.
@@ -107,14 +110,16 @@ The worker will produce several flavour as much as possible by mixing particular
  6. Develop a testing framework that can validate the consistency of the blended wine over time.
  7. Once the system has been developed and tested, it can be used to blend individual batches of wine to create a consistent flavor profile over time. The user can input information on the individual wines and vineyard and the system will generate a customized blend based on the algorithm and database.
 
-# 7. Functionalities 
+### 7. Functionalities
+
 The system will be used to blend individual batches of wine to create a consistent flavor profile over time.
 The information on the individual wines and vineyard and the system will generate a customized blend based on the algorithm and database.
 
-# 8. User interface
+### 8. User interface
+
 The programmes will be running on both Windows and MacOS.
 
-# 9. Software architecture
+### 9. Software architecture
 
 The software could be developed using a layered architecture, with each layer responsible for a specific set of functionalities.
 
@@ -128,7 +133,7 @@ To ensure that the software is reliable and fault-tolerant, it would be designed
 
 Overall, this architecture would provide a robust and scalable software solution for the Krug Champagne blending process, built using the latest and most advanced technologies in the .NET ecosystem.
 
-# 10. Evaluation criteria
+### 10. Evaluation criteria
 
 Here are the criteria that will be used to evaluate the software:
 
@@ -138,7 +143,8 @@ Here are the criteria that will be used to evaluate the software:
 4. Minimum number of steps to get to the result
 5. Speed of the code
 
-# 11. Conclusion
+### 11. Conclusion
 
 Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
-# Glosary
+
+### Glosary
