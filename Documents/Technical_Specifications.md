@@ -2,6 +2,8 @@
 
 # Technical Specifications
 
+___
+
 <details>
 
 <summary>📖 Table of content</summary>
@@ -16,8 +18,8 @@
     - [A. Descritpion](#a-descritpion)
     - [B. Software architecture](#b-software-architecture)
     - [C. Technical constraints](#c-technical-constraints)
-    - [D. Architecture diagram](#d-architecture-diagram)
-    - [E. How is it work ?](#e-how-is-it-work-)
+    - [D. How is it work ?](#d-how-is-it-work-)
+    - [E. Program architecture diagram](#e-program-architecture-diagram)
   - [III. Further considereations](#iii-further-considereations)
     - [A. Cost estimation](#a-cost-estimation)
     - [B. Security](#b-security)
@@ -26,6 +28,8 @@
   - [V. Glossary](#v-glossary)
 
 </details>
+
+___
 
 ## I. Introduction of the project
 
@@ -69,13 +73,11 @@ Overall, this architecture would provide a robust and scalable software solution
 
 ### C. Technical constraints
 
-(description of the technical constraints to be taken into account in the development of the software)
-
 1. Objects description :
 
 | Tanks | Wines | Main |
 | :-: | :-: | :-: |
-| capacity [float] | id [int] | margin [float] |
+| capacity [float] | ID [int] | margin [float] |
 | wines [list] | quantity [float] |  |
 | errorMargin [float] |  |  |
 | Similarity [float] |  |  |
@@ -83,9 +85,8 @@ Overall, this architecture would provide a robust and scalable software solution
 | `<wines> get winePercent()` |  | <pre>```for(int i=O; i<maxTank; i++)```<br>  ```tank_arr.append(new Tank())```</pre> |
 | `isGood(<wines> wine, errorMargin)` |  |  |
 | <pre>```Tank()```<br>  ```this.capacity = (random % 99)+1```<br>  ```this.wine = new List<wines>();```</pre> |  |  |
-|  |  |  |
 
-2. Different solution to create an interface :
+1. Different solution to create an interface :
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -95,23 +96,31 @@ Overall, this architecture would provide a robust and scalable software solution
 | API | can connect any interface + Mobile compatibility | depend of it + server cost |
 | GUI (Graphic User Interface) | not to heavy + user friendly (design) + Mobile compatibility | midde weight + might take too long for creation + heavier |
 
-### D. Architecture diagram
-
-### E. How is it work ?
+### D. How is it work ?
 
 1. Interface :
 
+
 2. Program :
+
+
+### E. Program architecture diagram
+
+![program architechture diagram]()
 
 ## III. Further considereations
 
 ### A. Cost estimation
 
-To make the project, the cost don't depends of the program, but rather if we create an interface or not and thanks to which tool. Certain tool needed pay servers, as explained in Part II. D. point number 2.
+To make the project, the cost don't depends of the program, but rather if we create an interface or not and thanks to which tool. Certain tool needed pay servers, as explained in Part II. C. point number 2.
 
 ### B. Security
 
+Each data collected are stocked on secur server.
+
 ### C. Accessibility
+
+The interface is accessible by 
 
 ## IV. Success evaluation
 
@@ -128,3 +137,9 @@ The program is scored according to the following criteria :
 [^1]: [House Krug Champagne](https://www.krug.com/fr/la-maison-krug)
 [^2]: Complexity
 It's a measure of how long an algorithm would take to complete given an input of size n.
+[^3]: 
+
+[^4]: 
+
+[^5]: 
+
