@@ -8,36 +8,36 @@
 
 - [2022-2023 - PROJECT5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project5---algorithms--data-structure---team-2)
 - [Technical Specifications](#technical-specifications)
-  - [Introduction of the project](#introduction-of-the-project)
-    - [Client](#client)
-    - [Goal of the project](#goal-of-the-project)
-    - [Team Members](#team-members)
-  - [Solution](#solution)
-    - [Descritpion](#descritpion)
-    - [Software architecture](#software-architecture)
-    - [Architecture diagram](#architecture-diagram)
-    - [Technical constraints](#technical-constraints)
-    - [How is it work ?](#how-is-it-work-)
-  - [Further considereations](#further-considereations)
-    - [Cost estimation](#cost-estimation)
-    - [Security](#security)
-    - [Accessibility](#accessibility)
-  - [Success evaluation](#success-evaluation)
-  - [Glossary](#glossary)
+  - [I. Introduction of the project](#i-introduction-of-the-project)
+    - [A. Client](#a-client)
+    - [B. Goal of the project](#b-goal-of-the-project)
+    - [C. Team Members](#c-team-members)
+  - [II. Solution](#ii-solution)
+    - [A. Descritpion](#a-descritpion)
+    - [B. Software architecture](#b-software-architecture)
+    - [C. Technical constraints](#c-technical-constraints)
+    - [D. Architecture diagram](#d-architecture-diagram)
+    - [E. How is it work ?](#e-how-is-it-work-)
+  - [III. Further considereations](#iii-further-considereations)
+    - [A. Cost estimation](#a-cost-estimation)
+    - [B. Security](#b-security)
+    - [C. Accessibility](#c-accessibility)
+  - [IV. Success evaluation](#iv-success-evaluation)
+  - [V. Glossary](#v-glossary)
 
 </details>
 
-## Introduction of the project
+## I. Introduction of the project
 
-### Client
+### A. Client
 
 The client is the House Krug Champagne[^1], conceptor of wine and champagne since 1843. Based in Reims, they try to make each year the best products thanks to the respect of the vineyards.
 
-### Goal of the project
+### B. Goal of the project
 
 The objectif of the project is to implement a program who blend many wines to realize an unique blending with the lowest complexity[^2] for the program and the least loss of wine in the tanks.
 
-### Team Members
+### C. Team Members
 
 | ROLE | NAME |
 | :-: | :-: |
@@ -47,11 +47,13 @@ The objectif of the project is to implement a program who blend many wines to re
 | Software Engineer | [Clémentine CUREL](https://github.com/Clementine951) |
 | Quality Assurance | [Alexandre BOBIS](https://github.com/AlexandreBobis) |
 
-## Solution
+## II. Solution
 
-### Descritpion
+### A. Descritpion
 
-### Software architecture
+We have an application where the user can log in and arrives on the home page. He can choose the production tab to enter the capacity of each tanks manually and also the formula so that the program can calculate the best way to achieve the perfect blend of their wines.
+
+### B. Software architecture
 
 The software could be developed using a layered architecture, with each layer responsible for a specific set of functionalities.
 
@@ -65,13 +67,11 @@ To ensure that the software is reliable and fault-tolerant, it would be designed
 
 Overall, this architecture would provide a robust and scalable software solution for the Krug Champagne blending process, built using the latest and most advanced technologies in the .NET ecosystem.
 
-### Architecture diagram
-
-### Technical constraints
+### C. Technical constraints
 
 (description of the technical constraints to be taken into account in the development of the software)
 
-Objects description :
+1. Objects description :
 
 | Tanks | Wines | Main |
 | :-: | :-: | :-: |
@@ -85,7 +85,7 @@ Objects description :
 | <pre>```Tank()```<br>  ```this.capacity = (random % 99)+1```<br>  ```this.wine = new List<wines>();```</pre> |  |  |
 |  |  |  |
 
-Different solution to create an interface :
+2. Different solution to create an interface :
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -95,19 +95,25 @@ Different solution to create an interface :
 | API | can connect any interface + Mobile compatibility | depend of it + server cost |
 | GUI (Graphic User Interface) | not to heavy + user friendly (design) + Mobile compatibility | midde weight + might take too long for creation + heavier |
 
-### How is it work ?
+### D. Architecture diagram
 
-## Further considereations
+### E. How is it work ?
 
-### Cost estimation
+1. Interface :
 
-To make the project, 
+2. Program :
 
-### Security
+## III. Further considereations
 
-### Accessibility
+### A. Cost estimation
 
-## Success evaluation
+To make the project, the cost don't depends of the program, but rather if we create an interface or not and thanks to which tool. Certain tool needed pay servers, as explained in Part II. D. point number 2.
+
+### B. Security
+
+### C. Accessibility
+
+## IV. Success evaluation
 
 The program is scored according to the following criteria :
 
@@ -117,8 +123,8 @@ The program is scored according to the following criteria :
 4. Minimum number of steps to get to the result
 5. Speed of the code
 
-## Glossary
+## V. Glossary
 
 [^1]: [House Krug Champagne](https://www.krug.com/fr/la-maison-krug)
 [^2]: Complexity
-...
+It's a measure of how long an algorithm would take to complete given an input of size n.
