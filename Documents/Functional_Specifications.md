@@ -12,8 +12,6 @@
         - [Who is Krug ?](#who-is-krug-)
 - [2. Objective](#2-objective)
 - [4. Personas](#4-personas)
-  - [A. The Tester:Client](#a-the-testerclient)
-  - [B. The Workers](#b-the-workers)
 - [5. Use case](#5-use-case)
 - [6. Blending step](#6-blending-step)
 - [7. Functionalities](#7-functionalities)
@@ -59,12 +57,12 @@ The Krug champagne need this software so as to chose the best path way to know i
   - Comments and idiomatic style.
   
 # 4. Personas
-
-## A. The Tester:Client
-The client will test the flavour of the resulting mixture of several wines that have done.
-
-## B. The Workers
-The worker will produce several flavour as much as possible by mixing particular ammounts of wines in various tanks.
+| Name   	| Age 	| Role| Description  	| Image
+|--------	|-----	|-------------|----------|------------|
+|Jackson James| 21 | Student |    | <img src="Images/.png"> |
+|Sam Keveth | 38 | Manager|    | <img src="Images/.png"> |
+|Christiano Ronaldo | 38 | Soccer player |    | <img src="Images/.png"> |
+|Zenna Cold | 31 | Worker|    | <img src="Images/.png"> |
 
 # 5. Use case
 
