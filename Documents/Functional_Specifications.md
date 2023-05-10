@@ -13,11 +13,6 @@
 - [2. Objective](#2-objective)
 - [3. Personas](#3-personas)
 - [4. Use case](#4-use-case)
-          - [Actors:](#actors)
-          - [Preconditions:](#preconditions)
-          - [Flow of Events:](#flow-of-events)
-          - [Assumptions:](#assumptions)
-          - [Notes:](#notes)
 - [5. Blending step](#5-blending-step)
 - [6. Functionalities](#6-functionalities)
 - [7. User interface](#7-user-interface)
@@ -47,47 +42,20 @@ Blending[^2]:
 2. Implement a user interface that allows the user to input information on the different wines as well as specify the desired flavor profile for the blended wine, and displays the resulting blend and flavor profile.
    
 The Krug champagne need this software so as to chose the best path way to know in which tank a particular wine have to go into during blending and to finally have the desired flavor. To have a good result, the following steps under must be taken in to consideration.
-  - Correctness: no crash, no half full or half empty tanks.
-  - How close your final product is from the input formula. 
-  - Minimum number of steps to get to the result.
-  - Speed of the code.
-  - Comments and idiomatic style.
   
 # 3. Personas
 | Name   	| Age 	| Role| Description | Image
 |--------	|-----	|-------------|----------|------------|
-|Jackson James| 21 | Student |James is a sophisticated student with a deep passion for wine. He explores diverse types and regions, studying oenology and viticulture. Engaging in wine clubs and societies, he shares his knowledge and hosts tastings. James skillfully pairs wine with food, immerses himself in wine literature, and embraces its cultural significance. His enthusiasm and knowledge shape his identity and future aspirations.   | <img src="Images/Jackson.png"> |
+|Jackson James| 21 | Student |James is a sophisticated student who is on internship in a wine industry, having a deep passion for wine. He explores diverse types and regions, studying oenology and viticulture. Engaging in wine clubs and societies, he shares his knowledge and hosts tastings. James skillfully, immerses himself in wine literature, and embraces its cultural significance. His enthusiasm and knowledge shape his identity and future aspirations for been a winemaker.   | <img src="Images/Jackson.png"> |
 |Sam Keveth | 38 | Manager|Sam is a seasoned wine manager, combining expertise with a discerning palate. With a professional demeanor and an air of authority, he oversees the selection and procurement of wines for a prestigious establishment. Sam's refined taste and extensive knowledge enable him to curate an exceptional wine list. He fosters relationships with wineries, negotiates deals, and ensures optimal inventory management. Passionate about wine education, he conducts staff training and tastings to enhance customer experiences. Sam's attention to detail and dedication to quality make him an invaluable asset in the world of wine | <img src="Images/SAM.jpg"> |
-|Christiano Ronaldo | 38 | Soccer player | As a professional footballer, Christiano Ronaldo is known for his exceptional skills on the field. Off the pitch, he possesses a sophisticated side, occasionally indulging in the pleasure of wines. With a discerning taste, he appreciates the complexity and nuances that different wines offer. Christiano enjoys exploring various varietals and regions, but always maintains moderation to prioritize his athletic performance. His occasional forays into the world of wine add depth and sophistication to his multifaceted lifestyle as a professional athlete   | <img src="Images/CR.jpg"> |
 |Zenna Cold | 31 | Worker|Zenna is a diligent worker in a winery production facility. With a strong work ethic and attention to detail, she ensures that every step of the winemaking process is executed flawlessly. Zenna skillfully operates machinery, monitors fermentation, and assists in bottling and labeling. Her knowledge of grape varieties and cellar techniques contributes to the production of high-quality wines. With a deep appreciation for the craft, Zenna takes pride in being part of the winemaking journey from vine to bottle    | <img src="Images/zenna.jpg"> |
 
 # 4. Use case
 Description: This use case describes the process of blending different wines to create a new wine blend.
 
-###### Actors:
-
-Winemaker: Responsible for overseeing the blending process.
-###### Preconditions:
-
-The winemaker has access to the inventory of wines available for blending.
-
-###### Flow of Events:
-
-1. The winemaker selects the desired wines for blending from the available inventory.
-2. The winemaker determines the desired proportions for each wine in the blend.
-3. The system prompts the winemaker to input the proportions for each selected wine.
-4. The winemaker enters the proportions for each wine and submits the blend request.
-5. The system calculates the final blend based on the specified proportions.
-6. The winemaker reviews and validates the final blend report.
-7. If the winemaker is not satisfied, the process returns to step 2 to adjust the proportions or select different wines for blending.
-    
-###### Assumptions:
-
-The winemaker has appropriate access rights and permissions to perform the blending process.
-
-###### Notes:
-
-The blend proportions can be expressed as percentages, ratios, or specific measurements depending on the winemaker's preference and the system's implementation
+| Name  | Actors | Preconditions | Flow of Events | Assumptions | Notes |
+|-------| -------|---------------|----------------|------------|------ |
+| Zenna Cold | Winemaker: Responsible for overseeing the blending process. | The winemaker has access to the inventory of wines available for blending. | 1. The winemaker selects the desired wines for blending from the available inventory. 2.The winemaker determines the desired proportions for each wine in the blend. 3.The system prompts the winemaker to input the proportions for each selected wine. 4.The winemaker enters the proportions for each wine and submits the blend request. 5.The system calculates the final blend based on the specified proportions. 6.The winemaker reviews and validates the final blend report. 7.If the winemaker is not satisfied, the process returns to step 2 to adjust the proportions or select different wines for blending. | The winemaker has appropriate access rights and permissions to perform the blending process. | The blend proportions can be expressed as percentages, ratios, or specific measurements depending on the winemaker's preference and the system's implementation |
 
 # 5. Blending step
 
