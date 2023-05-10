@@ -8,7 +8,7 @@
 
 - [2022-2023 - PROJECT5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project5---algorithms--data-structure---team-2)
   - [Functional Specifications](#functional-specifications)
-- [1. Introduction - Overview](#1-introduction---overview)
+- [1. Introduction](#1-introduction)
         - [Who is Krug ?](#who-is-krug-)
 - [2. Objective](#2-objective)
 - [3. Personas](#3-personas)
@@ -29,7 +29,7 @@
 </details>
 <hr>
 
-# 1. Introduction - Overview
+# 1. Introduction
 The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
 More detaily tanks will be used to mix different wines with no thank been partialy filled, so as to get the desired flavor at a precise percentage.
 
