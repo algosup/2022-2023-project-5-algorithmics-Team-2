@@ -17,7 +17,7 @@
 - [6. Functionalities](#6-functionalities)
 - [7. User interface](#7-user-interface)
 - [8. Evaluation criteria](#8-evaluation-criteria)
-- [10. Conclusion](#10-conclusion)
+- [9. Conclusion](#9-conclusion)
 - [Glosary](#glosary)
 
 </details>
@@ -59,20 +59,17 @@ The Krug champagne need this software so as to chose the best path way to know i
 
 # 5. Blending step
 
- 1. Gather data on the different vineyards and grape varieties that will be used in the blend.
- 2. Create a user interface that allows the user to input information on the different wines and vineyards profile for the blended wine. The interface might include features such as dropdown menus, sliders, and other interactive elements to make it easy for the user to customize the blend.
-   For example:
+ 1. Selection: Winemakers carefully choose different wines with  to create a desired flavor profile.
+ 2. Trial Blending: Small-scale blending experiments are conducted, combining different wines in varying proportions to find the ideal blend. Tasting and adjustments are made until the desired result is achieved.
+  For example:
    (input --> percatage of wine.
    input --> quantity of wine.
    input --> index[^3] of wine.)[^4]
- 3. Implement a database that can store information on the different wines and vineyards, as well as track the inventory of the individual wines and the blending process itself. This database might include tables for storing data on the grape varieties, vineyards, and individual wines.
- 4. Develop a testing framework that can validate the consistency of the blended wine over time.
- 5. Once the system has been developed and tested, it can be used to blend individual batches of wine to create a consistent flavor profile over time. The user can input                                                                           
-information on the individual wines and vineyard and the system will generate a customized blend based on the algorithm and database.
 
 # 6. Functionalities 
-The system will be used to blend individual batches of wine to create a consistent flavor profile over time.
-The information on the individual wines and vineyard, and the system will generate a customized blend based on the algorithm and database.
+The system will be used to blend individual batches of wine to create a consistent flavor profile.
+
+The information on the individual wines, and the system will generate a customized blend based on the algorithm and database.
   - Add as much as wine you want so the formula.
   - Add as much as tank you want.
   - No half-full.
@@ -83,7 +80,7 @@ The programmes will be running on both Windows and MacOS.
 
 # 8. Evaluation criteria
 
-Here are the criteria that will be used to evaluate the software:
+Here are the criteria that will be used to evaluate the robustness and consistency of the software:
 
 1. Correctness: no crash, no half full or half empty tanks
 2. How close your final product is from the input formula
@@ -91,7 +88,7 @@ Here are the criteria that will be used to evaluate the software:
 4. Minimum number of steps to get to the result
 5. Speed of the code
 
-# 10. Conclusion
+# 9. Conclusion
 
 Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
 # Glosary
