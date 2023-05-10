@@ -2,7 +2,8 @@
 
 ## Technical Specifications
 
-<hr>
+___
+
 <details>
 <summary>📖 Table of content</summary>
 
@@ -26,7 +27,8 @@
     - [V. Glossary](#v-glossary)
 
 </details>
-<hr>
+
+___
 
 ### I. Introduction of the project
 
@@ -90,7 +92,7 @@ Write only one statement or declaration per line.
 If subsequent lines are not automatically indented, indent them by one tab stop (four spaces).
 Add at least one blank line between method definitions and property definitions.
 Use parentheses to make the clauses of an expression apparent.
-Exemple :
+- Exemple :
 ```
 if ((val1 > val2) && (val1 > val3))
 {
@@ -99,7 +101,7 @@ if ((val1 > val2) && (val1 > val3))
 ```
 *source : [learn Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)*
 
-1. Objects description :
+2. Objects description :
 
 |  | Tanks | Wines | Main |
 | :-: | :-: | :-: | :-: |
@@ -144,7 +146,7 @@ To make the project, the cost don't depends of the program, but rather if we cre
 
 #### B. Security
 
-Each data collected are stocked on secur server.
+Each data collected are stocked on secure server.
 
 #### C. Accessibility
 
@@ -158,7 +160,7 @@ The program is scored according to the following criteria :
 2. How close your final product is from the input formula
 3. Comments and idiomatic style
 4. Minimum number of steps to get to the result
-5. Speed of the code
+5. Complexity and Speed of the code
 
 ___
 
@@ -211,3 +213,7 @@ L'ORM est en quelque sorte la couche qui relie la programmation orientée objet 
 The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.
 The 5 principles are : Single Responsibility (a class should do one thing and therefore it should have only a single reason to change) / Open-Closed (classes should be open for extension and closed to modification) / Liskov Substitution (subclasses should be substitutable for their base classes) / Interface Segregation (separating the interfaces) / Dependency Inversion (classes should depend upon interfaces or abstract classes instead of concrete classes and functions)
 *source : [Free code camp](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/)*
+
+[^12]: ****
+
+*source : []()*
