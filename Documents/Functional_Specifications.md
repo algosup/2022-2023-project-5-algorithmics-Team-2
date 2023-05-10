@@ -13,11 +13,17 @@
 - [2. Objective](#2-objective)
 - [3. Personas](#3-personas)
 - [4. Use case](#4-use-case)
+          - [Actors:](#actors)
+          - [Preconditions:](#preconditions)
+          - [Flow of Events:](#flow-of-events)
+          - [Assumptions:](#assumptions)
+          - [Notes:](#notes)
 - [5. Blending step](#5-blending-step)
 - [6. Functionalities](#6-functionalities)
 - [7. User interface](#7-user-interface)
 - [8. Evaluation criteria](#8-evaluation-criteria)
 - [9. Conclusion](#9-conclusion)
+- [Reference](#reference)
 - [Glosary](#glosary)
 
 </details>
@@ -56,6 +62,32 @@ The Krug champagne need this software so as to chose the best path way to know i
 |Zenna Cold | 31 | Worker|Zenna is a diligent worker in a winery production facility. With a strong work ethic and attention to detail, she ensures that every step of the winemaking process is executed flawlessly. Zenna skillfully operates machinery, monitors fermentation, and assists in bottling and labeling. Her knowledge of grape varieties and cellar techniques contributes to the production of high-quality wines. With a deep appreciation for the craft, Zenna takes pride in being part of the winemaking journey from vine to bottle    | <img src="Images/zenna.jpg"> |
 
 # 4. Use case
+Description: This use case describes the process of blending different wines to create a new wine blend.
+
+###### Actors:
+
+Winemaker: Responsible for overseeing the blending process.
+###### Preconditions:
+
+The winemaker has access to the inventory of wines available for blending.
+
+###### Flow of Events:
+
+1. The winemaker selects the desired wines for blending from the available inventory.
+2. The winemaker determines the desired proportions for each wine in the blend.
+3. The system prompts the winemaker to input the proportions for each selected wine.
+4. The winemaker enters the proportions for each wine and submits the blend request.
+5. The system calculates the final blend based on the specified proportions.
+6. The winemaker reviews and validates the final blend report.
+7. If the winemaker is not satisfied, the process returns to step 2 to adjust the proportions or select different wines for blending.
+    
+###### Assumptions:
+
+The winemaker has appropriate access rights and permissions to perform the blending process.
+
+###### Notes:
+
+The blend proportions can be expressed as percentages, ratios, or specific measurements depending on the winemaker's preference and the system's implementation
 
 # 5. Blending step
 
@@ -91,8 +123,13 @@ Here are the criteria that will be used to evaluate the robustness and consisten
 # 9. Conclusion
 
 Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
+
+# Reference
+
+Krug Champagne: <a href="https://www.krug.com">Krug Champagne's page</a>
+
 # Glosary
 [^1]: LVMH simply means "Moët Hennessy Louis Vuitton".
-[^2]: Blending The still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile.
+[^2]: Blending: the still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile.
 [^3]: An index is a list of data, such as group of files or database entries.
 [^4]: The percentage, quantity, and index of each wine is entered.
