@@ -57,12 +57,12 @@ The Krug champagne need this software so as to chose the best path way to know i
   - Comments and idiomatic style.
   
 # 4. Personas
-| Name   	| Age 	| Role| Description  	| Image
+| Name   	| Age 	| Role| Description | Image
 |--------	|-----	|-------------|----------|------------|
-|Jackson James| 21 | Student |    | <img src="Images/.png"> |
-|Sam Keveth | 38 | Manager|    | <img src="Images/.png"> |
-|Christiano Ronaldo | 38 | Soccer player |    | <img src="Images/.png"> |
-|Zenna Cold | 31 | Worker|    | <img src="Images/.png"> |
+|Jackson James| 21 | Student |James is a sophisticated student with a deep passion for wine. He explores diverse types and regions, studying oenology and viticulture. Engaging in wine clubs and societies, he shares his knowledge and hosts tastings. James skillfully pairs wine with food, immerses himself in wine literature, and embraces its cultural significance. His enthusiasm and knowledge shape his identity and future aspirations.   | <img src="Images/Jackson.png"> |
+|Sam Keveth | 38 | Manager|Sam is a seasoned wine manager, combining expertise with a discerning palate. With a professional demeanor and an air of authority, he oversees the selection and procurement of wines for a prestigious establishment. Sam's refined taste and extensive knowledge enable him to curate an exceptional wine list. He fosters relationships with wineries, negotiates deals, and ensures optimal inventory management. Passionate about wine education, he conducts staff training and tastings to enhance customer experiences. Sam's attention to detail and dedication to quality make him an invaluable asset in the world of wine | <img src="Images/SAM.jpg"> |
+|Christiano Ronaldo | 38 | Soccer player | As a professional footballer, Christiano Ronaldo is known for his exceptional skills on the field. Off the pitch, he possesses a sophisticated side, occasionally indulging in the pleasure of wines. With a discerning taste, he appreciates the complexity and nuances that different wines offer. Christiano enjoys exploring various varietals and regions, but always maintains moderation to prioritize his athletic performance. His occasional forays into the world of wine add depth and sophistication to his multifaceted lifestyle as a professional athlete   | <img src="Images/CR.jpg"> |
+|Zenna Cold | 31 | Worker|Zenna is a diligent worker in a winery production facility. With a strong work ethic and attention to detail, she ensures that every step of the winemaking process is executed flawlessly. Zenna skillfully operates machinery, monitors fermentation, and assists in bottling and labeling. Her knowledge of grape varieties and cellar techniques contributes to the production of high-quality wines. With a deep appreciation for the craft, Zenna takes pride in being part of the winemaking journey from vine to bottle    | <img src="Images/zenna.jpg"> |
 
 # 5. Use case
 
