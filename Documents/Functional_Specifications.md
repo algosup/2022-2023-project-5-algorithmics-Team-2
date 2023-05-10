@@ -24,20 +24,15 @@
 <hr>
 
 # 1. Introduction - Overview
+The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
+More detaily tanks will be used to mix different wines with no thank been partialy filled, so as to get the desired flavor at a precise percentage.
 
-Introduction:
-Krug Champagne is a prestigious brand of champagne that is part of the LVMH group. Known for its high quality and unique flavor profile, Krug Champagne is made using the traditional method, also known as "méthode champenoise", which involves a complex process of fermentation and aging. The grapes used to make Krug Champagne are typically harvested in September or October, and the most commonly used grape varieties are Pinot Noir, Pinot Meunier, and Chardonnay.
 ##### Who is Krug ?
 Here is a small brief history of Krugs.
 Joseph Krug founded the House of Krug in 1843. He was born in 1800, at a time when the city was part of the Napoleonic Empire. He left Mainz in 1824 and by 1834 he was in Paris.Joseph joined Champagne Jacquesson in Châlons-sur-Marne.
 Joseph died in 1866 and was succeeded by his son Paul Krug. Joseph had laid the foundations and under the supervision of Paul. By the 1880s the prestige of Krug was acknowledged in the United Kingdom.
 After Paul's death in 1910, he was succeeded by his son, Joseph Krug II. However, during World War I Joseph II was taken prisoner and his wife Jeanne played a key role in the House. After the war, Joseph II's slow recovery led to his nephew Jean Seydoux becoming joint manager in 1924. 
 In 1959 to 1977, Paul Krug II, the son of Joseph II, succeeded his father. His father died in 1967.In 1962 Henri Krug, the son of Paul II, joined the management, as did his brother Remi three years later. In January 1999 the House became part of LVMH[^1] and by 2007. In 2009 Olivier Krug, the son of Henri, became House director.
-
-
-Overview:
-The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
-More detaily tanks will be used to mix different wines with no thank been partialy filled, so as to get the desired flavor at a precise percentage.
 
 # 2. Objective
 
