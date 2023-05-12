@@ -5,17 +5,17 @@ namespace KrugAppTest
     [TestClass]
     public class TankConstructor
     {
-        //[TestMethod]
-        //public void Tank_DefaultConstructor_CreatesTankWithRandomCapacity()
-        //{
-        //    // Arrange
-        //    var tank = new Tank();
+        [TestMethod]
+        public void Tank_DefaultConstructor_CreatesTankWithRandomCapacity()
+        {
+            // Arrange
+            var tank = new Tank();
 
-        //    // Assert
-        //    Assert.IsTrue(tank.Capacity >= 10 && tank.Capacity <= 100);
-        //    Assert.IsNotNull(tank.Wine);
-        //    Assert.AreEqual(0, tank.Wine.Length);
-        //}
+            // Assert
+            Assert.IsTrue(tank.Capacity >= 10 && tank.Capacity <= 100);
+            Assert.IsNotNull(tank.Wine);
+            Assert.AreEqual(0, tank.Wine.Length);
+        }
 
         // The above code works if:
 
@@ -48,16 +48,16 @@ namespace KrugAppTest
             Assert.IsTrue(tank.Capacity >= 10 && tank.Capacity <= 100);
         }
 
-        //[TestMethod]
-        //public void Tank_DefaultConstructor_CreatesTankWithEmptyWineArray()
-        //{
-        //    // Arrange
-        //    var tank = new Tank();
+        [TestMethod]
+        public void Tank_DefaultConstructor_CreatesTankWithEmptyWineArray()
+        {
+            // Arrange
+            var tank = new Tank();
 
-        //    // Assert
-        //    Assert.IsNotNull(tank.Wine);
-        //    Assert.AreEqual(0, tank.Wine.Length);
-        //}
+            // Assert
+            Assert.IsNotNull(tank.Wine);
+            Assert.AreEqual(0, tank.Wine.Length);
+        }
 
         // The above code works if:
 
@@ -87,20 +87,20 @@ namespace KrugAppTest
     public class TankCapacity
     {
 
-        //[TestMethod]
-        //public void Tank_ConstructorWithCapacity_CreatesTankWithGivenCapacity()
-        //{
-        //    // Arrange
-        //    float capacity = 50.0f;
+        [TestMethod]
+        public void Tank_ConstructorWithCapacity_CreatesTankWithGivenCapacity()
+        {
+            // Arrange
+            float capacity = 50.0f;
 
-        //    // Act
-        //    var tank = new Tank(capacity);
+            // Act
+            var tank = new Tank(capacity);
 
-        //    // Assert
-        //    Assert.AreEqual(capacity, tank.Capacity);
-        //    Assert.IsNotNull(tank.Wine);
-        //    Assert.AreEqual(0, tank.Wine.Length);
-        //}
+            // Assert
+            Assert.AreEqual(capacity, tank.Capacity);
+            Assert.IsNotNull(tank.Wine);
+            Assert.AreEqual(0, tank.Wine.Length);
+        }
 
         // The above code works if:
 
@@ -112,21 +112,21 @@ namespace KrugAppTest
         //}
 
 
-        //[TestMethod]
-        //public void Tank_ConstructorWithCapacity_CreatesTankWithZeroWineQuantities()
-        //{
-        //    // Arrange
-        //    float capacity = 50.0f;
+        [TestMethod]
+        public void Tank_ConstructorWithCapacity_CreatesTankWithZeroWineQuantities()
+        {
+            // Arrange
+            float capacity = 50.0f;
 
-        //    // Act
-        //    var tank = new Tank(capacity);
+            // Act
+            var tank = new Tank(capacity);
 
-        //    // Assert
-        //    foreach (var wine in tank.Wine)
-        //    {
-        //        Assert.AreEqual(0, wine.Quantity);
-        //    }
-        //}
+            // Assert
+            foreach (var wine in tank.Wine)
+            {
+                Assert.AreEqual(0, wine.Quantity);
+            }
+        }
 
         // The code above works if:
 
@@ -138,15 +138,15 @@ namespace KrugAppTest
         //}
 
 
-        //[TestMethod]
-        //public void Tank_ConstructorWithCapacity_ThrowsExceptionForNegativeCapacity()
-        //{
-        //    // Arrange
-        //    float capacity = -10.0f;
+        [TestMethod]
+        public void Tank_ConstructorWithCapacity_ThrowsExceptionForNegativeCapacity()
+        {
+            // Arrange
+            float capacity = -10.0f;
 
-        //    // Assert
-        //    Assert.ThrowsException<ArgumentException>(() => new Tank(capacity));
-        //}
+            // Assert
+            Assert.ThrowsException<ArgumentException>(() => new Tank(capacity));
+        }
 
         // The above code works if:
 
@@ -162,19 +162,19 @@ namespace KrugAppTest
         //}
 
 
-        //[TestMethod]
-        //public void Tank_ConstructorWithCapacity_InitializesCapacityAndWineArray()
-        //{
-        //    // Arrange
-        //    float capacity = 50.0f;
+        [TestMethod]
+        public void Tank_ConstructorWithCapacity_InitializesCapacityAndWineArray()
+        {
+            // Arrange
+            float capacity = 50.0f;
 
-        //    // Act
-        //    var tank = new Tank(capacity);
+            // Act
+            var tank = new Tank(capacity);
 
-        //    // Assert
-        //    Assert.AreEqual(capacity, tank.Capacity);
-        //    Assert.IsNotNull(tank.Wine);
-        //}
+            // Assert
+            Assert.AreEqual(capacity, tank.Capacity);
+            Assert.IsNotNull(tank.Wine);
+        }
 
         // The above code works if:
 
@@ -186,19 +186,19 @@ namespace KrugAppTest
         //}
 
 
-        //[TestMethod]
-        //public void Tank_ConstructorWithCapacity_CreatesTankWithCorrectCapacityAndEmptyWineArray()
-        //{
-        //    // Arrange
-        //    float capacity = 75.0f;
+        [TestMethod]
+        public void Tank_ConstructorWithCapacity_CreatesTankWithCorrectCapacityAndEmptyWineArray()
+        {
+            // Arrange
+            float capacity = 75.0f;
 
-        //    // Act
-        //    var tank = new Tank(capacity);
+            // Act
+            var tank = new Tank(capacity);
 
-        //    // Assert
-        //    Assert.AreEqual(capacity, tank.Capacity);
-        //    Assert.AreEqual(0, tank.Wine.Length);
-        //}
+            // Assert
+            Assert.AreEqual(capacity, tank.Capacity);
+            Assert.AreEqual(0, tank.Wine.Length);
+        }
 
         // The above code works if:
 

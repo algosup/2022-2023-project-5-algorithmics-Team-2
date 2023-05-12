@@ -14,6 +14,7 @@ namespace KrugApp
             this.Quantity = 0;
         }
 
+
         /// <summary>
         /// Create a Wine using the quantity 
         /// </summary>
@@ -23,6 +24,7 @@ namespace KrugApp
             this.Quantity = value;
         }
 
+        
         // Operator overloads
         public static Wine operator +(Wine wine1, Wine wine2)
         {
