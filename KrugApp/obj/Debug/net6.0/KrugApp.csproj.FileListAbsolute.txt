@@ -1,0 +1,15 @@
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/bin/Debug/net6.0/KrugApp
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/bin/Debug/net6.0/KrugApp.deps.json
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/bin/Debug/net6.0/KrugApp.runtimeconfig.json
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/bin/Debug/net6.0/KrugApp.dll
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/bin/Debug/net6.0/KrugApp.pdb
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.csproj.AssemblyReference.cache
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.AssemblyInfoInputs.cache
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.AssemblyInfo.cs
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.csproj.CoreCompileInputs.cache
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.dll
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/refint/KrugApp.dll
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.pdb
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/KrugApp.genruntimeconfig.cache
+/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/Debug/net6.0/ref/KrugApp.dll

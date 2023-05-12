@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/Users/clementine/.nuget/packages/": {}
+    "/Users/alexandre/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/clementine/Desktop/Projects/2022-2023-project-5-algorithmics-Team-2/KrugApp/KrugApp.csproj",
+      "projectUniqueName": "/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/KrugApp.csproj",
       "projectName": "KrugApp",
-      "projectPath": "/Users/clementine/Desktop/Projects/2022-2023-project-5-algorithmics-Team-2/KrugApp/KrugApp.csproj",
-      "packagesPath": "/Users/clementine/.nuget/packages/",
-      "outputPath": "/Users/clementine/Desktop/Projects/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/",
+      "projectPath": "/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/KrugApp.csproj",
+      "packagesPath": "/Users/alexandre/.nuget/packages/",
+      "outputPath": "/Users/alexandre/Desktop/GitHub/2022-2023-project-5-algorithmics-Team-2/KrugApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/clementine/.nuget/NuGet/NuGet.Config"
+        "/Users/alexandre/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
