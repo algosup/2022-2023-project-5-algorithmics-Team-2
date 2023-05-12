@@ -73,7 +73,9 @@ Overall, this architecture would provide a robust and scalable software solution
 
 #### C. Technical constraints
 
-The most important thing to consider throughout the project is to have an `O(X)` with `X =` `1`, `log n` or `n`. The values to be avoided absolutely for the efficiency of the program, is an `O(X)` with `X =` `n²`, `2^n` and `n!`.
+The program is implemented by the technique of TDD[^12].
+
+The most important thing to consider throughout the project is to have an `O(X)` with X = `1`, `log n` or `n`. The values to be avoided absolutely for the efficiency of the program, is an `O(X)` with X = `n²`, `2^n` and `n!`.
 
 1. C# coding convention :
 
@@ -84,24 +86,27 @@ The most important thing to consider throughout the project is to have an `O(X)`
 |  |  | naming structure | <pre>```public struct ValueCoordinate```<br>```{```<br>```}```</pre> |
 |  |  | naming interface | <pre>```public interface IWorkerQueue```<br>```{```<br>```}```</pre> |
 |  |  | naming public members | <pre>```public class Example```<br>```{```<br>    ```public IWorkerQueue WorkerQueue { get; init; }```<br>```{```</pre> |
-| Camel Casing = _ | prefix them | naming private or internal fields | <pre>```public class DataService``` <br>```{``` <br>    ```private IWorkerQueue _workerQueue;``` <br>```}```</pre> |
-|  | prefix `s_` | static fields that are private or internal | <pre>```public class DataService``` <br>```{``` <br>    ```private static IWorkerQueue s_workerQueue;``` <br>```}```</pre> |
-|  | prefix `t_` | thread static fields that are private or internal | <pre>```public class DataService``` <br>```{``` <br>    ```[ThreadStatic]```<br>    ```private static TimeSpan t_timeSpan;``` <br>```}```</pre> |
+| Camel Casing = _ | prefix them | naming private or internal fields | <pre>```public class DataService```<br>```{```<br>    ```private IWorkerQueue _workerQueue;``` <br>```}```</pre> |
+|  | prefix `s_` | static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```private static IWorkerQueue s_workerQueue;```<br>```}```</pre> |
+|  | prefix `t_` | thread static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```[ThreadStatic]```<br>    ```private static TimeSpan t_timeSpan;```<br>```}```</pre> |
 | dot = . | separate name too long |  | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
 Write only one statement or declaration per line.
 If subsequent lines are not automatically indented, indent them by one tab stop (four spaces).
 Add at least one blank line between method definitions and property definitions.
 Use parentheses to make the clauses of an expression apparent.
+
 - Exemple :
-```
+
+```C#
 if ((val1 > val2) && (val1 > val3))
 {
     // Take appropriate action.
 }
 ```
+
 *source : [learn Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)*
 
-2. Objects description :
+1. Objects description :
 
 |  | Tanks | Wines | Main |
 | :-: | :-: | :-: | :-: |
@@ -110,13 +115,13 @@ if ((val1 > val2) && (val1 > val3))
 |  | errorMargin [float] |  |  |
 |  | Similarity [float] |  |  |
 |  |  |  |  |
-| **Function** | <pre>```get Similarity()```<br>  ```transferFrom(Tank[] tanks)```<br>  ```transferTo(Tank[] tanks)```</pre> | constructor : `wine(id, quantity)` | `tank[] tank_arr` |
-|  | `<wines> get winePercent()` |  | <pre>```for(int i=O; i<maxTank; i++)```<br>  ```tank_arr.append(new Tank())```</pre> |
+| **Function** | <pre>```get Similarity()```<br>    ```transferFrom(Tank[] tanks)```<br>    ```transferTo(Tank[] tanks)```</pre> | constructor : `wine(id, quantity)` | `tank[] tank_arr` |
+|  | `<wines> get winePercent()` |  | <pre>```for(int i=O; i<maxTank; i++)```<br>    ```tank_arr.append(new Tank())```</pre> |
 |  | `isGood(<wines> wine, errorMargin)` |  |  |
-|  | <pre>```Tank()```<br>  ```this.capacity = (random % 99)+1```<br>  ```this.wine = new List<wines>();```</pre> |  |  |
+|  | <pre>```Tank()```<br>    ```this.capacity = (random % 99)+1```<br>    ```this.wine = new List<wines>();```</pre> |  |  |
 |  |  |  |  |
 
-3. Different solution to create an interface :
+1. Different solution to create an interface :
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -179,8 +184,8 @@ The layered architecture style places no restrictions on the number of layers th
 
 [^4]: **Presentation layer :**
 The presentation layer is the first of two layers in the so-called "three-tier architecture" (based on the client-server environment, see attached diagram).
+The presentation layer is the "Client" part thanks an interface to use the program.
 ![Three-tier architecture](Images/three-tier_architecture.png)
-It's the "Client" part thanks an interface to use the program.
 *source : [Wikipedia](https://fr.wikipedia.org/wiki/Architecture_trois_tiers)*
 
 [^5]: **Cellar Master :**
@@ -214,6 +219,16 @@ The SOLID Principles are five principles of Object-Oriented class design. They a
 The 5 principles are : Single Responsibility (a class should do one thing and therefore it should have only a single reason to change) / Open-Closed (classes should be open for extension and closed to modification) / Liskov Substitution (subclasses should be substitutable for their base classes) / Interface Segregation (separating the interfaces) / Dependency Inversion (classes should depend upon interfaces or abstract classes instead of concrete classes and functions)
 *source : [Free code camp](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/)*
 
-[^12]: ****
+[^12]: **TDD (Test-Driven Development):**
+TDD can be represent by the formula `TDD = Refactor + TFD` (Test First Development)
+The first steps of TFD is to quickly add a test, basically just enough code to fail.
+Next you run your tests to ensure that the new test does in fact fail.
+You then update your functional code to make it pass the new tests.
+The fourth step is to run your tests again. If they fail you need to update your functional code and retest. Once the tests pass the next step is to start over (you may first need to refactor any duplication out of your design as needed, turning TFD into TDD).
+![TFD-TDD](Images/TFD-TDD.png)
+TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
+*source : [Agile data](http://agiledata.org/essays/tdd.html)*
+
+[^13]: **...**
 
 *source : []()*
