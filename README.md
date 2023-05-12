@@ -2,8 +2,8 @@
 
 ## Description
 
-The client is the House Krug Champagne1, conceptor of wine and champagne since 1843. Based in Reims, they try to make each year the best products thanks to the respect of the vineyards.
-The objectif of the project is to implement a program who blend many wines to realize an unique blending with the lowest complexity for the program and the least loss of wine in the tanks.
+The client is the House Krug Champagne, conceptor of wine and champagne since 1843. Based in Reims, they try to make each year the best products thanks to the respect of the vineyards.
+The objective of the project is to implement a program who blend many wines to realize an unique blending with the lowest complexity for the program and the least loss of wine in the tanks.
 
 ## Contributors
 
@@ -41,13 +41,14 @@ The objectif of the project is to implement a program who blend many wines to re
 
 ##### *Quality Assurance*
 
-## Documents link
+## Links to documents
 
 ### Specifications
 
-- [Functional Specification](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Functional_Specifications.md)
-- [Technical Specification](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Technical_Specifications.md)
+- [Functional Specifications](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Functional_Specifications.md)
+- [Technical Specifications](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Technical_Specifications.md)
 
-### Test
+### Tests
 
 - [Test Case](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Tests/Test_Case.md)
+- [Test Plan](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Tests/Test_Plan.md)
