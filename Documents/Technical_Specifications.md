@@ -5,6 +5,7 @@
 ___
 
 <details>
+
 <summary>📖 Table of content</summary>
 
 - [2022-2023 - PROJECT 5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project-5---algorithms--data-structure---team-2)
@@ -19,7 +20,7 @@ ___
       - [C. Technical constraints](#c-technical-constraints)
       - [D. How is it work ?](#d-how-is-it-work-)
       - [E. Program architecture diagram](#e-program-architecture-diagram)
-    - [III. Further considereations](#iii-further-considereations)
+    - [III. Further considerations](#iii-further-considerations)
       - [A. Cost estimation](#a-cost-estimation)
       - [B. Security](#b-security)
       - [C. Accessibility](#c-accessibility)
@@ -106,7 +107,7 @@ if ((val1 > val2) && (val1 > val3))
 
 *source : [learn Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)*
 
-1. Objects description :
+2. Objects description :
 
 |  | Tanks | Wines | Main |
 | :-: | :-: | :-: | :-: |
@@ -114,14 +115,12 @@ if ((val1 > val2) && (val1 > val3))
 |  | wines [list] | quantity [float] |  |
 |  | errorMargin [float] |  |  |
 |  | Similarity [float] |  |  |
-|  |  |  |  |
 | **Function** | <pre>```get Similarity()```<br>    ```transferFrom(Tank[] tanks)```<br>    ```transferTo(Tank[] tanks)```</pre> | constructor : `wine(id, quantity)` | `tank[] tank_arr` |
 |  | `<wines> get winePercent()` |  | <pre>```for(int i=O; i<maxTank; i++)```<br>    ```tank_arr.append(new Tank())```</pre> |
 |  | `isGood(<wines> wine, errorMargin)` |  |  |
 |  | <pre>```Tank()```<br>    ```this.capacity = (random % 99)+1```<br>    ```this.wine = new List<wines>();```</pre> |  |  |
-|  |  |  |  |
 
-1. Different solution to create an interface :
+3. Different solution to create an interface :
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -133,17 +132,19 @@ if ((val1 > val2) && (val1 > val3))
 
 #### D. How is it work ?
 
-1. Interface :
+1. Interface : Terminal
+
 
 
 2. Program :
 
 
+
 #### E. Program architecture diagram
 
-![program architechture diagram]()
+![program architechture diagram](Images/)
 
-### III. Further considereations
+### III. Further considerations
 
 #### A. Cost estimation
 
@@ -155,7 +156,7 @@ Each data collected are stocked on secure server.
 
 #### C. Accessibility
 
-The interface is accessible by 
+The interface is accessible by the blending manager of the House Krug by installing the application on their computer or phone.
 
 ### IV. Success evaluation
 
