@@ -290,3 +290,8 @@ __pycache__/
 *.xsd.cs
 KrugAppTest/obj/Debug/net6.0/KrugAppTest.assets.cache
 KrugApp/.DS_Store
+KrugAppTest/bin/Debug/net6.0/CoverletSourceRootsMapping
+*.cache
+*.editorconfig
+*.json
+*.props
