@@ -78,7 +78,16 @@ The information on the individual wines, and the system will generate a customiz
   - The error margin.
 
 # 7. User interface
-The programmes will be running on both Windows and MacOS.
+The programmes will be running on both Windows and MacOS, more precisely on a console application.For example:
+   1. Menu option: A menu option with several types of wines will be presented for the blending process.
+       ###### Please select an option
+       ###### 1.  Start new blend
+       ###### 2.  Display the blend result
+       ###### 3. Exist
+       Users can input the corresponding number to select the desired option.
+
+   2. Input prompts: The user enters the percentage of the desired number of wines to be blend.
+   3. Output display: After each blend, display relevant information or results to the user. For example, display the final blend, or any relevant notifications or messages like the total percentage of the blend result.
 
 # 8. Evaluation criteria
 
