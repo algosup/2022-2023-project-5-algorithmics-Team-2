@@ -152,39 +152,89 @@ The program is implemented by the technique of TDD[^14].
 
 2. Program :
 
-a. Tanks
-
-```C#
-
-```
+a. Tanks.cs folder
 
 create a tank list (of length MAX_WINES = 400) with a capacity and the name of the wine
 
 ```C#
-
+private int MAX_WINES = 400;
+public float Capacity { get; set; }
+public Wine[] Wine { get; set; }
 ```
 
+__
 
 
-b. Wines
 
 ```C#
-
+        
 ```
+
+b. Wines.cs folder
 
 create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
 
 ```C#
+public float Quantity { get; set; }
 
+public Wine()
+{
+  this.Quantity = 0;
+}
+
+public Wine(float value)
+{
+  this.Quantity = value;
+}
 ```
+
+__
 
 define each operator
 
 ```C#
+public static Wine operator +(Wine wine1, Wine wine2)
+{
+  return new Wine(wine1.Quantity + wine2.Quantity);
+}
 
+public static Wine operator -(Wine wine1, Wine wine2)
+{
+  return new Wine(wine1.Quantity - wine2.Quantity);
+}
+
+public static Wine operator *(Wine wine1, Wine wine2)
+{
+  return new Wine(wine1.Quantity * wine2.Quantity);
+}
+
+public static Wine operator /(Wine wine1, Wine wine2)
+{
+  if (wine2.Quantity != 0)
+    return new Wine(wine1.Quantity / wine2.Quantity);
+  else
+    throw new DivideByZeroException("Cannot divide by zero.");
+}
 ```
 
+__
+
 returns the quantity
+
+```C#
+public override string ToString()
+{
+  return "Quantity: " + this.Quantity;
+}
+```
+
+c. .cs folder
+
+
+
+```C#
+
+```
 
 #### E. Program architecture diagram
 
@@ -199,7 +249,7 @@ To make the project, the cost don't depends of the program, but rather if we cre
 
 #### B. Security
 
-Each data collected are stocked on secure server.
+Each data used by the program aren't saved when your close the program and avoids any security problems regarding data theft.
 
 #### C. Accessibility
 
