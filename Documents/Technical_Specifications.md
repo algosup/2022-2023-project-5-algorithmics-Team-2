@@ -77,11 +77,15 @@ Overall, this architecture would provide a robust and scalable software solution
 
 #### C. Technical constraints
 
-The program is implemented by the technique of TDD[^13].
+1. The tanks :
+
+Tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation[^13] of the wine must be avoided.
+
+2. The Complexity :
 
 The most important thing to consider throughout the project is to have an `O(X)` with X = `1`, `log n` or `n`. The values to be avoided absolutely for the efficiency of the program, is an `O(X)` with X = `n²`, `2^n` and `n!`.
 
-1. C# coding convention :
+3. C# coding convention :
 
 | Notation | How | Usage | Exemple |
 | :-: | :-: | :-: | :-: |
@@ -94,6 +98,9 @@ The most important thing to consider throughout the project is to have an `O(X)`
 |  | prefix `s_` | static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```private static IWorkerQueue s_workerQueue;```<br>```}```</pre> |
 |  | prefix `t_` | thread static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```[ThreadStatic]```<br>    ```private static TimeSpan t_timeSpan;```<br>```}```</pre> |
 | dot = . | separate name too long |  | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
+
+- Important :
+
 Write only one statement or declaration per line.
 If subsequent lines are not automatically indented, indent them by one tab stop (four spaces).
 Add at least one blank line between method definitions and property definitions.
@@ -110,7 +117,7 @@ if ((val1 > val2) && (val1 > val3))
 
 *source : [learn Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)*
 
-2. Objects description :
+4. Objects description :
 
 |  | Tanks | Wines | Main |
 | :-: | :-: | :-: | :-: |
@@ -123,7 +130,11 @@ if ((val1 > val2) && (val1 > val3))
 |  | `isGood(<wines> wine, errorMargin)` |  |  |
 |  | <pre>```Tank()```<br>    ```this.capacity = (random % 99)+1```<br>    ```this.wine = new List<wines>();```</pre> |  |  |
 
-3. Different solution to create an interface :
+5. Implementation :
+
+The program is implemented by the technique of TDD[^14].
+
+6. Different solution to create an interface :
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -146,6 +157,7 @@ if ((val1 > val2) && (val1 > val3))
 #### E. Program architecture diagram
 
 ![program architechture diagram](Images/)
+![diagram index](Images/)
 
 ### III. Further considerations
 
@@ -159,7 +171,7 @@ Each data collected are stocked on secure server.
 
 #### C. Accessibility
 
-The interface is accessible by the blending manager of the House Krug by installing the application on their computer or phone.
+Since the programme will be used via the interface, the users are the blending manager of the House Krug by installing the application on their computer or phone but also the informatic service (or equivalent to this one).
 
 ### IV. Success evaluation
 
@@ -228,7 +240,11 @@ The SOLID Principles are five principles of Object-Oriented class design. They a
 The 5 principles are : Single Responsibility (a class should do one thing and therefore it should have only a single reason to change) / Open-Closed (classes should be open for extension and closed to modification) / Liskov Substitution (subclasses should be substitutable for their base classes) / Interface Segregation (separating the interfaces) / Dependency Inversion (classes should depend upon interfaces or abstract classes instead of concrete classes and functions)
 *source : [Free code camp](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/)*
 
-[^13]: **TDD (Test-Driven Development):**
+[^13]: **Oxydation:**
+Chimical reaction between body and oxygen. If the wine is oxydised, it's not usable anymore.
+*source : [Le Robert](https://dictionnaire.lerobert.com/google-dictionnaire-fr?param=oxydation)*
+
+[^14]: **TDD (Test-Driven Development):**
 TDD can be represent by the formula `TDD = Refactor + TFD` (Test First Development)
 The first steps of TFD is to quickly add a test, basically just enough code to fail.
 Next you run your tests to ensure that the new test does in fact fail.
@@ -238,10 +254,6 @@ The fourth step is to run your tests again. If they fail you need to update your
 TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
 *source : [Agile data](http://agiledata.org/essays/tdd.html)*
 
-[^14]: **...**
-
-*source : []()*
-
-[^15]: **...**
+[^15]: **...:**
 
 *source : []()*
