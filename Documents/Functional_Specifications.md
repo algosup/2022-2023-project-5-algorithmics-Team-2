@@ -78,16 +78,17 @@ The information on the individual wines, and the system will generate a customiz
   - The error margin.
 
 # 7. User interface
-The programmes will be running on both Windows and MacOS, more precisely on a console application.For example:
-   1. Menu option: A menu option with several types of wines will be presented for the blending process.
-       ###### Please select an option
+The programmes will be running on both Windows and MacOS, more precisely on a GUI[^5].For example:
+  1. Representation: There is menu option with the wines number and quantity, and on the other side we have a graph with positive vertices(X, Y), Y represent the quantity/percentage of wines, and X represent the number of each wine.  
+   2. Menu option: A menu option of several types of wines and quantity/percentage will be presented for the blending process.
+       ###### 1.  Please enter the quantity/percentage of each wine
        ###### 1.  Start new blend
        ###### 2.  Display the blend result
        ###### 3. Exist
-       Users can input the corresponding number to select the desired option.
 
-   2. Input prompts: The user enters the percentage of the desired number of wines to be blend.
-   3. Output display: After each blend, display relevant information or results to the user. For example, display the final blend, or any relevant notifications or messages like the total percentage of the blend result.
+   3. Input prompts: The user enters the quantity/percentage of the desired number of wines to be blend.
+   4. Process: After entering the quantity of the different wines, and start the calculation, the position number of each wine with it input quantity/percentage will be graphicaly represented.
+   5. Output display: After each blend, display relevant information or results to the user. For example, display the final blend, or any relevant notifications or messages like the total percentage of the blend result.
 
 # 8. Evaluation criteria
 
@@ -112,3 +113,4 @@ Krug Champagne: <a href="https://www.krug.com">Krug Champagne's page</a>
 [^2]: Blending: the still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile.
 [^3]: An index is a list of data, such as group of files or database entries.
 [^4]: The percentage, quantity, and index of each wine is entered.
+[^5]: GUI(Graphical User Interface)provides a visual way for users to interact with an application using graphical elements such as windows, buttons, menus, and forms.
