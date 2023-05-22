@@ -142,17 +142,49 @@ The program is implemented by the technique of TDD[^14].
 | Blazor web | 1 big server to be fast + Mobile compatibility | cost online + heavy depend |
 | Blazor app | secure (local) + offline | heavy on the  user's machine |
 | API | can connect any interface + Mobile compatibility | depend of it + server cost |
-| GUI (Graphic User Interface) | not to heavy + user friendly (design) + Mobile compatibility | midde weight + might take too long for creation + heavier |
+| [GUI](https://github.com/gui-cs/Terminal.Gui) (Graphic User Interface) | not to heavy + user friendly (design) + Mobile compatibility | midde weight + might take too long for creation + heavier |
 
 #### D. How is it work ?
 
-1. Interface : Terminal
+1. Interface : Terminal GUI
 
 
 
 2. Program :
 
+a. Tanks
 
+```C#
+
+```
+
+create a tank list (of length MAX_WINES = 400) with a capacity and the name of the wine
+
+```C#
+
+```
+
+
+
+b. Wines
+
+```C#
+
+```
+
+create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
+
+```C#
+
+```
+
+define each operator
+
+```C#
+
+```
+
+returns the quantity
 
 #### E. Program architecture diagram
 
