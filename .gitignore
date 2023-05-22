@@ -295,3 +295,8 @@ KrugAppTest/bin/Debug/net6.0/CoverletSourceRootsMapping
 *.editorconfig
 *.json
 *.props
+*.cache
+*.json
+*.props
+*.editorconfig
+KrugAppTest/bin/Debug/net6.0/CoverletSourceRootsMapping
