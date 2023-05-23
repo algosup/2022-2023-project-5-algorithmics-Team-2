@@ -2,10 +2,9 @@
 
 ## Technical Specifications
 
-___
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <details>
-
 <summary>📖 Table of content</summary>
 
 - [2022-2023 - PROJECT 5 - ALGORITHMS \& DATA STRUCTURE - TEAM 2](#2022-2023---project-5---algorithms--data-structure---team-2)
@@ -18,6 +17,12 @@ ___
       - [A. Descritpion](#a-descritpion)
       - [B. Software architecture](#b-software-architecture)
       - [C. Technical constraints](#c-technical-constraints)
+        - [1. The tanks](#1-the-tanks)
+        - [2. The Complexity](#2-the-complexity)
+        - [3. C# coding convention](#3-c-coding-convention)
+        - [4. Objects description](#4-objects-description)
+        - [5. Implementation](#5-implementation)
+        - [6. Different solution to create an interface](#6-different-solution-to-create-an-interface)
       - [D. How is it work ?](#d-how-is-it-work-)
       - [E. Program architecture diagram](#e-program-architecture-diagram)
     - [III. Further considerations](#iii-further-considerations)
@@ -29,7 +34,7 @@ ___
 
 </details>
 
-___
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ### I. Introduction of the project
 
@@ -77,15 +82,15 @@ Overall, this architecture would provide a robust and scalable software solution
 
 #### C. Technical constraints
 
-1. The tanks :
+##### 1. The tanks
 
 Tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation[^13] of the wine must be avoided.
 
-2. The Complexity :
+##### 2. The Complexity
 
 The most important thing to consider throughout the project is to have an `O(X)` with X = `1`, `log n` or `n`. The values to be avoided absolutely for the efficiency of the program, is an `O(X)` with X = `n²`, `2^n` and `n!`.
 
-3. C# coding convention :
+##### 3. C# coding convention
 
 | Notation | How | Usage | Exemple |
 | :-: | :-: | :-: | :-: |
@@ -117,7 +122,7 @@ if ((val1 > val2) && (val1 > val3))
 
 *source : [learn Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)*
 
-4. Objects description :
+##### 4. Objects description
 
 |  | Tanks | Wines | Main |
 | :-: | :-: | :-: | :-: |
@@ -130,11 +135,11 @@ if ((val1 > val2) && (val1 > val3))
 |  | `isGood(<wines> wine, errorMargin)` |  |  |
 |  | <pre>```Tank()```<br>    ```this.capacity = (random % 99)+1```<br>    ```this.wine = new List<wines>();```</pre> |  |  |
 
-5. Implementation :
+##### 5. Implementation
 
 The program is implemented by the technique of TDD[^14].
 
-6. Different solution to create an interface :
+##### 6. Different solution to create an interface
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -148,8 +153,6 @@ The program is implemented by the technique of TDD[^14].
 
 1. Interface : Terminal GUI
 
-
-
 2. Program :
 
 a. Tanks.cs file
@@ -162,7 +165,7 @@ public float Capacity { get; set; }
 public Wine[] Wine { get; set; }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
 
 Create a tank with a random capacity between 10 and 100
 
@@ -175,7 +178,7 @@ public Tank()
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 Create a tank with a define capacity
 
@@ -187,7 +190,7 @@ public Tank(float capacity)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Return the total quantity of a tank, that have multiple wines in it. The parameter "total" is the array of the wines' capacity.
 
@@ -199,7 +202,7 @@ public Tank(Wine[] total)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
 
 Empties the contents of the specified array by setting all elements to their default values. The parameter "array" is the array of tank to be emptied
 
@@ -210,7 +213,7 @@ public static void EmptyTank<T>(Wine[] array)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 Fill the tank with only one wine. the parameter "indexOfWine" is the index of where the wine is.
 
@@ -224,7 +227,7 @@ public void FillWithOneWine(int indexOfWine)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Transfers the total quantity of wines from an array of tanks into a new tank with the combined capacity and quantity from the input tanks.
 
@@ -244,7 +247,7 @@ public Tank TankFrom(Tank[] tanks)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
 
 Return an array of tanks with the wine from the target tank.
 The parameter "tanks" is the array of tanks to transfer wine from and the parameter "tank" is the target tank to receive the transferred wine.
@@ -279,7 +282,7 @@ public static Tank[] TransferTo(Tank[] tanks, Tank tank)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 Calculates the percentages of the total capacity for each tank in the provided array.
 
@@ -292,7 +295,7 @@ public Tank[] CalculatePercentages(Tank[] tanks)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Calculates the similarity between a given formula of wines (represent the desired quantities of wines in the final mix.) and the quantities of wines in a set of tanks and return an array of wines representing the differences between the desired quantities and the tank quantities.
 
@@ -311,7 +314,7 @@ public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
 
 Adds two tanks together, combining their capacity and wine quantities (with operator overloads) in an other tank.
 If the total quantity of wines is higher or lower than the capacity of the tank, it will return an error.
@@ -331,6 +334,8 @@ public static Tank operator +(Tank tank1, Tank tank2)
 }
 ```
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png)
+
 b. Wines.cs file
 
 create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
@@ -349,7 +354,7 @@ public Wine(float value)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 define each operator
 
@@ -378,7 +383,7 @@ public static Wine operator /(Wine wine1, Wine wine2)
 }
 ```
 
-__
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
 
 returns the quantity
 
@@ -389,9 +394,9 @@ public override string ToString()
 }
 ```
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png)
+
 c. .cs folder
-
-
 
 ```C#
 
@@ -399,8 +404,8 @@ c. .cs folder
 
 #### E. Program architecture diagram
 
-![program architechture diagram](Images/)
-![diagram index](Images/)
+![Program Architechture Diagram](Images/)
+![Diagram Index](Images/)
 
 ### III. Further considerations
 
@@ -426,7 +431,7 @@ The program is scored according to the following criteria :
 4. Minimum number of steps to get to the result
 5. Complexity and Speed of the code
 
-___
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ### V. Glossary
 
