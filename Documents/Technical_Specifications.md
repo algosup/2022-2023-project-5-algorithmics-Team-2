@@ -152,7 +152,7 @@ The program is implemented by the technique of TDD[^14].
 
 2. Program :
 
-a. Tanks.cs folder
+a. Tanks.cs file
 
 create a tank list (of length MAX_WINES = 400) with a capacity and the name of the wine
 
@@ -164,13 +164,174 @@ public Wine[] Wine { get; set; }
 
 __
 
-
+Create a tank with a random capacity between 10 and 100
 
 ```C#
-        
+public Tank()
+{
+  Random rnd = new Random();
+  this.Capacity = rnd.Next(10, 100);
+  this.Wine = new Wine[MAX_WINES];
+}
 ```
 
-b. Wines.cs folder
+__
+
+Create a tank with a define capacity
+
+```C#
+public Tank(float capacity)
+{
+  this.Capacity = capacity;
+  this.Wine = new Wine[MAX_WINES];
+}
+```
+
+__
+
+Return the total quantity of a tank, that have multiple wines in it. The parameter "total" is the array of the wines' capacity.
+
+```C#
+public Tank(Wine[] total)
+{
+  this.Capacity = total.Sum(wine => wine.Quantity);
+  this.Wine = new Wine[MAX_WINES];
+}
+```
+
+__
+
+Empties the contents of the specified array by setting all elements to their default values. The parameter "array" is the array of tank to be emptied
+
+```C#
+public static void EmptyTank<T>(Wine[] array)
+{
+  Array.Clear(array, 0, array.Length);
+}
+```
+
+__
+
+Fill the tank with only one wine. the parameter "indexOfWine" is the index of where the wine is.
+
+```C#
+public void FillWithOneWine(int indexOfWine)
+{
+  if (this.Wine.Sum(wine => wine.Quantity) == 0)
+    this.Wine[indexOfWine].Quantity = this.Capacity;
+  else
+    throw new Exception("Cannot fill a full tank.");
+}
+```
+
+__
+
+Transfers the total quantity of wines from an array of tanks into a new tank with the combined capacity and quantity from the input tanks.
+
+```C#
+public Tank TankFrom(Tank[] tanks)
+{
+  float totalCapacity = tanks.Sum(tank => tank.Capacity);
+  Wine[] totalWines = new Wine[MAX_WINES];
+
+  for (int i = 0; i < MAX_WINES; i++)
+  {
+    float totalQuantity = tanks.Sum(tank => tank.Wine[i].Quantity);
+    totalWines[i] = new Wine(totalQuantity);
+  }
+
+  return new Tank(totalWines);
+}
+```
+
+__
+
+Return an array of tanks with the wine from the target tank.
+The parameter "tanks" is the array of tanks to transfer wine from and the parameter "tank" is the target tank to receive the transferred wine.
+The tank receivers need to be empty, and their total capacity needs to be equal to the capacity of the initial tank.
+
+```C#
+public static Tank[] TransferTo(Tank[] tanks, Tank tank)
+{
+  if (tanks.Sum(t => t.Wine.Sum(w => w.Quantity)) != 0)
+  {
+    throw new Exception("Cannot transfer if the total quantity of wine in the tanks is not zero.");
+  }
+
+  if (tanks.Sum(t => t.Capacity) != tank.Capacity)
+  {
+    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+  }
+
+  Tank[] res = new Tank[tanks.Length];
+
+  for (int j = 0; j < tanks.Length; j++)
+  {
+    res[j] = new Tank(tanks[j].Capacity);
+
+    for (int i = 0; i < tank.MAX_WINES; i++)
+    {
+      res[j].Wine[i].Quantity = (tank.Wine[i].Quantity / tank.Capacity) * tanks[j].Capacity;
+    }
+
+  }
+  return res;
+}
+```
+
+__
+
+Calculates the percentages of the total capacity for each tank in the provided array.
+
+```C#
+public Tank[] CalculatePercentages(Tank[] tanks)
+{
+  float total = tanks.Sum(tank => tank.Capacity);
+
+  return tanks.Select(tank => new Tank(tank.Capacity / total * 100)).ToArray();
+}
+```
+
+__
+
+Calculates the similarity between a given formula of wines (represent the desired quantities of wines in the final mix.) and the quantities of wines in a set of tanks and return an array of wines representing the differences between the desired quantities and the tank quantities.
+
+```C#
+public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
+{
+  Wine[] tank1 = tanks.SelectMany(tank => tank.Wine).ToArray();
+  Wine[] diff = new Wine[formula.Length];
+
+  for (int i = 0; i < formula.Length; i++)
+  {
+    diff[i] = new Wine(formula[i].Quantity - tank1[i].Quantity);
+  }
+
+  return diff;
+}
+```
+
+__
+
+Adds two tanks together, combining their capacity and wine quantities (with operator overloads) in an other tank.
+If the total quantity of wines is higher or lower than the capacity of the tank, it will return an error.
+
+```C#
+public static Tank operator +(Tank tank1, Tank tank2)
+{
+  Tank tank = new Tank(tank1.Capacity + tank2.Capacity);
+
+  for (int i = 0; i < tank.Wine.Length; i++)
+    tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
+
+    if (tank.Capacity == tank.Wine.Sum(tank => tank.Quantity) || tank.Wine.Sum(tank => tank.Quantity) == 0)
+      return tank;
+    else
+      throw new Exception("The tank is neither full nor empty.");
+}
+```
+
+b. Wines.cs file
 
 create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
 
