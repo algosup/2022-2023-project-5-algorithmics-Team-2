@@ -28,8 +28,8 @@
 
 ### 1. Introduction
 
-The software will assist the Cellar Master and her team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula, using the minimum number of steps, and without any waste.
-More detaily tanks will be used to mix different wines with no thank been partialy filled, so as to get the desired flavor at a precise percentage.
+The software will assist the Cellar Master and their team in blending the different still wines to create a consistent flavor profile for the Krug Grande Cuvée. The software will optimize the blending process to ensure that the final product is as close as possible to the desired formula using the minimum number of steps and without any waste.
+In order to achieve the satisfactory mix, tanks will be used to mix different wines with the requirement that tanks should be either full or empty, no in-between.
 
 #### Who is Krug ?
 
@@ -43,10 +43,10 @@ In 1959 to 1977, Paul Krug II, the son of Joseph II, succeeded his father. His f
 
 Blending[^2]:
 
-1. Create an algorithm that make use of several tanks to blend different varities of wines and comes out with the desire flavor.
+1. Create an algorithm that make use of several tanks to blend different varities of wines and comes out with the desired flavor.
 2. Implement a user interface that allows the user to input information on the different wines as well as specify the desired flavor profile for the blended wine, and displays the resulting blend and flavor profile.
 
-The Krug champagne need this software so as to chose the best path way to know in which tank a particular wine have to go into during blending and to finally have the desired flavor. To have a good result, the following steps under must be taken in to consideration.
+Krug Champagne need this software to be able to output steps to mix which wines in which tanks in the least amount of steps in order to have the desired flavor. To have a good result, the following steps under must be taken in to consideration.
 
 ### 3. Personas
 
@@ -68,7 +68,7 @@ Description: This use case describes the process of blending different wines to 
 
 ### 5. Blending step
 
- 1. Selection: Winemakers carefully choose different wines with  to create a desired flavor profile.
+ 1. Selection: Winemakers carefully choose different wines to create a desired flavor profile.
  2. Trial Blending: Small-scale blending experiments are conducted, combining different wines in varying proportions to find the ideal blend. Tasting and adjustments are made until the desired result is achieved.
   For example:
    (input --> percatage of wine.
@@ -81,9 +81,9 @@ The system will be used to blend individual batches of wine to create a consiste
 
 The information on the individual wines, and the system will generate a customized blend based on the algorithm and database:
 
-- Add as much as wine you want so the formula.
-- Add as much as tank you want.
-- No half-full.
+- Add as many wines as you want in the formula.
+- Add as many tanks as you want.
+- Tanks should be full or empty, no in-between.
 - The error margin.
 
 ### 7. User interface
@@ -94,13 +94,13 @@ The programmes will be running on both Windows and MacOS, more precisely on a GU
 
 2. Menu option: A menu option of several types of wines and quantity/percentage will be presented for the blending process.
        **1. Please enter the quantity/percentage of each wine**
-       **1. Start new blend**
-       **2. Display the blend result**
-       **3. Exist**
+       **2. Start new blend**
+       **3. Display the blend result**
+       **4. Exit**
 
 3. Input prompts: The user enters the quantity/percentage of the desired number of wines to be blend.
 
-4. Process: After entering the quantity of the different wines, and start the calculation, the position number of each wine with it input quantity/percentage will be graphicaly represented.
+4. Process: After entering the quantity of the different wines, and start the calculation, the position number of each wine with its input quantity/percentage will be graphically represented.
 
 5. Output display: After each blend, display relevant information or results to the user. For example, display the final blend, or any relevant notifications or messages like the total percentage of the blend result.
 
