@@ -17,10 +17,10 @@ namespace KrugApp
         /// <summary>
         /// Create a Wine using the quantity 
         /// </summary>
-        /// <param name="value"> the quantity of wine</param>
-        public Wine(float value)
+        /// <param name="quantity"> the quantity of wine</param>
+        public Wine(float quantity)
         {
-            this.Quantity = value;
+            this.Quantity = quantity;
         }
 
         // Operator overloads

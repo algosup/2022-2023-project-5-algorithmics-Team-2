@@ -6,7 +6,11 @@ namespace KrugApp
 {
     public class Tank
     {
-        private int MAX_WINES = 400;
+        public const int MIN_CAPACITY = 10;
+        public const int MAX_CAPACITY = 100;
+
+        public const int MAX_WINES = 400;
+
         public float Capacity { get; set; }
         public Wine[] Wine { get; set; }
         //public int[][] Node { get; set; }
@@ -17,7 +21,7 @@ namespace KrugApp
         public Tank()
         {
             Random rnd = new Random();
-            this.Capacity = rnd.Next(10, 100);
+            this.Capacity = rnd.Next(MIN_CAPACITY, MAX_CAPACITY);
             this.Wine = new Wine[MAX_WINES];
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
@@ -29,6 +33,8 @@ namespace KrugApp
         /// <param name="capacity"></param>
         public Tank(float capacity)
         {
+            if (capacity < MIN_CAPACITY || capacity > MAX_CAPACITY)
+                throw new ArgumentException($"Capacity must be between {MIN_CAPACITY} and {MAX_CAPACITY}");
             this.Capacity = capacity;
             this.Wine = new Wine[MAX_WINES];
             for (int i = 0; i < MAX_WINES; i++)
@@ -43,6 +49,10 @@ namespace KrugApp
         {
             if(total.Length == MAX_WINES)
             {
+                if (total.Sum(wine => wine.Quantity) > MAX_CAPACITY)
+                    throw new Exception("The total quantity of wine is too big for the tank.");
+                else if (total.Sum(wine => wine.Quantity) < MIN_CAPACITY)
+                    throw new Exception("The total quantity of wine is too small for the tank.");
                 this.Capacity = total.Sum(wine => wine.Quantity);
                 this.Wine = total;
             }
@@ -120,7 +130,7 @@ namespace KrugApp
             {
                 res[j] = new Tank(tanks[j].Capacity);
 
-                for (int i = 0; i < tank.MAX_WINES; i++)
+                for (int i = 0; i < Tank.MAX_WINES; i++)
                 {
                     res[j].Wine[i].Quantity = (tank.Wine[i].Quantity / tank.Capacity) * tanks[j].Capacity;
                 }

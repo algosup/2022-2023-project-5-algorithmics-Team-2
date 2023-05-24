@@ -12,9 +12,9 @@ namespace KrugAppTest
             var tank = new Tank();
 
             // Assert
-            Assert.IsTrue(tank.Capacity >= 10 && tank.Capacity <= 100);
+            Assert.IsTrue(tank.Capacity >= Tank.MIN_CAPACITY && tank.Capacity <= Tank.MAX_CAPACITY);
             Assert.IsNotNull(tank.Wine);
-            Assert.AreEqual(0, tank.Wine.Length);
+            Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
         // The above code works if:
@@ -56,7 +56,7 @@ namespace KrugAppTest
 
             // Assert
             Assert.IsNotNull(tank.Wine);
-            Assert.AreEqual(0, tank.Wine.Length);
+            Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
         // The above code works if:
@@ -99,7 +99,7 @@ namespace KrugAppTest
             // Assert
             Assert.AreEqual(capacity, tank.Capacity);
             Assert.IsNotNull(tank.Wine);
-            Assert.AreEqual(0, tank.Wine.Length);
+            Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
         // The above code works if:
@@ -197,7 +197,7 @@ namespace KrugAppTest
 
             // Assert
             Assert.AreEqual(capacity, tank.Capacity);
-            Assert.AreEqual(0, tank.Wine.Length);
+            Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
         // The above code works if:
@@ -219,25 +219,33 @@ namespace KrugAppTest
         public void Tank_ConstructorWithEmptyWineArray_SetsCapacityToZero()
         {
             // Arrange
-            var wines = new Wine[0];
+            var wines = new Wine[Tank.MAX_WINES];
+            for (int i = 0; i < wines.Length; i++)
+            {
+                wines[i] = new Wine();
+            }
 
             // Act
-            var tank = new Tank(wines);
+
 
             // Assert
-            Assert.AreEqual(0, tank.Capacity);
+            Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
 
         [TestMethod]
         public void Tank_ConstructorWithWines_CalculatesTotalCapacityFromWinesWithPositiveQuantities()
         {
             // Arrange
-            var wines = new Wine[]
+            var wines = new Wine[Tank.MAX_WINES];
+            for (int i = 0; i < wines.Length; i++)
             {
-                new Wine(30),
-                new Wine(20),
-                new Wine(50)
-            };
+                wines[i] = new Wine();
+            }
+            wines[69].Quantity = 20;
+            wines[42].Quantity = 20;
+            wines[4].Quantity = 20;
+            wines[12].Quantity = 20;
+            wines[360].Quantity = 20;
 
             // Act
             var tank = new Tank(wines);
@@ -250,56 +258,61 @@ namespace KrugAppTest
         public void Tank_ConstructorWithWines_CalculatesTotalCapacityFromWinesWithZeroQuantities()
         {
             // Arrange
-            var wines = new Wine[]
+            var wines = new Wine[Tank.MAX_WINES];
+            for (int i = 0; i < wines.Length; i++)
             {
-                new Wine(0),
-                new Wine(0),
-                new Wine(0)
-            };
+                wines[i] = new Wine();
+            }
+            wines[9] = new Wine(0);
+            wines[19] = new Wine(0);
+            wines[29] = new Wine(0);
 
             // Act
-            var tank = new Tank(wines);
+
 
             // Assert
-            Assert.AreEqual(0, tank.Capacity);
+            Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
 
         [TestMethod]
         public void Tank_ConstructorWithWines_CalculatesTotalCapacityFromWinesWithNegativeQuantities()
         {
             // Arrange
-            var wines = new Wine[]
+            var wines = new Wine[Tank.MAX_WINES];
+            for (int i = 0; i < wines.Length; i++)
             {
-                new Wine(-30),
-                new Wine(-20),
-                new Wine(-50)
-            };
+                wines[i] = new Wine();
+            }
+            wines[7] = new Wine(-30);
+            wines[5] = new Wine(-20);
+            wines[17] = new Wine(-50);
 
             // Act
-            var tank = new Tank(wines);
+
 
             // Assert
-            Assert.AreEqual(-100, tank.Capacity);
+            Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
 
         [TestMethod]
         public void Tank_ConstructorWithWines_CalculatesTotalCapacityFromMixedQuantities()
         {
             // Arrange
-            var wines = new Wine[]
+            var wines = new Wine[Tank.MAX_WINES];
+            for (int i = 0; i < wines.Length; i++)
             {
-                new Wine(30),
-                new Wine(-20),
-                new Wine(0),
-                new Wine(-50),
-                new Wine(40)
-            };
+                wines[i] = new Wine();
+            }
+            wines[1] = new Wine(-20);
+            wines[2] = new Wine(0);
+            wines[51] = new Wine(-50);
+            wines[10] = new Wine(40);
 
             // Act
-            var tank = new Tank(wines);
+            
 
             // Assert
-            Assert.AreEqual(0, tank.Capacity);
+            Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
 
     }
