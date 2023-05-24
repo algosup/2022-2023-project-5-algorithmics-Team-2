@@ -59,12 +59,15 @@ The objectif of the project is to implement a program who blend many wines to re
 | Software Engineer | [Clémentine CUREL](https://github.com/Clementine951) |
 | Quality Assurance | [Alexandre BOBIS](https://github.com/AlexandreBobis) |
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
 ### II. Solution
 
 #### A. Descritpion
 
-We have an application where the user can log in and arrives on the home page. He can choose the production tab to enter the capacity of each tanks manually and also the formula of blending.
+We have a terminal where the user can log in and arrives on the home page. He can choose the production tab to enter the capacity of each tanks manually and also the formula of blending.
 After entering all the parameters and validating them, the program calculates, as quickly as possible, the path between the tanks that the wine must take for the blends with the least amount of loss.
+The user has a return of numbers of steps, i.e. the numbers of times where the wine has been transfer (in different tanks or same tanks that an other wine), the similarity with the original formula and which tank has been useful for the blending.
 
 #### B. Software architecture
 
@@ -165,7 +168,7 @@ public float Capacity { get; set; }
 public Wine[] Wine { get; set; }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Create a tank with a random capacity between 10 and 100
 
@@ -178,7 +181,7 @@ public Tank()
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Create a tank with a define capacity
 
@@ -202,7 +205,7 @@ public Tank(Wine[] total)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Empties the contents of the specified array by setting all elements to their default values. The parameter "array" is the array of tank to be emptied
 
@@ -213,7 +216,7 @@ public static void EmptyTank<T>(Wine[] array)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Fill the tank with only one wine. the parameter "indexOfWine" is the index of where the wine is.
 
@@ -247,7 +250,7 @@ public Tank TankFrom(Tank[] tanks)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Return an array of tanks with the wine from the target tank.
 The parameter "tanks" is the array of tanks to transfer wine from and the parameter "tank" is the target tank to receive the transferred wine.
@@ -282,7 +285,7 @@ public static Tank[] TransferTo(Tank[] tanks, Tank tank)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Calculates the percentages of the total capacity for each tank in the provided array.
 
@@ -314,7 +317,7 @@ public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 Adds two tanks together, combining their capacity and wine quantities (with operator overloads) in an other tank.
 If the total quantity of wines is higher or lower than the capacity of the tank, it will return an error.
@@ -334,7 +337,7 @@ public static Tank operator +(Tank tank1, Tank tank2)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 b. Wines.cs file
 
@@ -383,7 +386,7 @@ public static Wine operator /(Wine wine1, Wine wine2)
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 returns the quantity
 
@@ -394,9 +397,9 @@ public override string ToString()
 }
 ```
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/vintage.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-c. .cs folder
+c. .cs file
 
 ```C#
 
@@ -431,7 +434,7 @@ The program is scored according to the following criteria :
 4. Minimum number of steps to get to the result
 5. Complexity and Speed of the code
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
 ### V. Glossary
 
@@ -454,7 +457,7 @@ The layered architecture style places no restrictions on the number of layers th
 [^5]: **Presentation layer :**
 The presentation layer is the first of two layers in the so-called "three-tier architecture" (based on the client-server environment, see attached diagram).
 The presentation layer is the "Client" part thanks an interface to use the program.
-![Three-tier architecture](Images/three-tier_architecture.png)
+![(Three-tier architecture)](Images/Three_Tier_Architecture.png)
 *source : [Wikipedia](https://fr.wikipedia.org/wiki/Architecture_trois_tiers)*
 
 [^6]: **Cellar Master :**
@@ -498,7 +501,7 @@ The first steps of TFD is to quickly add a test, basically just enough code to f
 Next you run your tests to ensure that the new test does in fact fail.
 You then update your functional code to make it pass the new tests.
 The fourth step is to run your tests again. If they fail you need to update your functional code and retest. Once the tests pass the next step is to start over (you may first need to refactor any duplication out of your design as needed, turning TFD into TDD).
-![TFD-TDD](Images/TFD-TDD.png)
+![(TFD-TDD)](Images/TFD-TDD.png)
 TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
 *source : [Agile data](http://agiledata.org/essays/tdd.html)*
 
