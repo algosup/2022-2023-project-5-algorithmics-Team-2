@@ -41,9 +41,12 @@
 #### A. Client
 
 The client is the House Krug Champagne[^1], conceptor of champagne since 1843. Based in Reims, they try to make each year the best products thanks to the respect of the vineyards. It's important to note that Krug is renowned for its production of high quality champagne and is considered one of the most prestigious houses in the Champagne region.
-Krug is classified has the title of "Récoltant-Manipulant" (RM)[^2], which means that it is completely independent. It produces its own grapes and makes its own champagne in its own facilities.
+
 In addition, Krug has several labels that testify to the quality of its champagnes. One of the most prestigious labels that Krug has is "Champagne de Prestige", which designates the most upmarket and exceptional champagnes.
+
 It also offers Grande Cuvée champagne (currently the 171st edition), Rosé, Millésime, Clos Mesnil, Clos d'Ambonnay and Collections, each with a unique history.
+
+Krug is classified has the title of "Récoltant-Manipulant" (RM)[^2], which means that it is completely independent. It produces its own grapes and makes its own champagne in its own facilities.
 
 #### B. Goal of the project
 
@@ -66,7 +69,9 @@ The objectif of the project is to implement a program who blend many wines to re
 #### A. Descritpion
 
 We have a terminal where the user can log in and arrives on the home page. He can choose the production tab to enter the capacity of each tanks manually and also the formula of blending.
+
 After entering all the parameters and validating them, the program calculates, as quickly as possible, the path between the tanks that the wine must take for the blends with the least amount of loss.
+
 The user has a return of numbers of steps, i.e. the numbers of times where the wine has been transfer (in different tanks or same tanks that an other wine), the similarity with the original formula and which tank has been useful for the blending.
 
 #### B. Software architecture
@@ -110,8 +115,11 @@ The most important thing to consider throughout the project is to have an `O(X)`
 - Important :
 
 Write only one statement or declaration per line.
+
 If subsequent lines are not automatically indented, indent them by one tab stop (four spaces).
+
 Add at least one blank line between method definitions and property definitions.
+
 Use parentheses to make the clauses of an expression apparent.
 
 - Exemple :
@@ -157,8 +165,21 @@ The program is implemented by the technique of TDD[^14].
 1. Interface : Terminal GUI
 
 2. Program :
-
 a. Tanks.cs file
+
+inside the namespace KrugApp, we start by define a new class "Tank" accessible
+
+```CSS
+namespace KrugApp
+{
+  public class Tank
+  {
+    ...
+  }
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 create a tank list (of length MAX_WINES = 400) with a capacity and the name of the wine
 
@@ -341,6 +362,20 @@ public static Tank operator +(Tank tank1, Tank tank2)
 
 b. Wines.cs file
 
+inside the namespace KrugApp, we start by define a new class "Wine" accessible
+
+```CSS
+namespace KrugApp
+{
+  public class Wine
+  {
+    ...
+  }
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
 create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
 
 ```C#
@@ -400,6 +435,8 @@ public override string ToString()
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 c. .cs file
+
+
 
 ```C#
 
