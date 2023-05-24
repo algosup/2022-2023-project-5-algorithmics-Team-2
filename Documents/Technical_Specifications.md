@@ -170,7 +170,7 @@ a. Tanks.cs file
 
 inside the namespace KrugApp, we start by define a new class "Tank" accessible
 
-```CSS
+```C#
 namespace KrugApp
 {
   public class Tank
@@ -365,7 +365,7 @@ b. Wines.cs file
 
 inside the namespace KrugApp, we start by define a new class "Wine" accessible
 
-```CSS
+```C#
 namespace KrugApp
 {
   public class Wine
