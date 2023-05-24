@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 
 namespace KrugApp
@@ -8,6 +9,7 @@ namespace KrugApp
         private int MAX_WINES = 400;
         public float Capacity { get; set; }
         public Wine[] Wine { get; set; }
+        //public int[][] Node { get; set; }
 
         /// <summary>
         /// Create a tank with a random capacity between 10 and 100
@@ -17,6 +19,8 @@ namespace KrugApp
             Random rnd = new Random();
             this.Capacity = rnd.Next(10, 100);
             this.Wine = new Wine[MAX_WINES];
+            for (int i = 0; i < MAX_WINES; i++)
+                this.Wine[i] = new Wine();
         }
 
         /// <summary>
@@ -27,6 +31,8 @@ namespace KrugApp
         {
             this.Capacity = capacity;
             this.Wine = new Wine[MAX_WINES];
+            for (int i = 0; i < MAX_WINES; i++)
+                this.Wine[i] = new Wine();
         }
 
         /// <summary>
@@ -35,8 +41,15 @@ namespace KrugApp
         /// <param name="total"> Array of the wines' capacity</param>
         public Tank(Wine[] total)
         {
-            this.Capacity = total.Sum(wine => wine.Quantity);
-            this.Wine = new Wine[MAX_WINES];
+            if(total.Length == MAX_WINES)
+            {
+                this.Capacity = total.Sum(wine => wine.Quantity);
+                this.Wine = total;
+            }
+            else
+            {
+                throw new Exception("Invalide number of wines");
+            }
         }
 
         /// <summary>
