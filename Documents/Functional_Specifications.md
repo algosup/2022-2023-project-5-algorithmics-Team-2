@@ -94,10 +94,10 @@ The programmes will be running on both Windows and MacOS, more precisely on a GU
 
 2. Menu option: A menu option of several types of wines and quantity/percentage will be presented for the blending process:
 
-- **1. Please enter the quantity/percentage of each wine**
-- **2. Start new blend**
-- **3. Display the blend result**
-- **4. Exit**
+- *1. Please enter the quantity/percentage of each wine*
+- *2. Start new blend*
+- *3. Display the blend result*
+- *4. Exit*
 
 1. Input prompts: The user enters the quantity/percentage of the desired number of wines to be blend.
 
