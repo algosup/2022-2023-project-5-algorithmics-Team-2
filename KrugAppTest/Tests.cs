@@ -69,7 +69,7 @@ namespace KrugAppTest
         public void Tank_ConstructorWithCapacity_CreatesTankWithGivenCapacity()
         {
             // Arrange
-            float capacity = 50.0f;
+            int capacity = 50;
 
             // Act
             var tank = new Tank(capacity);
@@ -84,7 +84,7 @@ namespace KrugAppTest
         public void Tank_ConstructorWithCapacity_CreatesTankWithZeroWineQuantities()
         {
             // Arrange
-            float capacity = 50.0f;
+            int capacity = 50;
 
             // Act
             var tank = new Tank(capacity);
@@ -100,7 +100,7 @@ namespace KrugAppTest
         public void Tank_ConstructorWithCapacity_ThrowsExceptionForNegativeCapacity()
         {
             // Arrange
-            float capacity = -10.0f;
+            int capacity = -10;
 
             // Assert
             Assert.ThrowsException<ArgumentException>(() => new Tank(capacity));
@@ -110,7 +110,7 @@ namespace KrugAppTest
         public void Tank_ConstructorWithCapacity_InitializesCapacityAndWineArray()
         {
             // Arrange
-            float capacity = 50.0f;
+            int capacity = 50;
 
             // Act
             var tank = new Tank(capacity);
@@ -124,7 +124,7 @@ namespace KrugAppTest
         public void Tank_ConstructorWithCapacity_CreatesTankWithCorrectCapacityAndEmptyWineArray()
         {
             // Arrange
-            float capacity = 75.0f;
+            int capacity = 75;
 
             // Act
             var tank = new Tank(capacity);

@@ -6,12 +6,12 @@ namespace KrugApp
 {
     public class Tank
     {
-        public const int MIN_CAPACITY = 10;
-        public const int MAX_CAPACITY = 100;
+        public const int MIN_CAPACITY = 1;
+        public const int MAX_CAPACITY = 10;
 
         public const int MAX_WINES = 400;
 
-        public float Capacity { get; set; }
+        public int Capacity { get; set; }
         public Wine[] Wine { get; set; }
         //public int[][] Node { get; set; }
 
@@ -31,7 +31,7 @@ namespace KrugApp
         /// create a tank with a define capacity
         /// </summary>
         /// <param name="capacity"></param>
-        public Tank(float capacity)
+        public Tank(int capacity)
         {
             if (capacity < MIN_CAPACITY || capacity > MAX_CAPACITY)
                 throw new ArgumentException($"Capacity must be between {MIN_CAPACITY} and {MAX_CAPACITY}");
@@ -53,7 +53,7 @@ namespace KrugApp
                     throw new Exception("The total quantity of wine is too big for the tank.");
                 else if (total.Sum(wine => wine.Quantity) < MIN_CAPACITY)
                     throw new Exception("The total quantity of wine is too small for the tank.");
-                this.Capacity = total.Sum(wine => wine.Quantity);
+                this.Capacity = (int)total.Sum(wine => wine.Quantity);
                 this.Wine = total;
             }
             else
@@ -150,7 +150,7 @@ namespace KrugApp
         {
             float total = tanks.Sum(tank => tank.Capacity);
 
-            return tanks.Select(tank => new Tank(tank.Capacity / total * 100)).ToArray();
+            return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100))).ToArray();
         }
 
         /// <summary>
@@ -195,6 +195,45 @@ namespace KrugApp
 
         }
 
+
+        public static List<int[]> GenerateSumCombinations(Tank[] values)
+        {
+            List<int[]> result = new List<int[]>();
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                int[] combination = new int[values.Length];
+                GenerateSumCombinations(values, values[i].Capacity, combination, result, i, 0);
+            }
+
+            return result;
+        }
+
+
+        private static void GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)
+        {
+            if (target == 0 && length > 1)
+            {
+                // Found a valid combination that sums up to the target and has more than one element
+                int[] validCombination = new int[length];
+                Array.Copy(combination, validCombination, length);
+                result.Add(validCombination);
+                return;
+            }
+
+            if (target < 0 || startIndex == tanks.Length)
+            {
+                // The current combination exceeds the target value or reached the end of the values array, backtrack
+                return;
+            }
+
+            // Exclude the current value and move to the next index
+            GenerateSumCombinations(tanks, target, combination, result, startIndex + 1, length);
+
+            // Include the current value and continue with the same index
+            combination[length] = tanks[startIndex].Capacity;
+            GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
+        }
 
     }
 }
