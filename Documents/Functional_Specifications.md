@@ -103,7 +103,7 @@ The programmes will be running on both Windows and MacOS, more precisely on a GU
 
 2. Process: After entering the quantity of the different wines, and start the calculation, the position number of each wine with its input quantity/percentage will be graphically represented.
 
-3. Output display: After each blend, display relevant information or results to the user. For example, display the final blend, or any relevant notifications or messages like the total percentage of the blend result.
+3. Output display: After each blend, display relevant information and results to the user. For example, display the final blend result, and any relevant notifications or messages like the total percentage of the blend result, the similarities, that is, how close in percentage our final result is from the users input formula, the number of steps, and finaly the number of times each tank has been used.
 
 ### 8. Evaluation criteria
 
