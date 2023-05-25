@@ -17,16 +17,6 @@ namespace KrugAppTest
             Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
-        // The above code works if:
-
-        //public Tank()
-        //{
-        //    Random rnd = new Random();
-        //    this.Capacity = rnd.Next(10, 101); // Generates a random number between 10 and 100 (inclusive)
-        //    this.Wine = new Wine[MAX_WINES];
-        //}
-
-
         [TestMethod]
         public void Tank_DefaultConstructor_CreatesDifferentRandomCapacityTanks()
         {
@@ -59,18 +49,6 @@ namespace KrugAppTest
             Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
-        // The above code works if:
-
-        //public Tank()
-        //{
-        //    Random rnd = new Random();
-        //    int num = rnd.Next(10, 100);
-        //    this.Capacity = num;
-        //    this.Wine = new Wine[MAX_WINES];
-        //    EmptyArray(this.Wine);
-        //}
-
-
         [TestMethod]
         public void Tank_DefaultConstructor_InitializesCapacityAndWineArray()
         {
@@ -102,16 +80,6 @@ namespace KrugAppTest
             Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
 
-        // The above code works if:
-
-        //public Tank(float capacity)
-        //{
-        //    this.Capacity = capacity;
-        //    this.Wine = new Wine[MAX_WINES];
-        //    EmptyArray(this.Wine);
-        //}
-
-
         [TestMethod]
         public void Tank_ConstructorWithCapacity_CreatesTankWithZeroWineQuantities()
         {
@@ -128,16 +96,6 @@ namespace KrugAppTest
             }
         }
 
-        // The code above works if:
-
-        //public Tank(float capacity)
-        //{
-        //    this.Capacity = capacity;
-        //    this.Wine = new Wine[MAX_WINES];
-        //    EmptyArray(this.Wine);
-        //}
-
-
         [TestMethod]
         public void Tank_ConstructorWithCapacity_ThrowsExceptionForNegativeCapacity()
         {
@@ -147,20 +105,6 @@ namespace KrugAppTest
             // Assert
             Assert.ThrowsException<ArgumentException>(() => new Tank(capacity));
         }
-
-        // The above code works if:
-
-        //public Tank(float capacity)
-        //{
-        //    if (capacity < 0)
-        //    {
-        //        throw new ArgumentException("Capacity cannot be negative.");
-        //    }
-
-        //    this.Capacity = capacity;
-        //    this.Wine = new Wine[MAX_WINES];
-        //}
-
 
         [TestMethod]
         public void Tank_ConstructorWithCapacity_InitializesCapacityAndWineArray()
@@ -176,16 +120,6 @@ namespace KrugAppTest
             Assert.IsNotNull(tank.Wine);
         }
 
-        // The above code works if:
-
-        //public Tank(float capacity)
-        //{
-        //    this.Capacity = capacity;
-        //    this.Wine = new Wine[MAX_WINES];
-        //    EmptyArray(this.Wine);
-        //}
-
-
         [TestMethod]
         public void Tank_ConstructorWithCapacity_CreatesTankWithCorrectCapacityAndEmptyWineArray()
         {
@@ -199,16 +133,6 @@ namespace KrugAppTest
             Assert.AreEqual(capacity, tank.Capacity);
             Assert.AreEqual(0, tank.Wine.Sum(w => w.Quantity));
         }
-
-        // The above code works if:
-
-        //public Tank(float capacity)
-        //{
-        //    this.Capacity = capacity;
-        //    this.Wine = new Wine[MAX_WINES];
-        //    EmptyArray(this.Wine);
-        //}
-
     }
 
     [TestClass]
@@ -224,10 +148,6 @@ namespace KrugAppTest
             {
                 wines[i] = new Wine();
             }
-
-            // Act
-
-
             // Assert
             Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
@@ -267,9 +187,6 @@ namespace KrugAppTest
             wines[19] = new Wine(0);
             wines[29] = new Wine(0);
 
-            // Act
-
-
             // Assert
             Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
@@ -286,9 +203,6 @@ namespace KrugAppTest
             wines[7] = new Wine(-30);
             wines[5] = new Wine(-20);
             wines[17] = new Wine(-50);
-
-            // Act
-
 
             // Assert
             Assert.ThrowsException<Exception>(() => new Tank(wines));
@@ -308,13 +222,9 @@ namespace KrugAppTest
             wines[51] = new Wine(-50);
             wines[10] = new Wine(40);
 
-            // Act
-            
-
             // Assert
             Assert.ThrowsException<Exception>(() => new Tank(wines));
         }
-
     }
 
     [TestClass]
@@ -449,14 +359,11 @@ namespace KrugAppTest
             // Assert
             Assert.AreEqual(500, result.Quantity);
         }
-
     }
-
 
     [TestClass]
     public class OperatorMultiply
     {
-
         [TestMethod]
         public void OperatorMultiply_MultiplyTwoZeroQuantityWines_ReturnsWineWithZeroQuantity()
         {
@@ -598,6 +505,5 @@ namespace KrugAppTest
             // Assert
             Assert.AreEqual(5, result.Quantity);
         }
-
     }
 }
