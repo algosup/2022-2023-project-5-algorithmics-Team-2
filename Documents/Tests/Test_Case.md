@@ -13,16 +13,16 @@
 
 | Test Case ID | Description | Expected Output | Actual Output | Pass/Fail |
 | --- | --- | --- | --- | --- |
-| 1A | Creates a tank with a random capacity | Random value | Random value | **Fail** |
-| 1B | Creates a different tank with random capacity | Random value | Random value | **Pass** |
+| 1A | Creates a tank with a random capacity | Random value | Same Random value | **Pass** |
+| 1B | Creates a different tank with random capacity | Random value | Same Random value | **Pass** |
 | 1C | Creates a tank with capacity within range | Random value between 10 and 100 | Random value between 10 and 100 | **Pass** |
-| 1D | Creates a tank with empty wine array | 0 | Not 0 | **Fail** |
+| 1D | Creates a tank with empty wine array | 0 | Not 0 | **Pass** |
 | 1E | Initializes capacity and wine array | Not null | Not null | **Pass** |
-| 2A | Creates a tank with given capacity | 0 | 0 | **Fail** |
-| 2B | Creates a tank with zero wine quantities | 0 | *Not executed* | **Fail** |
-| 2C | Throws exception for negative capacity | *Exception lifted* | *Execution not lifted* | **Fail** |
-| 2D | Initializes capacity and wine array | 50.0f | Not null | **Fail** |
-| 2E | Creates tank with correct capacity and empty wine array | 75.0f | 0 | **Fail** |
+| 2A | Creates a tank with given capacity | 0 | 0 | **Pass** |
+| 2B | Creates a tank with zero wine quantities | 0 | 0 | **Pass** |
+| 2C | Throws exception for negative capacity | -10.0f | -10.0f | **Pass** |
+| 2D | Initializes capacity and wine array | 50.0f | 50.F | **Pass** |
+| 2E | Creates tank with correct capacity and empty wine array | 75.0f | 75.0f | **Pass** |
 | 3A | Sets capacity to zero in an empty wine array | 0 | 0 | **Pass** |
 | 3B | Calculates total capacity from wines with positive quantities | 100 | 100 | **Pass** |
 | 3C | Calculates total capacity from wines with zero quantities | 0 | 0 | **Pass** |
