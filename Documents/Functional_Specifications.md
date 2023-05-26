@@ -71,9 +71,10 @@ Description: This use case describes the process of blending different wines to 
  1. Selection: Winemakers carefully choose different wines to create a desired flavor profile.
  2. Trial Blending: Small-scale blending experiments are conducted, combining different wines in varying proportions to find the ideal blend. Tasting and adjustments are made until the desired result is achieved.
   For example:
-   (input --> percatage of wine.
-   input --> quantity of wine.
-   input --> index[^3] of wine.)[^4]
+   (
+   input --> Quantity of tanks to be used.
+   input --> index[^3] of wine. 
+   input --> percentage or quantity of wine.)[^4]
 
 ### 6. Functionalities
 
@@ -103,7 +104,7 @@ The programmes will be running on both Windows and MacOS, more precisely on a GU
 
 2. Process: After entering the quantity of the different wines, and start the calculation, the position number of each wine with its input quantity/percentage will be graphically represented.
 
-3. Output display: After each blend, display relevant information and results to the user. For example, display the final blend result, and any relevant notifications or messages like the total percentage of the blend result, the similarities, that is, how close in percentage our final result is from the users input formula, the number of steps, and finaly the number of times each tank has been used.
+3. Output display: After each blend, display relevant information and results to the user. For example, display the final blend result, and any relevant notifications or messages like the total percentage of the blend result, the similarities, that is, how close in percentage our final result is from the users input formula, the number of steps[^6], and finaly the number of times each tank has been used.
 
 ### 8. Evaluation criteria
 
@@ -130,3 +131,4 @@ Krug Champagne: [Krug Champagne's page](https://www.krug.com)
 [^3]: An index is a list of data, such as group of files or database entries.
 [^4]: The percentage, quantity, and index of each wine is entered.
 [^5]: GUI(Graphical User Interface)provides a visual way for users to interact with an application using graphical elements such as windows, buttons, menus, and forms.
+[^6]: Here when we say step, we simply, means 1 transfer, that is the transfer on wine from 1 tank into another one.
