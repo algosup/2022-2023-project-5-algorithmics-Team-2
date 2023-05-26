@@ -22,7 +22,7 @@
         - [3. C# coding convention](#3-c-coding-convention)
         - [4. Objects description](#4-objects-description)
         - [5. Implementation](#5-implementation)
-        - [6. Different solution to create an interface](#6-different-solution-to-create-an-interface)
+        - [6. Different solution to create an interface (optional)](#6-different-solution-to-create-an-interface-optional)
       - [D. How is it work ?](#d-how-is-it-work-)
       - [E. Program architecture diagram](#e-program-architecture-diagram)
     - [III. Further considerations](#iii-further-considerations)
@@ -110,7 +110,8 @@ The most important thing to consider throughout the project is to have an `O(X)`
 | Camel Casing = _ | prefix them | naming private or internal fields | <pre>```public class DataService```<br>```{```<br>    ```private IWorkerQueue _workerQueue;``` <br>```}```</pre> |
 |  | prefix `s_` | static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```private static IWorkerQueue s_workerQueue;```<br>```}```</pre> |
 |  | prefix `t_` | thread static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```[ThreadStatic]```<br>    ```private static TimeSpan t_timeSpan;```<br>```}```</pre> |
-| dot = . | separate name too long |  | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
+| dot = . |  | separate name too long | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
+| comment = // | start each line with two slashes and an uppercase letter and finish the comment by a period. | give more information of the code | <pre>```// The following declaration creates a query. It does not run the query.```</pre> |
 
 - Important :
 
@@ -150,7 +151,7 @@ if ((val1 > val2) && (val1 > val3))
 
 The program is implemented by the technique of TDD[^14].
 
-##### 6. Different solution to create an interface
+##### 6. Different solution to create an interface (optional)
 
 | INTERFACE | POSITIVE | NEGATIVE |
 | :-: | :-: | :-: |
@@ -162,7 +163,31 @@ The program is implemented by the technique of TDD[^14].
 
 #### D. How is it work ?
 
-1. Interface : Terminal GUI
+1. Interface : Terminal GUI (optional)
+
+a. Step 1
+
+All variable are empty when you open the terminal.
+
+![Step 1](Images/Step1.png)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+b. Step 2
+
+You enter the recipe you want.
+
+![Step 2](Images/Step2.png)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+c. Step 3
+
+Press calculate and watch the bars update while it searches the for the best way to get to the combination.
+
+![Step 3](Images/Step3.png)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 2. Program :
 
@@ -435,18 +460,9 @@ public override string ToString()
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-c. .cs file
-
-
-
-```C#
-
-```
-
 #### E. Program architecture diagram
 
-![Program Architechture Diagram](Images/)
-![Diagram Index](Images/)
+![Program Architechture Diagram](Images/Architecture_diagram.png)
 
 ### III. Further considerations
 
@@ -542,7 +558,3 @@ The fourth step is to run your tests again. If they fail you need to update your
 ![(TFD-TDD)](Images/TFD-TDD.png)
 TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
 *source : [Agile data](http://agiledata.org/essays/tdd.html)*
-
-[^15]: **...:**
-
-*source : []()*
