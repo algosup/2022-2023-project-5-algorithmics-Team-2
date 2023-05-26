@@ -110,7 +110,8 @@ The most important thing to consider throughout the project is to have an `O(X)`
 | Camel Casing = _ | prefix them | naming private or internal fields | <pre>```public class DataService```<br>```{```<br>    ```private IWorkerQueue _workerQueue;``` <br>```}```</pre> |
 |  | prefix `s_` | static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```private static IWorkerQueue s_workerQueue;```<br>```}```</pre> |
 |  | prefix `t_` | thread static fields that are private or internal | <pre>```public class DataService```<br>```{```<br>    ```[ThreadStatic]```<br>    ```private static TimeSpan t_timeSpan;```<br>```}```</pre> |
-| dot = . | separate name too long |  | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
+| dot = . |  | separate name too long | <pre>```var currentPerformanceCounterCategory = new System.Diagnostics.```<br>    ```PerformanceCounterCategory();```</pre> |
+| comment = // | start each line with two slashes and an uppercase letter and finish the comment by a period. | give more information of the code | <pre>```// The following declaration creates a query. It does not run the query.```</pre> |
 
 - Important :
 
@@ -445,8 +446,7 @@ c. .cs file
 
 #### E. Program architecture diagram
 
-![Program Architechture Diagram](Images/)
-![Diagram Index](Images/)
+![Program Architechture Diagram](Images/Architecture_diagram.png)
 
 ### III. Further considerations
 
