@@ -44,9 +44,9 @@ In 1959 to 1977, Paul Krug II, the son of Joseph II, succeeded his father. His f
 Blending[^2]:
 
 1. Create an algorithm that make use of several tanks to blend different varities of wines and comes out with the desired flavor.
-2. Implement a user interface that allows the user to input information on the different wines as well as specify the desired flavor profile for the blended wine, and displays the resulting blend and flavor profile.
+2. Implement a user interface that allows the user to input information on the different wines as well as specify the desired number of tanks for the blending process, and displays the resulting blend.
 
-Krug Champagne need this software to be able to output steps to mix which wines in which tanks in the least amount of steps in order to have the desired flavor. To have a good result, the following steps under must be taken in to consideration.
+Krug Champagne need this software to be able to output steps to mix which wines in which tanks in the least amount of steps in order to have the desired flavor. To have a good result, the following steps under must be taken in to consideration(Blending step).
 
 ### 3. Personas
 
@@ -72,9 +72,9 @@ Description: This use case describes the process of blending different wines to 
  2. Trial Blending: Small-scale blending experiments are conducted, combining different wines in varying proportions to find the ideal blend. Tasting and adjustments are made until the desired result is achieved.
   For example:
    (
-   input --> Quantity of tanks to be used.
-   input --> index[^3] of wine. 
-   input --> percentage or quantity of wine.)[^4]
+   - input --> Quantity of tanks to be used.
+   - input --> index[^3] of wine. 
+   - input --> percentage or quantity of wine.)[^4]
 
 ### 6. Functionalities
 
@@ -118,7 +118,7 @@ Here are the criteria that will be used to evaluate the robustness and consisten
 
 ### 9. Conclusion
 
-Overall, the goal of the project is to create a system that can produce high-quality blended wines with a consistent flavor profile, while also allowing for customization and flexibility based on user input.
+Overall, the goal of the project is to create a system that can produce high-quality blended wines based on users input.
 
 ### Reference
 
