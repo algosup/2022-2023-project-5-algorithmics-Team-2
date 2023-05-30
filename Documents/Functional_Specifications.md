@@ -71,8 +71,8 @@ Description: This use case describes the process of blending different wines to 
  1. Selection: Winemakers carefully choose different wines to create a desired flavor profile.
  2. Trial Blending: Small-scale blending experiments are conducted, combining different wines in varying proportions to find the ideal blend. Tasting and adjustments are made until the desired result is achieved.
   For example:
-   (
-   - input --> Quantity of tanks to be used.
+   
+   - (input --> Quantity of tanks to be used.
    - input --> index[^3] of wine. 
    - input --> percentage or quantity of wine.)[^4]
 
