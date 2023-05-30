@@ -129,6 +129,6 @@ Krug Champagne: [Krug Champagne's page](https://www.krug.com)
 [^1]: LVMH simply means "Moët Hennessy Louis Vuitton".
 [^2]: Blending: the still wines from different vineyards and grape varieties are blended together to create a consistent flavor profile.
 [^3]: An index is a list of data, such as group of files or database entries.
-[^4]: The percentage, quantity, and index of each wine is entered.
+[^4]: The percentage, quantity, and index of each wine are entered.
 [^5]: GUI(Graphical User Interface)provides a visual way for users to interact with an application using graphical elements such as windows, buttons, menus, and forms.
 [^6]: Here when we say step, we simply, means 1 transfer, that is the transfer on wine from 1 tank into another one.
