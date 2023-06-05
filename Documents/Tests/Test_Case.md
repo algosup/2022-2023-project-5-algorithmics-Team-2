@@ -50,4 +50,4 @@
 
 ## Total tests
 
-Tests: 34 Passed: 28 Failed: 6 Skipped: 0
+Tests: 34 Passed: 34 Failed: 0 Skipped: 0
