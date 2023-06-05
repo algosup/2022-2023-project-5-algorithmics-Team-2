@@ -22,7 +22,6 @@
         - [3. C# coding convention](#3-c-coding-convention)
         - [4. Objects description](#4-objects-description)
         - [5. Implementation](#5-implementation)
-        - [6. Different solution to create an interface (optional)](#6-different-solution-to-create-an-interface-optional)
       - [D. How is it work ?](#d-how-is-it-work-)
       - [E. Program architecture diagram](#e-program-architecture-diagram)
     - [III. Further considerations](#iii-further-considerations)
@@ -68,7 +67,7 @@ The objectif of the project is to implement a program who blend many wines to re
 
 #### A. Descritpion
 
-We have a terminal where the user can log in and arrives on the home page. He can choose the production tab to enter the capacity of each tanks manually and also the formula of blending.
+We have a configuration file where the user can enter the capacity of each tanks manually and also the formula of blending.
 
 After entering all the parameters and validating them, the program calculates, as quickly as possible, the path between the tanks that the wine must take for the blends with the least amount of loss.
 
@@ -151,47 +150,11 @@ if ((val1 > val2) && (val1 > val3))
 
 The program is implemented by the technique of TDD[^14].
 
-##### 6. Different solution to create an interface (optional)
-
-| INTERFACE | POSITIVE | NEGATIVE |
-| :-: | :-: | :-: |
-| Terminal | light weight | not user friendly |
-| Blazor web | 1 big server to be fast + Mobile compatibility | cost online + heavy depend |
-| Blazor app | secure (local) + offline | heavy on the  user's machine |
-| API | can connect any interface + Mobile compatibility | depend of it + server cost |
-| [GUI](https://github.com/gui-cs/Terminal.Gui) (Graphic User Interface) | not to heavy + user friendly (design) + Mobile compatibility | midde weight + might take too long for creation + heavier |
-
 #### D. How is it work ?
 
-1. Interface : Terminal GUI (optional)
+Program :
 
-a. Step 1
-
-All variable are empty when you open the terminal.
-
-![Step 1](Images/Step1.png)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
-
-b. Step 2
-
-You enter the recipe you want.
-
-![Step 2](Images/Step2.png)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
-
-c. Step 3
-
-Press calculate and watch the bars update while it searches the for the best way to get to the combination.
-
-![Step 3](Images/Step3.png)
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
-
-2. Program :
-
-a. Tanks.cs file
+1. Tanks.cs file
 
 inside the namespace KrugApp, we start by define a new class "Tank" accessible
 
@@ -386,7 +349,7 @@ public static Tank operator +(Tank tank1, Tank tank2)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-b. Wines.cs file
+2. Wines.cs file
 
 inside the namespace KrugApp, we start by define a new class "Wine" accessible
 
