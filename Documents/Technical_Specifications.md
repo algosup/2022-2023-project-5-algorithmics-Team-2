@@ -148,7 +148,7 @@ if ((val1 > val2) && (val1 > val3))
 
 ##### 5. Implementation
 
-The program is implemented by the technique of TDD[^14].
+The program is implemented by the technique of TDD[^14]. The program generate a general tree[^15] and use the BFS[^16] method and the pruning[^17] technique.
 
 #### D. How is it work ?
 
@@ -383,7 +383,7 @@ public Wine(float value)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-define each operator
+define each operator (+, -, *, /)
 
 ```C#
 public static Wine operator +(Wine wine1, Wine wine2)
@@ -412,7 +412,7 @@ public static Wine operator /(Wine wine1, Wine wine2)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-returns the quantity
+returns the quantity in string type
 
 ```C#
 public override string ToString()
@@ -425,13 +425,24 @@ public override string ToString()
 
 #### E. Program architecture diagram
 
+1. V.1 of the algorithm
+
 ![Program Architechture Diagram](Images/Architecture_diagram.png)
+This algorithm has been abandoned because :
+
+- Big O complexity is too high
+- Not the best option
+- Too much cases where it won't work
+
+2. V.2 of the algorithm
+
+![Program Architechture Diagram](Images/)
 
 ### III. Further considerations
 
 #### A. Cost estimation
 
-To make the project, the cost don't depends of the program, but rather if we create an interface or not and thanks to which tool. Certain tool needed pay servers, as explained in Part II. C. point number 2.
+To make the project, we don't have a cost.
 
 #### B. Security
 
@@ -439,7 +450,7 @@ Each data used by the program aren't saved when your close the program and avoid
 
 #### C. Accessibility
 
-Since the programme will be used via the interface, the users are the blending manager of the House Krug by installing the application on their computer or phone but also the informatic service (or equivalent to this one).
+The program will be accessible by a text file to enter data like the formula (in percentage), the similarity expected (in percentage) or also each tank available and returns a text file with the steps, the percentage of similarity
 
 ### IV. Success evaluation
 
@@ -500,7 +511,7 @@ Once a model is created, it is possible to use EF Migrations to create a databas
 *source : [learn Microsoft](https://learn.microsoft.com/en-gb/ef/core/)*
 
 [^11]: **ORM (Object-Relational Mapping) :**
-L'ORM est en quelque sorte la couche qui relie la programmation orientée objet (OOP) aux bases de données relationnelles et simplifie l'interaction entre les deux.
+The ORM is the layer that links object-oriented programming (OOP) to relational databases and simplifies the interaction between the two.
 *source : [Free code camp](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/)*
 
 [^12]: **SOLID principles :**
@@ -508,7 +519,7 @@ The SOLID Principles are five principles of Object-Oriented class design. They a
 The 5 principles are : Single Responsibility (a class should do one thing and therefore it should have only a single reason to change) / Open-Closed (classes should be open for extension and closed to modification) / Liskov Substitution (subclasses should be substitutable for their base classes) / Interface Segregation (separating the interfaces) / Dependency Inversion (classes should depend upon interfaces or abstract classes instead of concrete classes and functions)
 *source : [Free code camp](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/)*
 
-[^13]: **Oxydation:**
+[^13]: **Oxydation :**
 Chimical reaction between body and oxygen. If the wine is oxydised, it's not usable anymore.
 *source : [Le Robert](https://dictionnaire.lerobert.com/google-dictionnaire-fr?param=oxydation)*
 
@@ -521,3 +532,18 @@ The fourth step is to run your tests again. If they fail you need to update your
 ![(TFD-TDD)](Images/TFD-TDD.png)
 TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
 *source : [Agile data](http://agiledata.org/essays/tdd.html)*
+
+[^15]: **General tree :**
+A tree is an abstract data type that represents a hierarchical tree structure with a set of nodes connected in a "parent-child" fashion. They are made up of several elements : a node, the root (the top-most element of a tree, a node with no parent) and a leaf (a bottom-most element of a tree, has no children).
+There is also another type of tree called a "binary tree". Its special feature is that it has only two children (left and right) for each nodes.
+When we have multiple trees, we call that a forest.
+Other vocabulary : sibling (two or more nodes that share the same parent), heigth (the distance from the root to the furthest leaf, counting the nodes)
+*source : [Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure)) / [tree lesson by Christopher Diggins](doc_link/trees.pptx)*
+
+[^16]: **BFS (Breadth First Search):**
+It's an algorithm for searching for data in a tree (binary or not) starting from the root and first visiting each child who is a sister (at the same height in the tree) before moving on to the "grandchildren".
+*source : [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search#Time_and_space_complexity)*
+
+[^17]: **Pruning :**
+This involves deleting branches of a tree that are no longer needed. This makes the programme faster and more efficient.
+*source : [DEV Community](https://dev.to/ml_82/what-is-pruning-in-decision-tree-30e0#:~:text=Pruning%20is%20a%20technique%20used,the%20tree%20by%20reducing%20overfitting.)*
