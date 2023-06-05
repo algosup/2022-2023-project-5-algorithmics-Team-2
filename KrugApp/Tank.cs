@@ -41,6 +41,16 @@ namespace KrugApp
                 this.Wine[i] = new Wine();
         }
 
+        public Tank (float wine, int index)
+        {
+            this.Capacity = (int)wine;
+            this.Wine = new Wine[MAX_WINES];
+            for (int i = 0; i < MAX_WINES; i++)
+                this.Wine[i] = new Wine();
+
+            this.Wine[index].Quantity = wine;
+        }
+
         /// <summary>
         /// Return the total quantity of a tank, that have multiple wines in it.
         /// </summary>
