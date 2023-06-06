@@ -511,28 +511,108 @@ namespace KrugAppTest
     public class GridComparison {
 
         [TestMethod]
-        public void GridComparison_1() {
-            
+        public void GridComparison_1()
+        {
+            // Create the first grid
+            int[][] grid1 = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 5, 6 },
+                new int[] { 7, 8, 9 }
+            };
+
+            // Create the second grid
+            int[][] grid2 = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 5, 6 },
+                new int[] { 7, 8, 9 }
+            };
+
+            // Compare
+            bool result = CompareGrids(grid1, grid2);
+
+            // Assert
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void GridComparison_2() {
+        public void GridComparison_2()
+        {
+            int[][] grid1 = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 5, 6 },
+                new int[] { 7, 8, 9 }
+            };
 
+            int[][] grid2 = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 0, 6 },
+                new int[] { 7, 8, 9 }
+            };
+
+            bool result = CompareGrids(grid1, grid2);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void GridComparison_3() {
+        public void GridComparison_3()
+        {
+            int[][] grid1 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 4 }
+            };
 
+            int[][] grid2 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 4 }
+            };
+
+            bool result = CompareGrids(grid1, grid2);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void GridComparison_4() {
+        public void GridComparison_4()
+        {
+            int[][] grid1 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 4 }
+            };
 
+            int[][] grid2 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 5 }
+            };
+
+            bool result = CompareGrids(grid1, grid2);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void GridComparison_5() {
+        public void GridComparison_5()
+        {
+            int[][] grid1 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 4 }
+            };
 
+            int[][] grid2 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 3, 4 },
+                new int[] { 5, 6 }
+            };
+
+            bool result = CompareGrids(grid1, grid2);
+            Assert.IsFalse(result);
         }
     }
 }
