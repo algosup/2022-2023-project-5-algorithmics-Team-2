@@ -99,7 +99,7 @@ The most important thing to consider throughout the project is to have an `O(X)`
 
 ##### 3. C# coding convention
 
-| Notation | How | Usage | Exemple |
+| Notation | How | Usage | Example |
 | :-: | :-: | :-: | :-: |
 | Pascal Casing | we attach each word and capitalize it to know where the next word starts (ex: DataService) | naming Class | <pre>```public class DataService```<br>```{```<br>```}```</pre> |
 |  |  | naming record | <pre>```public record PhysicalAddress(```<br>```)```</pre> |
@@ -122,7 +122,7 @@ Add at least one blank line between method definitions and property definitions.
 
 Use parentheses to make the clauses of an expression apparent.
 
-- Exemple :
+- Example :
 
 ```C#
 if ((val1 > val2) && (val1 > val3))

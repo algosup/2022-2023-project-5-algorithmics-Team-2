@@ -47,6 +47,11 @@
 | 7C | With the '/' operator, divide wine with positive quantity by wine with positive quantity returns wine with correct division result | 5 | 5 | **Pass** |
 | 7D | With the '/' operator, divide wine with negative quantity by wine with positive quantity returns wine with negative quantity | -5 | -5 | **Pass** |
 | 7E | With the '/' operator, divide wine with negative quantity by wine with negative quantity returns wine with positive quantity | 5 | 5 | **Pass** |
+| 8A | Compare 2 grids with values | --- | --- | --- |
+| 8B | Compare 2 grids with values | --- | --- | --- |
+| 8C | Compare 2 grids with values | --- | --- | --- |
+| 8D | Compare 2 grids with values | --- | --- | --- |
+| 8E | Compare 2 grids with values | --- | --- | --- |
 
 ## Total tests
 

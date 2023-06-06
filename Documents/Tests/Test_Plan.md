@@ -46,6 +46,12 @@
       - [7C](#7c)
       - [7D](#7d)
       - [7E](#7e)
+    - [Eight Test Part](#eight-test-part)
+      - [8A](#8a)
+      - [8B](#8b)
+      - [8C](#8c)
+      - [8D](#8d)
+      - [8E](#8e)
 
 </details>
 
@@ -348,4 +354,46 @@ This test verifies that the operator divide function (/) correctly divides a win
 
 `
 The final test in the list validates that the operator divide function (/) correctly divides a wine with a negative quantity by another wine with a negative quantity and returns a wine with the correct positive quantity. It ensures that the division of wines with negative quantities results in a wine with the correct positive quantity.
+`
+
+### Eight Test Part
+
+#### 8A
+
+**TITLE: GridComparison_1():**
+
+`
+
+`
+
+#### 8B
+
+**TITLE: GridComparison_2():**
+
+`
+
+`
+
+#### 8C
+
+**TITLE: GridComparison_3():**
+
+`
+
+`
+
+#### 8D
+
+**TITLE: GridComparison_4():**
+
+`
+
+`
+
+#### 8E
+
+**TITLE: GridComparison_5():**
+
+`
+
 `

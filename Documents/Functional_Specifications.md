@@ -45,9 +45,9 @@ This software to be able to output steps to mix which wines in which tanks in th
 |------|-----|-----|-------------|-------|
 | Jackson James | 21 | Student | Jackson is a sophisticated student who is on internship in a wine industry, having a deep passion for wine. He explores diverse types and regions, studying oenology and viticulture. Engaging in wine clubs and societies, he shares his knowledge and hosts tastings. James skillfully, immerses himself in wine literature, and embraces its cultural significance. His enthusiasm and knowledge shape his identity and future aspirations for been a winemaker.   | <img src="Images/Jackson_James.jpg"> |
 |Sam Keveth | 38 |Marketing Manager|Sam is a seasoned wine manager, combining expertise with a discerning palate. With a professional demeanor and an air of authority. He fosters relationships with wineries, negotiates deals, and ensures optimal inventory management. Passionate about wine education, he conducts staff training and tastings to enhance customer experiences.  | <img src="Images/Samuel_Keveth.jpg"> |
-| Sheyne Bline | 32 | Manager | Sheyne is the manager, she oversees the selection and procurement of wines for a prestigious establishment. Sheyne's refined taste and extensive knowledge enable her to curate an exceptional wine list. She make sure of the different varieties of wine she choose for the blending process, so as to creat a particular flavor profile. Sheyne's attention to detail and dedication to quality make her an invaluable asset in the world of wine | <img src ="Images/Sheyne Bline.jpg"> |
+| Sheyne Bline | 32 | Manager | Sheyne is the manager, she oversees the selection and procurement of wines for a prestigious establishment. Sheyne's refined taste and extensive knowledge enable her to curate an exceptional wine list. She make sure of the different varieties of wine she choose for the blending process, so as to creat a particular flavor profile. Sheyne's attention to detail and dedication to quality make her an invaluable asset in the world of wine | <img src ="Images/Sheyne_Bline.jpg"> |
 |Zenna Cold | 31 | Worker|Zenna is a diligent worker in a winery production facility. With a strong work ethic and attention to detail, she ensures that every step of the winemaking process is executed flawlessly. Zenna skillfully operates machinery, monitors fermentation, and assists in bottling and labeling. Her knowledge of grape varieties and cellar techniques contributes to the production of high-quality wines. With a deep appreciation for the craft, Zenna takes pride in being part of the winemaking journey from vine to bottle | <img src="Images/Zenna_Cold.jpg"> |
-| Dany Don | 29 | Worker | Dany Don is a worker in a winery production. With a strong work ethic and attention to detail, He ensures that every tanks are well connected. He skillfully operates machinery. His knowledge, and attention to every detail during connection contributes to the production of high-quality wines. He takes pride in being part of the winemaking. | <img src = "Images/Dany Don.jpg"> |
+| Dany Don | 29 | Worker | Dany is a worker in a winery production. With a strong work ethic and attention to detail, He ensures that every tanks are well connected. He skillfully operates machinery. His knowledge, and attention to every detail during connection contributes to the production of high-quality wines. He takes pride in being part of the winemaking. | <img src = "Images/Dany_Don.jpg"> |
 
 ### 4. Use case
 
@@ -68,7 +68,7 @@ Description: This use case describes the process of blending different wines to 
   For example:
    
    - (input --> Quantity of tanks to be used.
-   - input --> index[^2] of wine. 
+   - input --> index[^2] of wine.
    - input --> percentage or quantity of wine.)[^3]
 
 ### 6. Functionalities
