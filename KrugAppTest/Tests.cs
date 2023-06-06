@@ -506,4 +506,33 @@ namespace KrugAppTest
             Assert.AreEqual(5, result.Quantity);
         }
     }
+
+    [TestClass]
+    public class GridComparison {
+
+        [TestMethod]
+        public void GridComparison_1() {
+            
+        }
+
+        [TestMethod]
+        public void GridComparison_2() {
+
+        }
+
+        [TestMethod]
+        public void GridComparison_3() {
+
+        }
+
+        [TestMethod]
+        public void GridComparison_4() {
+
+        }
+
+        [TestMethod]
+        public void GridComparison_5() {
+
+        }
+    }
 }

@@ -16,7 +16,7 @@ namespace KrugApp
         //public int[][] Node { get; set; }
 
         /// <summary>
-        /// Create a tank with a random capacity between 10 and 100
+        /// Creates a tank with a random capacity between 10 and 100
         /// </summary>
         public Tank()
         {
@@ -28,9 +28,9 @@ namespace KrugApp
         }
 
         /// <summary>
-        /// create a tank with a define capacity
+        /// Creates a tank with a define capacity
         /// </summary>
-        /// <param name="capacity"></param>
+        /// <param name="capacity">The capacity of the tank.</param>
         public Tank(int capacity)
         {
             if (capacity < MIN_CAPACITY || capacity > MAX_CAPACITY)
@@ -41,7 +41,12 @@ namespace KrugApp
                 this.Wine[i] = new Wine();
         }
 
-        public Tank (float wine, int index)
+        /// <summary>
+        /// Creates a tank with a specified amount of wine at a given index.
+        /// </summary>
+        /// <param name="wine">The amount of wine to be stored.</param>
+        /// <param name="index">The index of the wine in the tank.</param>
+        public Tank(float wine, int index)
         {
             this.Capacity = (int)wine;
             this.Wine = new Wine[MAX_WINES];
@@ -52,9 +57,9 @@ namespace KrugApp
         }
 
         /// <summary>
-        /// Return the total quantity of a tank, that have multiple wines in it.
+        /// Returns the total quantity of a tank, that have multiple wines in it.
         /// </summary>
-        /// <param name="total"> Array of the wines' capacity</param>
+        /// <param name="total"> Array of the wines' capacity.</param>
         public Tank(Wine[] total)
         {
             if(total.Length == MAX_WINES)
@@ -84,9 +89,9 @@ namespace KrugApp
 
 
         /// <summary>
-        /// Fill the tank with only one wine
+        /// Fill the tank with only one wine.
         /// </summary>
-        /// <param name="indexOfWine">The index of where the wine is</param>
+        /// <param name="indexOfWine">The index of where the wine is.</param>
         public void FillWithOneWine(int indexOfWine)
         {
             if (this.Wine.Sum(wine => wine.Quantity) == 0)
@@ -118,9 +123,9 @@ namespace KrugApp
         /// <summary>
         /// Return an array of tanks with the wine from the target tank.
         /// </summary>
-        /// <param name="tanks">Array of tanks to transfer wine from</param>
-        /// <param name="tank">Target tank to receive the transferred wine</param>
-        /// <returns>An array of tanks with transferred quantities</returns>
+        /// <param name="tanks">Array of tanks to transfer wine from.</param>
+        /// <param name="tank">Target tank to receive the transferred wine.</param>
+        /// <returns>An array of tanks with transferred quantities.</returns>
         /// <remarks>The tank receivers need to be empty, and their total capacity needs to be equal to the capacity of the initial tank.</remarks>
         public static Tank[] TransferTo(Tank[] tanks, Tank tank)
         {
@@ -190,7 +195,7 @@ namespace KrugApp
         /// <param name="tank1">The first tank.</param>
         /// <param name="tank2">The second tank.</param>
         /// <returns>A new tank with the combined capacity and wine quantities.</returns>
-        /// <remarks>If the total quantity of wines is higer or lower than the capacity of the tank, it will return an erro</remarks>
+        /// <remarks>If the total quantity of wines is higer or lower than the capacity of the tank, it will return an error.</remarks>
         public static Tank operator +(Tank tank1, Tank tank2)
         {
             Tank tank = new Tank(tank1.Capacity + tank2.Capacity);
@@ -244,6 +249,5 @@ namespace KrugApp
             combination[length] = tanks[startIndex].Capacity;
             GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
         }
-
     }
 }
