@@ -8,18 +8,18 @@ namespace KrugApp
 {
     internal class TankTree : ITree
     {
-        public TankTree? parentNode { get; set; }
-        public List<TankTree> childNodes { get; set; }
+        public TankTree? ParentNode { get; set; }
+        public List<TankTree> ChildNodes { get; set; }
 
         // tank0 => (tank1, tank2) => tank3
         // if tank0 is null
         // this means that (tank1, tank2) were poured into tank3
         // if tank3 is null
         // this means that tank0 was split into (tank1, tank2)
-        Tuple<int?, Tuple<int, int>, int?> step { get; set; }
+        public Tuple<int?, Tuple<int, int>, int?> Step { get; set; }
         public Tank[] value { get; set; }
 
-        private bool isValid()
+        private bool IsValid()
         {
             /*
              * Pruning conditions:
@@ -32,25 +32,35 @@ namespace KrugApp
 
         public TankTree(Tank[] value)
         {
-            this.parentNode = null;
+            this.ParentNode = null;
             this.value = value;
-            this.childNodes = new List<TankTree>();
-            this.step = new Tuple<int?, Tuple<int, int>, int?>(null, new Tuple<int, int>(0, 0), null);
+            this.ChildNodes = new();
+            this.Step = new Tuple<int?, Tuple<int, int>, int?>(null, new Tuple<int, int>(0, 0), null);
         }
 
-        public List<Tank[]> getPossibleChilds()
+        public List<TankTree> GetPossibleChilds()
         {
-            List<Tank[]> tanks = new List<Tank[]>();
+            List<TankTree> possibleChilds = new();
 
-            foreach (var t in this.value)
-                foreach(var step in t.Steps)
+            foreach (var tank in this.value)
+                foreach(var step in tank.Steps)
                 {
-                    var splitStep = new Tuple<int?, Tuple<int, int>, int?>    (t.Index, step, null);
-                    var mergeStep = new Tuple<int?, Tuple<int, int>, int?>    (null, step, t.Index);
-                    tanks.Prepend(Tank.getStateAfterStep(this.value, splitStep));
-                    tanks.Prepend(Tank.getStateAfterStep(this.value, mergeStep));
+                    if (tank.IsEmpty)
+                    {
+                        var stepTuple = new Tuple<int?, Tuple<int, int>, int?>(null, step, tank.Index);
+                        var stepTree = new TankTree(Tank.getStateAfterStep(this.value, stepTuple));
+                        stepTree.Step = stepTuple;
+                        possibleChilds.Add(stepTree);
+                    }
+                    else
+                    {
+                        var stepTuple = new Tuple<int?, Tuple<int, int>, int?>(tank.Index, step, null);
+                        var stepTree = new TankTree(Tank.getStateAfterStep(this.value, stepTuple));
+                        stepTree.Step = stepTuple;
+                        possibleChilds.Add(stepTree);
+                    }
                 }
-            return tanks;
+            return possibleChilds;
         }
 
 
@@ -58,12 +68,11 @@ namespace KrugApp
         {
             if (depth > 0)
             {
-                var possibleChilds = this.getPossibleChilds();
-                foreach (var child in possibleChilds)
+                var possibleChilds = this.GetPossibleChilds();
+                foreach (var childNode in possibleChilds)
                 {
-                    TankTree childNode = new TankTree(child);
-                    childNode.parentNode = this;
-                    this.childNodes.Prepend(childNode);
+                    childNode.ParentNode = this;
+                    this.ChildNodes.Prepend(childNode);
                 }
             }
         }

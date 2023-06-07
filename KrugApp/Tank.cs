@@ -11,7 +11,7 @@ namespace KrugApp
         public const int MAX_CAPACITY = 10;
 
         public const int MAX_WINES = 400;
-
+        public bool IsEmpty { get; set; }
         public List<Tuple<int, int>> Steps { get; set; }
             
         public int Capacity { get; set; }
@@ -32,6 +32,7 @@ namespace KrugApp
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
             this.Index = index;
+            this.IsEmpty = true;
         }
 
         public Tank()
@@ -56,6 +57,7 @@ namespace KrugApp
                 this.Wine[i] = new Wine();
             this.Index = index;
             this.Steps = new List<Tuple<int, int>>();
+            this.IsEmpty = true;
         }
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace KrugApp
                 this.Wine = total;
                 this.Index = index;
                 this.Steps = new List<Tuple<int, int>>();
+                this.IsEmpty = false;
             }
             else
             {
@@ -82,24 +85,16 @@ namespace KrugApp
         }
 
         /// <summary>
-        /// Empties the contents of the specified array by setting all elements to their default values.
-        /// </summary>
-        /// <typeparam name="T">The type of elements in the array.</typeparam>
-        /// <param name="array">The array to be emptied.</param>
-        public static void EmptyTank<T>(Wine[] array)
-        {
-            Array.Clear(array, 0, array.Length);
-        }
-
-
-        /// <summary>
         /// Fill the tank with only one wine
         /// </summary>
         /// <param name="indexOfWine">The index of where the wine is</param>
         public void FillWithOneWine(int indexOfWine)
         {
             if (this.Wine.Sum(wine => wine.Quantity) == 0)
+            {
                 this.Wine[indexOfWine].Quantity = this.Capacity;
+                this.IsEmpty = false;
+            }
             else
                 throw new Exception("Cannot fill a full tank.");
         }
@@ -169,6 +164,7 @@ namespace KrugApp
             {
                 res[i] = (tankInput * tanks[1].Capacity) / tankInput.Capacity;
                 res[i].Index = tanks[i].Index;
+                res[i].IsEmpty = false;
             }
             
             return res;
@@ -187,6 +183,8 @@ namespace KrugApp
 
             for (int i = 0; i < tank.Wine.Length; i++)
                 tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
+
+            tank.IsEmpty = false;
 
             if (tank.Capacity == tank.Wine.Sum(tank => tank.Quantity) || tank.Wine.Sum(tank => tank.Quantity) == 0)
                 return tank;
@@ -236,41 +234,34 @@ namespace KrugApp
         }
 
 
-        private bool isEmpty()
-        {
-            foreach (Wine wine in Wine)
-            {
-                if (wine.Quantity != 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         private void empty()
         {
-            foreach (Wine wine in Wine)
+            foreach (Wine wine in this.Wine)
             {
                 wine.Quantity = 0;
             }
+            this.IsEmpty = true;
         }
 
 
         public static Tank[] getStateAfterStep(Tank[] currentState, Tuple<int?, Tuple<int, int>, int?> step)
         {
-            if (step.Item1 != null)
+            if (step.Item1 != null) // (source => (target1 , target 2))
             {
+                if (!currentState[step.Item1.Value].IsEmpty && currentState[step.Item2.Item1].IsEmpty && currentState[step.Item2.Item2].IsEmpty)
+                {
                 var split = splitTanks(currentState[step.Item1.Value], new Tank[] { currentState[step.Item2.Item1], currentState[step.Item2.Item2] });
                 currentState[step.Item2.Item1] = split[0];
                 currentState[step.Item2.Item2] = split[1];
                 currentState[step.Item1.Value].empty();
+                }
             }
-            else
+            else // ((source1, source2) => target)
             {
-                if (step.Item3 == null)
+                if (step.Item3 == null) // impossible case
                     throw new Exception("Not supposed to be null.");
 
-                if (currentState[step.Item3.Value].isEmpty())
+                if (currentState[step.Item3.Value].IsEmpty && !currentState[step.Item2.Item1].IsEmpty && !currentState[step.Item2.Item2].IsEmpty) // Fill the tank only if it is empty
                 {
                     var tmp = currentState[step.Item2.Item1] + currentState[step.Item2.Item2];
                     tmp.Index = currentState[step.Item3.Value].Index;
@@ -282,11 +273,19 @@ namespace KrugApp
                     }
                     else
                     {
-                        throw new Exception("Invalid step." + tmp.Capacity + " => " + currentState[step.Item3.Value].Capacity + "\n"
-                            + currentState[step.Item2.Item1].Capacity + "+" + currentState[step.Item2.Item2].Capacity);
+                        throw new Exception("Invalid step : \n"+
+                            "(("+step.Item2.Item1+"."+step.Item2.Item2+")=>"+step.Item3+")"+" .\n" +
+                            "((" + currentState[step.Item2.Item1].Capacity + "." + currentState[step.Item2.Item2].Capacity + ")=>" + currentState[step.Item3.Value].Capacity + ")" + " .\n" +
+                            "Tank at index " + step.Item3.Value + " or " + tmp.Index + "has capacity of " + tmp.Capacity + " or " + currentState[step.Item3.Value].Capacity + ".\n" +
+                            "The capacity of the tank should be equal to the sum of the capacities of the two tanks.\n" +
+                            "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".\n");
                     }
                 }
-                // pour tankS Item2 into tank Item1
+                else
+                {
+                    // skip the step
+                    //throw new Exception("The tank is not empty.");
+                }
             }
             return currentState;
         }
