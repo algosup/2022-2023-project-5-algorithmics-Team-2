@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using KrugApp;
 
@@ -8,81 +9,24 @@ namespace KrugApp
     {
         static void Main(string[] args)
         {
-            // Define the wines and their quantities in the given formula
-            Wine[] formula = new Wine[]
-            {
-                new Wine(2),
-                new Wine(8),
-                new Wine(250),
-                new Wine(150),
-            };
 
-            // Create an array of tanks
-            Tank[] tanks = new Tank[10];
+            Tank[] tanks = new Tank[330];
             for (int i = 0; i < tanks.Length; i++)
-                tanks[i] = new Tank();
+                tanks[i] = new Tank(i);
 
-            foreach (Tank t in tanks)
+
+            for (int i = 0; i < tanks.Length; i++)
             {
-                Console.WriteLine("Object : "+t);
-                Console.WriteLine("Capacity : " + ((int)t.Capacity));
-                Console.WriteLine("Total wine : " + t.Wine.Sum(w => w.Quantity));
-            }
-            tanks.OrderBy(tank => tank.Capacity);
-
-            // possibility of transfert
-
-            //foreach (Tank tank in tanks)
-            //{
-            //    Console.WriteLine(tank);
-            //}
-
-            Tank[] tankValues = tanks.ToArray();
-            List<int[]> sumCombinations = Tank.GenerateSumCombinations(tankValues);
-
-            // Iterate over the sum combinations
-
-            for (int i = 0; i < sumCombinations.Count; i++)
-            {
-                Console.WriteLine(printable(sumCombinations[i]));
+                tanks[i].GenrerateCombinaison(tanks);
             }
 
+            TankTree tankTree = new TankTree(tanks);
 
-/*
-            foreach (int[] combination in sumCombinations)
-            {
-                Console.WriteLine($"Combination for Tank {index} of capacity {tanks[index].Capacity} :");
-                foreach (int value in combination)
-                {
-                    Console.Write(value + "-");
-                }
-                Console.WriteLine();
-                index++;
-            }
-*/
+            tankTree.GenerateChilds(4);
 
+            var a = tankTree.childNodes.First().childNodes.First().value[0];
 
-            Console.WriteLine("\n\tDone");
-            foreach (var tank in tanks)
-            {
-                Console.Write(tank.Capacity + ", ");
-            }
-                
-            Console.Read();
-
+            Console.WriteLine("\n\tDone" + a.Capacity);
         }
-        static string printable(int[] input)
-        {
-            var a = String.Empty;
-
-            foreach (var b in input)
-                a = a + "," + b.ToString();
-
-            a = a.TrimStart(',');
-
-            a = a + " : " + input.Sum();
-            return a;
-        }
-
     }
 }
