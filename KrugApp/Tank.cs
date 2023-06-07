@@ -7,9 +7,9 @@ namespace KrugApp
     public class Tank
     {
         public const int MIN_CAPACITY = 1;
-        public const int MAX_CAPACITY = 10;
+        public const int MAX_CAPACITY = 200;
 
-        public const int MAX_WINES = 400;
+        public const int MAX_WINES = 4;
 
         public int Capacity { get; set; }
         public Wine[] Wine { get; set; }

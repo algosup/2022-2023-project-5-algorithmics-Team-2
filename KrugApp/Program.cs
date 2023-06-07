@@ -38,46 +38,139 @@ namespace KrugApp
             }
             tanks.OrderBy(tank => tank.Capacity);
 
-            // possibility of transfert
-
-            //foreach (Tank tank in tanks)
-            //{
-            //    Console.WriteLine(tank);
-            //}
-
-            Tank[] tankValues = tanks.ToArray();
-            List<int[]> sumCombinations = Tank.GenerateSumCombinations(tankValues);
-
-            // Iterate over the sum combinations
-
-            for (int i = 0; i < sumCombinations.Count; i++)
+            Tank[] tankArrayA = new Tank[]
             {
-                Console.WriteLine(printable(sumCombinations[i]));
+                new Tank(100),
+                new Tank(new Wine[] { new Wine(70), new Wine(40), new Wine(0), new Wine(1) }),
+                //new Tank(100),
+                new Tank(100),
+                //new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
+                //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) })
+            };
+
+            Tank[] tankArrayB = new Tank[]
+            {
+                //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) }),
+                new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(120), new Wine(60) }),
+                new Tank(100),
+                //new Tank(new Wine[] { new Wine(60), new Wine(0), new Wine(0), new Wine(0) }),
+                new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
+                //new Tank(new Wine[] { new Wine(1), new Wine(4), new Wine(0), new Wine(90) }),
+            };
+
+            Console.WriteLine("Similarity of the nodes: " + Similarity(tankArrayA, tankArrayB) + " / 10");
+
+
+        }
+
+        /// <summary>
+        /// This function compare multiple criteria to know the similarity between two Tank[]
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>The similarity indicator between 0(opposite) and 10(same)</returns>
+        /// <exception cref="ArgumentException"></exception>
+        static int Similarity(Tank[] a, Tank[] b)
+        {
+            if (a == null || b == null || a.Length == 0 || b.Length == 0)
+                throw new ArgumentException("Both arrays must have at least one element.");
+
+            // Number of used tank
+            var usedTank = SimiPoint(NbrTank(a), NbrTank(b));
+
+            // Number of wines in the tanks
+            var nbrWine = SimiPoint(NbrWines(a), NbrWines(b));
+
+            // The total quantity of all the wines
+            var nbrQuan = SimiPoint(NbrTotalWine(a), NbrTotalWine(b));
+
+            // The quantity for each wines
+            var QuanWine = NbrEachWine(a, b);
+
+            var similarity = usedTank + nbrWine + nbrQuan + QuanWine;
+
+            if (similarity == 8)
+                similarity += 2;
+            else if (similarity == 7)
+                similarity += 1;
+
+            // return similarity (int)
+            return similarity;
+
+        }
+
+        static int SimiPoint(int c, int d)
+        {
+            if (c == d)
+                return 2;
+            else if (c > d && c / 2 > d)
+                return 1;
+            else if (c < d && c > d / 2)
+                return 1;
+            else
+                return 0;
+        }
+
+        static int NbrWines(Tank[] a)
+        {
+            var d = 0; // number of wines
+            for (var i = 0; i < a.Length; i++)
+                for (var j = 0; j < a[i].Wine.Length; j++)
+                    if ((int)a[i].Wine[j].Quantity > 0)
+                        d += 1;
+            return d;
+        }
+
+        static int NbrTank(Tank[] a)
+        {
+            float c = 0; // Quantity of wine in the tank
+            var d = 0; // number of used tank
+            foreach (var tank in a)
+            {
+                foreach (var wine in tank.Wine)
+                    c += wine.Quantity;
+
+                if (c != 0)
+                    d += 1;
+                c = 0;
             }
+            return d;
+        }
 
-
-/*
-            foreach (int[] combination in sumCombinations)
+        static int NbrTotalWine(Tank[] a)
+        {
+            int wine1 = 0;
+            for (int i = 0; i < a.Length; i++)
             {
-                Console.WriteLine($"Combination for Tank {index} of capacity {tanks[index].Capacity} :");
-                foreach (int value in combination)
+                for (int j = 0; j < a[i].Wine.Length; j++)
                 {
-                    Console.Write(value + "-");
+                    wine1 += (int)a[i].Wine[j].Quantity;
                 }
-                Console.WriteLine();
-                index++;
             }
-*/
+            return wine1;
+        }
 
-
-            Console.WriteLine("\n\tDone");
-            foreach (var tank in tanks)
+        static int NbrEachWine(Tank[] a, Tank[] b)
+        {
+            var d = 0; // number of wines
+            for (var i = 0; i < a.Length; i++)
             {
-                Console.Write(tank.Capacity + ", ");
-            }
-                
-            Console.Read();
+                for (var j = 0; j < a[i].Wine.Length; j++)
+                {
+                    var tankA = a[i].Wine[j].Quantity;
+                    var tankB = b[i].Wine[j].Quantity;
+                    if (tankA == tankB)
+                        d += 2;
+                    else if (tankA > tankB && tankA / 2 >= tankB)
+                        d += 1;
+                    else if (tankA < tankB && tankA >= tankB / 2)
+                        d += 1;
+                }
 
+            }
+
+            d = d / NbrWines(a) / 2;
+            return d;
         }
 
         ///<summary>
