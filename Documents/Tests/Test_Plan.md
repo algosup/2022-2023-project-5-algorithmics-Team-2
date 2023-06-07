@@ -48,10 +48,6 @@
       - [7E](#7e)
     - [Eight Test Part](#eight-test-part)
       - [8A](#8a)
-      - [8B](#8b)
-      - [8C](#8c)
-      - [8D](#8d)
-      - [8E](#8e)
 
 </details>
 
@@ -360,40 +356,9 @@ The final test in the list validates that the operator divide function (/) corre
 
 #### 8A
 
-**TITLE: GridComparison_1():**
+**TITLE: TestNodeTraversal()**
 
 `
-
-`
-
-#### 8B
-
-**TITLE: GridComparison_2():**
-
-`
-
-`
-
-#### 8C
-
-**TITLE: GridComparison_3():**
-
-`
-
-`
-
-#### 8D
-
-**TITLE: GridComparison_4():**
-
-`
-
-`
-
-#### 8E
-
-**TITLE: GridComparison_5():**
-
-`
-
+This test aims to verify the node traversal functionality in a "Tank" object using a simulated array of nodes. Here's a brief summary in English:
+The purpose of this test is to ensure that the node traversal in a "Tank" object meets specific conditions. The test creates a simulated array of nodes and initializes them with different quantities. It then calls the "TraverseNodes" method and verifies the results. The assertions check that the number of results is correct, each node has a quantity within a valid range, and each node differs from its parent and siblings by at least 5 units. The test helps validate the correctness of the node traversal logic in the "Tank" object.
 `
