@@ -104,13 +104,13 @@ namespace KrugApp
 
                 
             }
-            foreach (var coloumn1 in wine_name)
+            foreach (var column1 in wine_name)
             {
-                Console.WriteLine(coloumn1);
+                Console.WriteLine(column1);
             }
-            foreach (var coloumn2 in quantity)
+            foreach (var column2 in quantity)
             {
-                Console.WriteLine(coloumn2);
+                Console.WriteLine(column2);
             }
             var wines = new Wine[wine_name.Count];
             for (int i = 0; i < wine_name.Count; i++)

@@ -250,9 +250,26 @@ namespace KrugApp
             GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
         }
 
+        ///<summary>
+        /// Traverse the nodes of the tree
+        ///</summary>
         public Wine[] TraverseNodes(Wine[] nodes)
         {
-            throw new NotImplementedException();
+            // Copier les nœuds d'origine pour éviter de modifier l'entrée
+            Wine[] copiedNodes = new Wine[nodes.Length];
+            Array.Copy(nodes, copiedNodes, nodes.Length);
+
+            // Parcours des nœuds
+            for (int i = 0; i < copiedNodes.Length; i++)
+            {
+                Wine currentNode = copiedNodes[i];
+
+                // Implémenter la logique de parcours spécifique ici
+                // Par exemple, inverser les quantités des nœuds pour l'exemple
+                currentNode.Quantity = Tank.MAX_WINES - currentNode.Quantity + 1;
+            }
+
+            return copiedNodes;
         }
     }
 }
