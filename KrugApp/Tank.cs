@@ -249,5 +249,10 @@ namespace KrugApp
             combination[length] = tanks[startIndex].Capacity;
             GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
         }
+
+        public Wine[] TraverseNodes(Wine[] nodes)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

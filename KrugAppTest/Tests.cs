@@ -615,4 +615,53 @@ namespace KrugAppTest
             Assert.IsFalse(result);
         }
     }
+
+    [TestClass]
+    public class TankTests
+    {
+        [TestMethod]
+        public void TestNodeTraversal()
+        {
+            // Créer un tableau de nœuds simulé pour les tests
+            Tank tank = new Tank(100, 0);
+            Wine[] nodes = new Wine[Tank.MAX_WINES];
+
+            // Initialiser les nœuds simulés avec des valeurs
+            for (int i = 0; i < Tank.MAX_WINES; i++)
+            {
+                nodes[i] = new Wine();
+                nodes[i].Quantity = i + 1; // Assigner une quantité différente à chaque nœud pour les tests
+            }
+
+            // Appeler la méthode de parcours des nœuds et obtenir les résultats
+            Wine[] results = tank.TraverseNodes(nodes);
+
+            // Effectuer les assertions pour vérifier les conditions spécifiées
+            Assert.AreEqual(Tank.MAX_WINES, results.Length); // Vérifier si le nombre de nœuds retournés est correct
+
+            foreach (Wine result in results)
+            {
+                // Vérifier si le nœud est éloigné de la solution
+                Assert.IsTrue(result.Quantity < Tank.MAX_WINES);
+
+                // Vérifier si le nœud est trop similaire à un parent
+                foreach (Wine parent in nodes)
+                {
+                    if (parent != result)
+                    {
+                        Assert.IsTrue(Math.Abs(result.Quantity - parent.Quantity) > 5); // Changer la valeur de 5 selon vos besoins
+                    }
+                }
+
+                // Vérifier si le nœud est trop similaire à une sœur
+                foreach (Wine sibling in results)
+                {
+                    if (sibling != result)
+                    {
+                        Assert.IsTrue(Math.Abs(result.Quantity - sibling.Quantity) > 5); // Changer la valeur de 5 selon vos besoins
+                    }
+                }
+            }
+        }
+    }
 }
