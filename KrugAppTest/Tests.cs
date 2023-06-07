@@ -507,160 +507,51 @@ namespace KrugAppTest
         }
     }
 
-    /*[TestClass]
-    public class GridComparison {
-
-        [TestMethod]
-        public void GridComparison_1()
-        {
-            // Create the first grid
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 2, 3 },
-                new int[] { 4, 5, 6 },
-                new int[] { 7, 8, 9 }
-            };
-
-            // Create the second grid
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 2, 3 },
-                new int[] { 4, 5, 6 },
-                new int[] { 7, 8, 9 }
-            };
-
-            // Compare
-            bool result = CompareGrids(grid1, grid2);
-
-            // Assert
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GridComparison_2()
-        {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 2, 3 },
-                new int[] { 4, 5, 6 },
-                new int[] { 7, 8, 9 }
-            };
-
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 2, 3 },
-                new int[] { 4, 0, 6 },
-                new int[] { 7, 8, 9 }
-            };
-
-            bool result = CompareGrids(grid1, grid2);
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void GridComparison_3()
-        {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            };
-
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            };
-
-            bool result = CompareGrids(grid1, grid2);
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GridComparison_4()
-        {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            };
-
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 5 }
-            };
-
-            bool result = CompareGrids(grid1, grid2);
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void GridComparison_5()
-        {
-            int[][] grid1 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            };
-
-            int[][] grid2 = new int[][]
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 },
-                new int[] { 5, 6 }
-            };
-
-            bool result = CompareGrids(grid1, grid2);
-            Assert.IsFalse(result);
-        }
-    }*/
-
     [TestClass]
     public class TankTests
     {
         [TestMethod]
         public void TestNodeTraversal()
         {
-            // Créer un tableau de nœuds simulé pour les tests
+            // Create a simulated array of nodes for testing
             Tank tank = new Tank(100, 0);
             Wine[] nodes = new Wine[Tank.MAX_WINES];
 
-            // Initialiser les nœuds simulés avec des valeurs
+            // Initialise the simulated nodes with values
             for (int i = 0; i < Tank.MAX_WINES; i++)
             {
                 nodes[i] = new Wine();
-                nodes[i].Quantity = i + 1; // Assigner une quantité différente à chaque nœud pour les tests
+                nodes[i].Quantity = i + 1; // Assign a different value to each node
             }
 
-            // Appeler la méthode de parcours des nœuds et obtenir les résultats
+            // Call the node traversal method and get the results
             Wine[] results = tank.TraverseNodes(nodes);
 
-            // Effectuer les assertions pour vérifier les conditions spécifiées
-            Assert.AreEqual(Tank.MAX_WINES, results.Length); // Vérifier si le nombre de nœuds retournés est correct
+            // Carry out the assertions to check the specified conditions
+            Assert.AreEqual(Tank.MAX_WINES, results.Length); // Verify that the number of results is correct
 
             foreach (Wine result in results)
             {
-                // Vérifier si le nœud est éloigné de la solution
+                // Verify that the node is not too far from the solution
                 Assert.IsTrue(result.Quantity <= Tank.MAX_WINES);
 
-                // Vérifier si le nœud est trop similaire à un parent
+                // Verify that the node is not too similar to a parent
                 foreach (Wine parent in nodes)
                 {
                     if (parent != result)
                     {
                         Assert.IsTrue(Math.Abs(result.Quantity - parent.Quantity) > 5 || result == parent,
-                            $"The node {result.Quantity} is too similar to the parent {parent.Quantity}."); // Changer la valeur de 5 selon vos besoins
+                            $"The node {result.Quantity} is too similar to the parent {parent.Quantity}."); // Change the value of 5 as required
                     }
                 }
 
-                // Vérifier si le nœud est trop similaire à une sœur
+                // Verify that the node is not too similar to a sibling
                 foreach (Wine sibling in results)
                 {
                     if (sibling != result)
                     {
                         Assert.IsTrue(Math.Abs(result.Quantity - sibling.Quantity) > 5 || result == sibling,
-                            $"the node {result.Quantity} is too similar to the sibling {sibling.Quantity}."); // Changer la valeur de 5 selon vos besoins
+                            $"the node {result.Quantity} is too similar to the sibling {sibling.Quantity}."); // Change the value of 5 as required
                     }
                 }
             }
