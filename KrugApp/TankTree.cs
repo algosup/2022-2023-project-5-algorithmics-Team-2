@@ -27,7 +27,9 @@ namespace KrugApp
              *      Child too similar to any parent
              *      Child too similar to other child
              */
-            return true;
+            if (this.ParentNode == null || this.ParentNode.ChildNodes.Count < 60)
+                return true;
+            return false;
         }
 
         public TankTree(Tank[] value)
@@ -35,7 +37,7 @@ namespace KrugApp
             this.ParentNode = null;
             this.value = value;
             this.ChildNodes = new();
-            this.Step = new Tuple<int?, Tuple<int, int>, int?>(null, new Tuple<int, int>(0, 0), null);
+            this.Step = null;
         }
 
         public List<TankTree> GetPossibleChilds()
@@ -71,8 +73,11 @@ namespace KrugApp
                 var possibleChilds = this.GetPossibleChilds();
                 foreach (var childNode in possibleChilds)
                 {
+                    if (!childNode.IsValid())
+                        continue;
                     childNode.ParentNode = this;
                     this.ChildNodes.Prepend(childNode);
+                    childNode.GenerateChilds(depth - 1);
                 }
             }
         }

@@ -125,7 +125,7 @@ namespace KrugApp
         {
             float total = tanks.Sum(tank => tank.Capacity);
 
-            return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100))).ToArray();
+            return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100), 0)).ToArray();
         }
 
         /// <summary>
@@ -179,18 +179,23 @@ namespace KrugApp
         /// <remarks>If the total quantity of wines is higer or lower than the capacity of the tank, it will return an erro</remarks>
         public static Tank operator +(Tank tank1, Tank tank2)
         {
-            Tank tank = new Tank(tank1.Capacity + tank2.Capacity, 0);
 
-            for (int i = 0; i < tank.Wine.Length; i++)
-                tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
+            var wine = new Wine[tank1.Wine.Length];
+            for(int i = 0; i < tank1.Wine.Length; i++)
+            {
+                wine[i] = new Wine(tank1.Wine[i].Quantity + tank2.Wine[i].Quantity);
+            }
+
+            Tank tank = new Tank(wine, 0);
 
             tank.IsEmpty = false;
 
             if (tank.Capacity == tank.Wine.Sum(tank => tank.Quantity) || tank.Wine.Sum(tank => tank.Quantity) == 0)
                 return tank;
             else
-                throw new Exception("The tank is neither full nor empty.");
-
+                throw new Exception("capacity : " + tank1.Capacity + " with " + tank1.Wine.Sum(wine => wine.Quantity) + "\n" +
+                    "capacity : " + tank2.Capacity + " with " + tank2.Wine.Sum(wine => wine.Quantity) + "\n" +
+                    "capacity : " + tank.Capacity + " with " + tank.Wine.Sum(wine => wine.Quantity) + "\n" );
         }
 
         public static Tank operator /(Tank tank, int divider)
@@ -198,22 +203,32 @@ namespace KrugApp
             if (divider == 0)
                 throw new DivideByZeroException();
 
-            Tank res = new Tank(tank.Capacity / divider);
+            Tank res = new Tank(tank.Capacity / divider, 0);
             for (int i = 0; i < res.Wine.Length; i++)
             {
                 res.Wine[i].Quantity = tank.Wine[i].Quantity / divider;
             }
+
+            res.Index = tank.Index;
+
+            if (res.Wine.Sum(wine => wine.Quantity) != res.Capacity)
+                throw new Exception("capacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nDivider : " + divider);
+
             return res;
         }
 
         public static Tank operator *(Tank tank, int multiplier)
         {
-            Tank res = new Tank(tank.Capacity * multiplier);
+            Tank res = new Tank(tank.Capacity * multiplier, 0);
 
             for (int i = 0; i < res.Wine.Length; i++)
             {
                 res.Wine[i].Quantity = tank.Wine[i].Quantity * multiplier;
             }
+
+            if (res.Wine.Sum(wine => wine.Quantity) != res.Capacity)
+                throw new Exception("Quantity" + tank.Capacity +"\ncapacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nMultiplier : " + multiplier);
+
             return res;
         }
 
@@ -263,7 +278,14 @@ namespace KrugApp
 
                 if (currentState[step.Item3.Value].IsEmpty && !currentState[step.Item2.Item1].IsEmpty && !currentState[step.Item2.Item2].IsEmpty) // Fill the tank only if it is empty
                 {
-                    var tmp = currentState[step.Item2.Item1] + currentState[step.Item2.Item2];
+                    //currentState[step.Item2.Item1] + currentState[step.Item2.Item2];
+
+                    var tmp = new Tank(currentState[step.Item2.Item1].Capacity + currentState[step.Item2.Item2].Capacity, 0);
+                    tmp.Wine = new Wine[currentState[step.Item2.Item1].Wine.Length];
+                    for(int i = 0; i < tmp.Wine.Length; i++)
+                    {
+                        tmp.Wine[i] = new Wine(currentState[step.Item2.Item1].Wine[i].Quantity + currentState[step.Item2.Item2].Wine[i].Quantity);
+                    }
                     tmp.Index = currentState[step.Item3.Value].Index;
                     if (tmp.Capacity == currentState[step.Item3.Value].Capacity)
                     {
@@ -280,11 +302,6 @@ namespace KrugApp
                             "The capacity of the tank should be equal to the sum of the capacities of the two tanks.\n" +
                             "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".\n");
                     }
-                }
-                else
-                {
-                    // skip the step
-                    //throw new Exception("The tank is not empty.");
                 }
             }
             return currentState;
