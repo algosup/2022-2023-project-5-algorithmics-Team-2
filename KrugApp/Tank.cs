@@ -255,17 +255,17 @@ namespace KrugApp
         ///</summary>
         public Wine[] TraverseNodes(Wine[] nodes)
         {
-            // Copier les nœuds d'origine pour éviter de modifier l'entrée
+            // Copy the original nodes to avoid modifying the input
             Wine[] copiedNodes = new Wine[nodes.Length];
             Array.Copy(nodes, copiedNodes, nodes.Length);
 
-            // Parcours des nœuds
+            // Node path
             for (int i = 0; i < copiedNodes.Length; i++)
             {
                 Wine currentNode = copiedNodes[i];
 
-                // Implémenter la logique de parcours spécifique ici
-                // Par exemple, inverser les quantités des nœuds pour l'exemple
+                // Implement the specific traversal logic here
+                // For example, reverse the quantities of the nodes for the example
                 currentNode.Quantity = Tank.MAX_WINES - currentNode.Quantity + 1;
             }
 
