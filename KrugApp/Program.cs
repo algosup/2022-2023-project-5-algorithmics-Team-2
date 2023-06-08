@@ -20,8 +20,6 @@ namespace KrugApp
                 tanks[i].IsEmpty = false;
             }
 
-
-
             for (int i = 0; i < tanks.Length; i++)
             {
                 tanks[i].GenrerateCombinaison(tanks);
