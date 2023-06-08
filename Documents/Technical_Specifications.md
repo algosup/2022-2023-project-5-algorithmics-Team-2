@@ -152,29 +152,41 @@ The program is implemented by the technique of TDD[^14]. The program generate a 
 
 #### D. How is it work ?
 
-Program :
+**1. Tanks.cs file**
 
-1. Tanks.cs file
+
+
+```cs
+using System;
+using System.Collections;
+using System.Threading.Tasks;
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 inside the namespace KrugApp, we start by define a new class "Tank" accessible
 
-```C#
+```cs
 namespace KrugApp
 {
-  public class Tank
-  {
-    ...
-  }
+    public class Tank
+    {
+        ...
+    }
 }
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-create a tank list (of length MAX_WINES = 400) with a capacity and the name of the wine
+create a tank array with parameter of capacity of the tank and the name of the wine
 
-```C#
-private int MAX_WINES = 400;
-public float Capacity { get; set; }
+```cs
+public const int MIN_CAPACITY = 1;
+public const int MAX_CAPACITY = 200;
+
+public const int MAX_WINES = 4;
+
+public int Capacity { get; set; }
 public Wine[] Wine { get; set; }
 ```
 
@@ -182,12 +194,14 @@ public Wine[] Wine { get; set; }
 
 Create a tank with a random capacity between 10 and 100
 
-```C#
+```cs
 public Tank()
 {
-  Random rnd = new Random();
-  this.Capacity = rnd.Next(10, 100);
-  this.Wine = new Wine[MAX_WINES];
+    Random rnd = new Random();
+    this.Capacity = rnd.Next(MIN_CAPACITY, MAX_CAPACITY);
+    this.Wine = new Wine[MAX_WINES];
+    for (int i = 0; i < MAX_WINES; i++)
+        this.Wine[i] = new Wine();
 }
 ```
 
@@ -195,23 +209,56 @@ public Tank()
 
 Create a tank with a define capacity
 
-```C#
-public Tank(float capacity)
+```cs
+public Tank(int capacity)
 {
-  this.Capacity = capacity;
-  this.Wine = new Wine[MAX_WINES];
+    if (capacity < MIN_CAPACITY || capacity > MAX_CAPACITY)
+        throw new ArgumentException($"Capacity must be between {MIN_CAPACITY} and {MAX_CAPACITY}");
+    this.Capacity = capacity;
+    this.Wine = new Wine[MAX_WINES];
+    for (int i = 0; i < MAX_WINES; i++)
+        this.Wine[i] = new Wine();
 }
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Return the total quantity of a tank, that have multiple wines in it. The parameter "total" is the array of the wines' capacity.
+Creates a tank with a specified amount of wine at a given index.
+The parameter "wine" is the amount of wine to be stored and the parameter "index" is the index of the wine in the tank.
 
-```C#
+```cs
+public Tank(float wine, int index)
+{
+    this.Capacity = (int)wine;
+    this.Wine = new Wine[MAX_WINES];
+    for (int i = 0; i < MAX_WINES; i++)
+        this.Wine[i] = new Wine();
+
+    this.Wine[index].Quantity = wine;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Return the total quantity of a tank, that have multiple wines in it.
+The parameter "total" is the array of the wines' capacity.
+
+```cs
 public Tank(Wine[] total)
 {
-  this.Capacity = total.Sum(wine => wine.Quantity);
-  this.Wine = new Wine[MAX_WINES];
+    if(total.Length == MAX_WINES)
+    {
+        if (total.Sum(wine => wine.Quantity) > MAX_CAPACITY)
+            throw new Exception("The total quantity of wine is too big for the tank.");
+        else if (total.Sum(wine => wine.Quantity) < MIN_CAPACITY)
+            throw new Exception("The total quantity of wine is too small for the tank.");
+        this.Capacity = (int)total.Sum(wine => wine.Quantity);
+        this.Wine = total;
+    }
+    else
+    {
+        throw new Exception("Invalide number of wines");
+    }
 }
 ```
 
@@ -219,24 +266,25 @@ public Tank(Wine[] total)
 
 Empties the contents of the specified array by setting all elements to their default values. The parameter "array" is the array of tank to be emptied
 
-```C#
+```cs
 public static void EmptyTank<T>(Wine[] array)
 {
-  Array.Clear(array, 0, array.Length);
+    Array.Clear(array, 0, array.Length);
 }
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Fill the tank with only one wine. the parameter "indexOfWine" is the index of where the wine is.
+Fill the tank with only one wine.
+The parameter "indexOfWine" is the index of where the wine is.
 
-```C#
+```cs
 public void FillWithOneWine(int indexOfWine)
 {
-  if (this.Wine.Sum(wine => wine.Quantity) == 0)
-    this.Wine[indexOfWine].Quantity = this.Capacity;
-  else
-    throw new Exception("Cannot fill a full tank.");
+    if (this.Wine.Sum(wine => wine.Quantity) == 0)
+        this.Wine[indexOfWine].Quantity = this.Capacity;
+    else
+        throw new Exception("Cannot fill a full tank.");
 }
 ```
 
@@ -244,19 +292,19 @@ public void FillWithOneWine(int indexOfWine)
 
 Transfers the total quantity of wines from an array of tanks into a new tank with the combined capacity and quantity from the input tanks.
 
-```C#
+```cs
 public Tank TankFrom(Tank[] tanks)
 {
-  float totalCapacity = tanks.Sum(tank => tank.Capacity);
-  Wine[] totalWines = new Wine[MAX_WINES];
+    float totalCapacity = tanks.Sum(tank => tank.Capacity);
+    Wine[] totalWines = new Wine[MAX_WINES];
 
-  for (int i = 0; i < MAX_WINES; i++)
-  {
-    float totalQuantity = tanks.Sum(tank => tank.Wine[i].Quantity);
-    totalWines[i] = new Wine(totalQuantity);
-  }
+    for (int i = 0; i < MAX_WINES; i++)
+    {
+        float totalQuantity = tanks.Sum(tank => tank.Wine[i].Quantity);
+        totalWines[i] = new Wine(totalQuantity);
+    }
 
-  return new Tank(totalWines);
+    return new Tank(totalWines);
 }
 ```
 
@@ -266,32 +314,32 @@ Return an array of tanks with the wine from the target tank.
 The parameter "tanks" is the array of tanks to transfer wine from and the parameter "tank" is the target tank to receive the transferred wine.
 The tank receivers need to be empty, and their total capacity needs to be equal to the capacity of the initial tank.
 
-```C#
+```cs
 public static Tank[] TransferTo(Tank[] tanks, Tank tank)
 {
-  if (tanks.Sum(t => t.Wine.Sum(w => w.Quantity)) != 0)
-  {
-    throw new Exception("Cannot transfer if the total quantity of wine in the tanks is not zero.");
-  }
-
-  if (tanks.Sum(t => t.Capacity) != tank.Capacity)
-  {
-    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
-  }
-
-  Tank[] res = new Tank[tanks.Length];
-
-  for (int j = 0; j < tanks.Length; j++)
-  {
-    res[j] = new Tank(tanks[j].Capacity);
-
-    for (int i = 0; i < tank.MAX_WINES; i++)
+    if (tanks.Sum(t => t.Wine.Sum(w => w.Quantity)) != 0)
     {
-      res[j].Wine[i].Quantity = (tank.Wine[i].Quantity / tank.Capacity) * tanks[j].Capacity;
+        throw new Exception("Cannot transfer if the total quantity of wine in the tanks is not zero.");
     }
 
-  }
-  return res;
+    if (tanks.Sum(t => t.Capacity) != tank.Capacity)
+    {
+        throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+    }
+
+    Tank[] res = new Tank[tanks.Length];
+
+    for (int j = 0; j < tanks.Length; j++)
+    {
+        res[j] = new Tank(tanks[j].Capacity);
+
+        for (int i = 0; i < tank.MAX_WINES; i++)
+        {
+            res[j].Wine[i].Quantity = (tank.Wine[i].Quantity / tank.Capacity) * tanks[j].Capacity;
+        }
+
+    }
+    return res;
 }
 ```
 
@@ -299,12 +347,12 @@ public static Tank[] TransferTo(Tank[] tanks, Tank tank)
 
 Calculates the percentages of the total capacity for each tank in the provided array.
 
-```C#
+```cs
 public Tank[] CalculatePercentages(Tank[] tanks)
 {
-  float total = tanks.Sum(tank => tank.Capacity);
+    float total = tanks.Sum(tank => tank.Capacity);
 
-  return tanks.Select(tank => new Tank(tank.Capacity / total * 100)).ToArray();
+    return tanks.Select(tank => new Tank(tank.Capacity / total * 100)).ToArray();
 }
 ```
 
@@ -312,18 +360,18 @@ public Tank[] CalculatePercentages(Tank[] tanks)
 
 Calculates the similarity between a given formula of wines (represent the desired quantities of wines in the final mix.) and the quantities of wines in a set of tanks and return an array of wines representing the differences between the desired quantities and the tank quantities.
 
-```C#
+```cs
 public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
 {
-  Wine[] tank1 = tanks.SelectMany(tank => tank.Wine).ToArray();
-  Wine[] diff = new Wine[formula.Length];
+    Wine[] tank1 = tanks.SelectMany(tank => tank.Wine).ToArray();
+    Wine[] diff = new Wine[formula.Length];
 
-  for (int i = 0; i < formula.Length; i++)
-  {
-    diff[i] = new Wine(formula[i].Quantity - tank1[i].Quantity);
-  }
+    for (int i = 0; i < formula.Length; i++)
+    {
+        diff[i] = new Wine(formula[i].Quantity - tank1[i].Quantity);
+    }
 
-  return diff;
+    return diff;
 }
 ```
 
@@ -332,34 +380,117 @@ public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
 Adds two tanks together, combining their capacity and wine quantities (with operator overloads) in an other tank.
 If the total quantity of wines is higher or lower than the capacity of the tank, it will return an error.
 
-```C#
+```cs
 public static Tank operator +(Tank tank1, Tank tank2)
 {
-  Tank tank = new Tank(tank1.Capacity + tank2.Capacity);
+    Tank tank = new Tank(tank1.Capacity + tank2.Capacity);
 
-  for (int i = 0; i < tank.Wine.Length; i++)
-    tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
+    for (int i = 0; i < tank.Wine.Length; i++)
+        tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
 
     if (tank.Capacity == tank.Wine.Sum(tank => tank.Quantity) || tank.Wine.Sum(tank => tank.Quantity) == 0)
-      return tank;
+        return tank;
     else
-      throw new Exception("The tank is neither full nor empty.");
+        throw new Exception("The tank is neither full nor empty.");
 }
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-2. Wines.cs file
+
+
+```cs
+public static List<int[]> GenerateSumCombinations(Tank[] values)
+{
+    List<int[]> result = new List<int[]>();
+
+    for (int i = 0; i < values.Length; i++)
+    {
+        int[] combination = new int[values.Length];
+        GenerateSumCombinations(values, values[i].Capacity, combination, result, i, 0);
+    }
+
+    return result;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+private static void GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)
+{
+    if (target == 0 && length > 1)
+    {
+        // Found a valid combination that sums up to the target and has more than one element
+        int[] validCombination = new int[length];
+        Array.Copy(combination, validCombination, length);
+        result.Add(validCombination);
+        return;
+    }
+
+    if (target < 0 || startIndex == tanks.Length)
+    {
+        // The current combination exceeds the target value or reached the end of the values array, backtrack
+        return;
+    }
+
+    // Exclude the current value and move to the next index
+    GenerateSumCombinations(tanks, target, combination, result, startIndex + 1, length);
+
+    // Include the current value and continue with the same index
+    combination[length] = tanks[startIndex].Capacity;
+    GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Traverses the tree widthways[^18] through each node and returns the order of the list of all nodes visited in the order in which they were visited.
+
+```cs
+public Wine[] TraverseNodes(Wine[] nodes)
+{
+    // Copy the original nodes to avoid modifying the input
+    Wine[] copiedNodes = new Wine[nodes.Length];
+    Array.Copy(nodes, copiedNodes, nodes.Length);
+
+    // Node path
+    for (int i = 0; i < copiedNodes.Length; i++)
+    {
+        Wine currentNode = copiedNodes[i];
+
+        // Implement the specific traversal logic here
+        // For example, reverse the quantities of the nodes for the example
+        currentNode.Quantity = Tank.MAX_WINES - currentNode.Quantity + 1;
+    }
+
+    return copiedNodes;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+**2. Wines.cs file**
+
+
+
+```cs
+using System;
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 inside the namespace KrugApp, we start by define a new class "Wine" accessible
 
-```C#
+```cs
 namespace KrugApp
 {
-  public class Wine
-  {
-    ...
-  }
+    public class Wine
+    {
+        ...
+    }
 }
 ```
 
@@ -367,17 +498,17 @@ namespace KrugApp
 
 create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
 
-```C#
+```cs
 public float Quantity { get; set; }
 
 public Wine()
 {
-  this.Quantity = 0;
+    this.Quantity = 0;
 }
 
-public Wine(float value)
+public Wine(float quantity)
 {
-  this.Quantity = value;
+    this.Quantity = quantity;
 }
 ```
 
@@ -385,28 +516,28 @@ public Wine(float value)
 
 define each operator (+, -, *, /)
 
-```C#
+```cs
 public static Wine operator +(Wine wine1, Wine wine2)
 {
-  return new Wine(wine1.Quantity + wine2.Quantity);
+    return new Wine(wine1.Quantity + wine2.Quantity);
 }
 
 public static Wine operator -(Wine wine1, Wine wine2)
 {
-  return new Wine(wine1.Quantity - wine2.Quantity);
+    return new Wine(wine1.Quantity - wine2.Quantity);
 }
 
 public static Wine operator *(Wine wine1, Wine wine2)
 {
-  return new Wine(wine1.Quantity * wine2.Quantity);
+    return new Wine(wine1.Quantity * wine2.Quantity);
 }
 
 public static Wine operator /(Wine wine1, Wine wine2)
 {
-  if (wine2.Quantity != 0)
-    return new Wine(wine1.Quantity / wine2.Quantity);
-  else
-    throw new DivideByZeroException("Cannot divide by zero.");
+    if (wine2.Quantity != 0)
+        return new Wine(wine1.Quantity / wine2.Quantity);
+    else
+        throw new DivideByZeroException("Cannot divide by zero.");
 }
 ```
 
@@ -414,14 +545,168 @@ public static Wine operator /(Wine wine1, Wine wine2)
 
 returns the quantity in string type
 
-```C#
+```cs
 public override string ToString()
 {
-  return "Quantity: " + this.Quantity;
+    return "Quantity: " + this.Quantity;
+}
+```
+
+**3. Program.cs file**
+
+
+
+```cs
+using System;
+using System.Linq;
+using KrugApp;
+
+using System.Data;
+using System.Data.OleDb;
+using System.Globalization;
+using System.IO;
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+inside the namespace KrugApp, we start by define a new class "Program" accessible
+
+```cs
+namespace KrugApp
+{
+    public class Program
+    {
+        ...
+    }
 }
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+static void Main(string[] args)
+{
+    var tanksIn = ReadCSV("./formulaTest.csv");
+
+    // Define the wines and their quantities in the given formula
+    Wine[] formula = new Wine[]
+    {
+        new Wine(2),
+        new Wine(8),
+        new Wine(250),
+        new Wine(150),
+    };
+
+    // Create an array of tanks
+    Tank[] tanks = new Tank[10];
+    for (int i = 0; i < tanks.Length; i++)
+        tanks[i] = new Tank();
+
+    foreach (Tank t in tanks)
+    {
+        Console.WriteLine("Object : "+t);
+        Console.WriteLine("Capacity : " + ((int)t.Capacity));
+        Console.WriteLine("Total wine : " + t.Wine.Sum(w => w.Quantity));
+    }
+    tanks.OrderBy(tank => tank.Capacity);
+
+    Tank[] tankArrayA = new Tank[]
+    {
+        new Tank(100),
+        new Tank(new Wine[] { new Wine(70), new Wine(40), new Wine(0), new Wine(1) }),
+        //new Tank(100),
+        new Tank(100),
+        //new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
+        //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) })
+    };
+
+    Tank[] tankArrayB = new Tank[]
+    {
+        //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) }),
+        new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(120), new Wine(60) }),
+        new Tank(100),
+        //new Tank(new Wine[] { new Wine(60), new Wine(0), new Wine(0), new Wine(0) }),
+        new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
+        //new Tank(new Wine[] { new Wine(1), new Wine(4), new Wine(0), new Wine(90) }),
+    };
+
+    Console.WriteLine("Similarity of the nodes: " + Similarity(tankArrayA, tankArrayB) + " / 10");
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
+
+```cs
+
+```
 
 #### E. Program architecture diagram
 
@@ -547,3 +832,7 @@ It's an algorithm for searching for data in a tree (binary or not) starting from
 [^17]: **Pruning :**
 This involves deleting branches of a tree that are no longer needed. This makes the programme faster and more efficient.
 *source : [DEV Community](https://dev.to/ml_82/what-is-pruning-in-decision-tree-30e0#:~:text=Pruning%20is%20a%20technique%20used,the%20tree%20by%20reducing%20overfitting.)*
+
+[^18]: **Traverses the tree widthways :**
+. 
+*source : [Wikipedia](https://en.wikipedia.org/wiki/Treewidth)*
