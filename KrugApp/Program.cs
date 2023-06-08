@@ -173,6 +173,22 @@ namespace KrugApp
             return d;
         }
 
+        /// <summary>
+        /// check if the child node moves away from the target in relation to a parent node
+        /// </summary>
+
+        static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
+        {
+            var parentSimilarity = Similarity(parent, target);
+            var childSimilarity = Similarity(child, target);
+
+            if (childSimilarity > parentSimilarity)
+                return true;
+            else
+                return false;
+        }
+        
+
         ///<summary>
         ///Reads the CSV file and returns a List of Wine objects
         ///</summary>
