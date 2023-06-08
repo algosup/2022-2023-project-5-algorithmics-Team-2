@@ -44,12 +44,17 @@ namespace KrugApp
         {
             List<TankTree> possibleChilds = new();
 
+            for(int i = 0; i < this.value.Length; i++)
+                this.value[i].Index = i;
+
             foreach (var tank in this.value)
                 foreach(var step in tank.Steps)
                 {
                     if (tank.IsEmpty)
                     {
                         var stepTuple = new Tuple<int?, Tuple<int, int>, int?>(null, step, tank.Index);
+                        for (int i = 0; i < this.value.Length; i++)
+                            this.value[i].Index = i;
                         var stepTree = new TankTree(Tank.getStateAfterStep(this.value, stepTuple));
                         stepTree.Step = stepTuple;
                         possibleChilds.Add(stepTree);
@@ -62,6 +67,10 @@ namespace KrugApp
                         possibleChilds.Add(stepTree);
                     }
                 }
+
+            for (int i = 0; i < this.value.Length; i++)
+                this.value[i].Index = i;
+
             return possibleChilds;
         }
 

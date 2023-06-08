@@ -234,18 +234,12 @@ namespace KrugApp
 
         public void GenrerateCombinaison(Tank[] tanks)
         {
-            for(int i = 0; i < tanks.Length - 1; i++)
-            {
-                if (i == this.Index) continue;
-                for(int j = i + 1; j < tanks.Length; j++)
-                {
-                    if (j == this.Index) continue;
-                    if (tanks[i].Capacity + tanks[j].Capacity == this.Capacity)
-                    {
-                        this.Steps.Add( new Tuple<int,int>(i, j) );
-                    }
-                }
-            }
+            for (int i = 0; i < tanks.Length - 1; i++)
+                if (i != this.Index)
+                    for (int j = i + 1; j < tanks.Length; j++)
+                        if (j != this.Index)
+                            if (tanks[i].Capacity + tanks[j].Capacity == this.Capacity)
+                                this.Steps.Add(new Tuple<int, int>(i, j));
         }
 
 
@@ -289,6 +283,7 @@ namespace KrugApp
                     tmp.Index = currentState[step.Item3.Value].Index;
                     if (tmp.Capacity == currentState[step.Item3.Value].Capacity)
                     {
+                        Console.WriteLine("Great success");
                         currentState[step.Item3.Value] = tmp;
                         currentState[step.Item2.Item1].empty();
                         currentState[step.Item2.Item2].empty();
@@ -296,8 +291,8 @@ namespace KrugApp
                     else
                     {
                         throw new Exception("Invalid step : \n"+
-                            "(("+step.Item2.Item1+"."+step.Item2.Item2+")=>"+step.Item3+")"+" .\n" +
-                            "((" + currentState[step.Item2.Item1].Capacity + "." + currentState[step.Item2.Item2].Capacity + ")=>" + currentState[step.Item3.Value].Capacity + ")" + " .\n" +
+                            "Indexes  (("+step.Item2.Item1+"."+step.Item2.Item2+")=>"+step.Item3+")"+" .\n" +
+                            "capacity ((" + currentState[step.Item2.Item1].Capacity + "." + currentState[step.Item2.Item2].Capacity + ")=>" + currentState[step.Item3.Value].Capacity + ")" + " .\n" +
                             "Tank at index " + step.Item3.Value + " or " + tmp.Index + "has capacity of " + tmp.Capacity + " or " + currentState[step.Item3.Value].Capacity + ".\n" +
                             "The capacity of the tank should be equal to the sum of the capacities of the two tanks.\n" +
                             "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".\n");

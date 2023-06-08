@@ -27,7 +27,6 @@ namespace KrugApp
                 tanks[i].GenrerateCombinaison(tanks);
             }
 
-
             TankTree tankTree = new TankTree(tanks);
 
             tankTree.GenerateChilds(4);
