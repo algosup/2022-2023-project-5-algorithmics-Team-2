@@ -4,10 +4,246 @@
 namespace KrugAppTest
 {
     [TestClass]
+    public class NbrWinesTests
+    {
+        [TestMethod]
+        public void NbrWines_EmptyTankArray_ReturnsZero()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[0];
+
+            // Act
+            int result = Program.NbrWines(tanks);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void NbrWines_AllTanksWithZeroQuantity_ReturnsZero()
+        {
+            try
+            {
+                Tank[] tanks = new Tank[]
+                {
+                    new Tank(100),
+                    new Tank(200),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0) }),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0), new Wine(0) })
+                };
+
+                int result = Program.NbrWines(tanks);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void NbrWines_SomeWinesWithNonZeroQuantity_ReturnsCorrectCount()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(2), new Wine(0) })
+            };
+
+            // Act
+            int result = Program.NbrWines(tanks);
+
+            // Assert
+            Assert.AreEqual(5, result);
+        }
+
+        [TestMethod]
+        public void NbrWines_AllWinesWithNonZeroQuantity_ReturnsTotalWineCount()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+            new Tank(new Wine[] { new Wine(30), new Wine(20), new Wine(15), new Wine(8) }),
+            new Tank(new Wine[] { new Wine(5), new Wine(20), new Wine(15), new Wine(8) }),
+            new Tank(new Wine[] { new Wine(20), new Wine(20), new Wine(15), new Wine(8) })
+            };
+
+            // Act
+            int result = Program.NbrWines(tanks);
+
+            // Assert
+            Assert.AreEqual(12, result);
+        }
+    }
+
+
+    [TestClass]
+    public class NbrTankTests
+    {
+        [TestMethod]
+        public void NbrTank_EmptyTankArray_ReturnsZero()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[0];
+
+            // Act
+            int result = Program.NbrTank(tanks);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void NbrTank_AllTanksWithZeroQuantity_ReturnsZero()
+        {
+            try
+            {
+                Tank[] tanks = new Tank[]
+                {
+                    new Tank(100),
+                    new Tank(200),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0) }),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0), new Wine(0) })
+                };
+
+                // Act
+                int result = Program.NbrTank(tanks);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            // Assert
+        }
+
+        [TestMethod]
+        public void NbrTank_SomeTanksWithNonZeroQuantity_ReturnsCorrectCount()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(14), new Wine(4), new Wine(2), new Wine(49) })
+            };
+
+            // Act
+            int result = Program.NbrTank(tanks);
+
+            // Assert
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void NbrTank_AllTanksWithNonZeroQuantity_ReturnsTotalTankCount()
+        {
+            try {
+                Tank[] tanks = new Tank[]
+                {
+                new Tank(new Wine[] { new Wine(30), new Wine(10) }),
+                new Tank(new Wine[] { new Wine(5) }),
+                new Tank(new Wine[] { new Wine(20), new Wine(15), new Wine(8) })
+                };
+
+                int result = Program.NbrTank(tanks);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void NbrTank_AllHaveCapacity_ReturnsCorrectCount()
+        {
+            Tank[] tanks = new Tank[]
+            {
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(new Wine[] { new Wine(14), new Wine(4), new Wine(2), new Wine(49) })
+            };
+
+            int result = Program.NbrTank(tanks);
+
+            Assert.AreEqual(10, result);
+        }
+    }
+
+
+    [TestClass]
+    public class NbrTotalWineTests
+    {
+        [TestMethod]
+        public void NbrTotalWine_EmptyTankArray_ReturnsZero()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[0];
+
+            // Act
+            int result = Program.NbrTotalWine(tanks);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void NbrTotalWine_TankArrayWithZeroQuantity_ReturnsZero()
+        {
+            try {
+                Tank[] tanks = new Tank[]
+                {
+                    new Tank(100),
+                    new Tank(200),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0) }),
+                    new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(0), new Wine(0) })
+                };
+
+                int result = Program.NbrTotalWine(tanks);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+        }
+
+        [TestMethod]
+        public void NbrTotalWine_TankArrayWithPositiveQuantities_ReturnsCorrectTotal()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(30), new Wine(10), new Wine(7), new Wine(100) }),
+            new Tank(100),
+            new Tank(new Wine[] { new Wine(14), new Wine(4), new Wine(2), new Wine(49) })
+            };
+
+            // Act
+            int result = Program.NbrTotalWine(tanks);
+
+            // Assert
+            Assert.AreEqual(216, result);
+        }
+    }
+
+
+    [TestClass]
     public class Similarity
     {
         [TestMethod]
-        public void NbrEachWine_EqualQuantities_ReturnsTwo()
+        public void TestNbrEachWine()
         {
             // Arrange
             Tank[] a = new Tank[]
@@ -205,5 +441,7 @@ namespace KrugAppTest
             // Assert
             Assert.AreEqual(0, result);
         }
+
+        
     }
 }

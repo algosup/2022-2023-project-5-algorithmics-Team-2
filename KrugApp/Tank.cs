@@ -271,5 +271,26 @@ namespace KrugApp
 
             return copiedNodes;
         }
+
+        public static bool checkFormula(Tank[] table, Wine[] formula, int a)
+        {
+            float total = 0;
+            foreach (var tank in table)
+            {
+                for (int i = 0; i < tank.Wine.Length; i++)
+                {
+                    total += Math.Abs(formula[i].Quantity - tank.Wine[i].Quantity);
+                }
+                if (total < a)
+                {
+                    return true;
+                }
+                else
+                {
+                    total = 0;
+                }
+            }
+            return false;
+    }
     }
 }
