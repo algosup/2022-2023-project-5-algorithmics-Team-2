@@ -397,7 +397,7 @@ public static Tank operator +(Tank tank1, Tank tank2)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Browse the list of "value" tanks and call the "GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)" function for each of the values.
 
 ```cs
 public static List<int[]> GenerateSumCombinations(Tank[] values)
@@ -416,7 +416,7 @@ public static List<int[]> GenerateSumCombinations(Tank[] values)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Create all combinations possible of length given with tanks available to make the blending of differents wines together.
 
 ```cs
 private static void GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)
@@ -447,7 +447,7 @@ private static void GenerateSumCombinations(Tank[] tanks, int target, int[] comb
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-(BFS method) Traverses the tree widthways through each node and returns the order of the list of all nodes visited in the order in which they were visited.
+Traverses the tree widthways through each node and returns the order of the list of all nodes visited in the order in which they were visited (BFS method).
 
 ```cs
 public Wine[] TraverseNodes(Wine[] nodes)
@@ -673,7 +673,7 @@ public static int Similarity(Tank[] a, Tank[] b)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Add similarity points between two tanks or Tank[]
 
 ```cs
 static int SimiPoint(int c, int d)
@@ -707,7 +707,7 @@ static int NbrWines(Tank[] a)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Count the number of tank used during the blending
 
 ```cs
 static int NbrTank(Tank[] a)
@@ -729,7 +729,7 @@ static int NbrTank(Tank[] a)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Calculate the quantity total used in all the array Tank.
 
 ```cs
 static int NbrTotalWine(Tank[] a)
@@ -781,7 +781,7 @@ static int NbrEachWine(Tank[] a, Tank[] b)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Check if the child node moves away from the target in relation to a parent node.
+Check if the child node moves away from the target in relation to a parent node and return a booleen.
 
 ```cs
 public static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
@@ -838,7 +838,7 @@ static Wine[] ReadCSV(string path)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Add comma between values in array (debug function)
 
 ```cs
 static string printable(int[] input)
