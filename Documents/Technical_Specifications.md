@@ -154,7 +154,7 @@ The program is implemented by the technique of TDD[^14]. The program generate a 
 
 **1. Tanks.cs file**
 
-
+Define every function/method/file we use that is external to the page.
 
 ```cs
 using System;
@@ -164,7 +164,7 @@ using System.Threading.Tasks;
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-inside the namespace KrugApp, we start by define a new class "Tank" accessible
+Inside the namespace KrugApp, we start by define a new class "Tank" accessible
 
 ```cs
 namespace KrugApp
@@ -178,7 +178,7 @@ namespace KrugApp
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-create a tank array with parameter of capacity of the tank and the name of the wine
+Create a tank array with parameter of capacity of the tank and the name of the wine
 
 ```cs
 public const int MIN_CAPACITY = 1;
@@ -223,7 +223,7 @@ public Tank(int capacity)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Creates a tank with a specified amount of wine at a given index.
+Create a tank with a specified amount of wine at a given index.
 The parameter "wine" is the amount of wine to be stored and the parameter "index" is the index of the wine in the tank.
 
 ```cs
@@ -240,7 +240,7 @@ public Tank(float wine, int index)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Return the total quantity of a tank, that have multiple wines in it.
+Return if the quantity of wine in a tank is too big, too small or perfect for the capacity of the tank.
 The parameter "total" is the array of the wines' capacity.
 
 ```cs
@@ -447,7 +447,7 @@ private static void GenerateSumCombinations(Tank[] tanks, int target, int[] comb
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Traverses the tree widthways[^18] through each node and returns the order of the list of all nodes visited in the order in which they were visited.
+(BFS method) Traverses the tree widthways through each node and returns the order of the list of all nodes visited in the order in which they were visited.
 
 ```cs
 public Wine[] TraverseNodes(Wine[] nodes)
@@ -474,7 +474,7 @@ public Wine[] TraverseNodes(Wine[] nodes)
 
 **2. Wines.cs file**
 
-
+Define every function/method/file we use that is external to the page.
 
 ```cs
 using System;
@@ -482,7 +482,7 @@ using System;
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-inside the namespace KrugApp, we start by define a new class "Wine" accessible
+Inside the namespace KrugApp, we start by define a new class "Wine" accessible
 
 ```cs
 namespace KrugApp
@@ -496,7 +496,7 @@ namespace KrugApp
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
+Create a list of wines with the quantities (default 0 otherwise value entered) (to have the index of each wine, we will use MAX_WINES = number of wines)
 
 ```cs
 public float Quantity { get; set; }
@@ -514,7 +514,7 @@ public Wine(float quantity)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-define each operator (+, -, *, /)
+Define each operator (+, -, *, /) for the quantity of wine
 
 ```cs
 public static Wine operator +(Wine wine1, Wine wine2)
@@ -543,7 +543,7 @@ public static Wine operator /(Wine wine1, Wine wine2)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-returns the quantity in string type
+Returns the quantity in string type
 
 ```cs
 public override string ToString()
@@ -554,7 +554,7 @@ public override string ToString()
 
 **3. Program.cs file**
 
-
+Define every function/method/file we use that is external to the page.
 
 ```cs
 using System;
@@ -569,7 +569,7 @@ using System.IO;
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-inside the namespace KrugApp, we start by define a new class "Program" accessible
+Inside the namespace KrugApp, we start by define a new class "Program" accessible
 
 ```cs
 namespace KrugApp
@@ -583,7 +583,7 @@ namespace KrugApp
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+The Main function will call up all the functions it needs to calculate the mix.
 
 ```cs
 static void Main(string[] args)
@@ -638,10 +638,37 @@ static void Main(string[] args)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+This function compare multiple criteria to know the similarity between two Tank[] and return the similarity indicator between 0(opposite) and 10(same)
 
 ```cs
+public static int Similarity(Tank[] a, Tank[] b)
+{
+    if (a == null || b == null || a.Length == 0 || b.Length == 0)
+        throw new ArgumentException("Both arrays must have at least one element.");
 
+    // Number of used tank
+    var usedTank = SimiPoint(NbrTank(a), NbrTank(b));
+
+    // Number of wines in the tanks
+    var nbrWine = SimiPoint(NbrWines(a), NbrWines(b));
+
+    // The total quantity of all the wines
+    var nbrQuan = SimiPoint(NbrTotalWine(a), NbrTotalWine(b));
+
+    // The quantity for each wines
+    var QuanWine = NbrEachWine(a, b);
+
+    var similarity = usedTank + nbrWine + nbrQuan + QuanWine;
+
+    if (similarity == 8)
+        similarity += 2;
+    else if (similarity == 7)
+        similarity += 1;
+
+    // return similarity (int)
+    return similarity;
+
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -649,7 +676,17 @@ static void Main(string[] args)
 
 
 ```cs
-
+static int SimiPoint(int c, int d)
+{
+    if (c == d)
+        return 2;
+    else if (c > d && c / 2 > d)
+        return 1;
+    else if (c < d && c > d / 2)
+        return 1;
+    else
+        return 0;
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -657,7 +694,15 @@ static void Main(string[] args)
 
 
 ```cs
-
+static int NbrWines(Tank[] a)
+{
+    var d = 0; // number of wines
+    for (var i = 0; i < a.Length; i++)
+        for (var j = 0; j < a[i].Wine.Length; j++)
+            if ((int)a[i].Wine[j].Quantity > 0)
+                d += 1;
+    return d;
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -665,7 +710,21 @@ static void Main(string[] args)
 
 
 ```cs
+static int NbrTank(Tank[] a)
+{
+    float c = 0; // Quantity of wine in the tank
+    var d = 0; // number of used tank
+    foreach (var tank in a)
+    {
+        foreach (var wine in tank.Wine)
+            c += wine.Quantity;
 
+        if (c != 0)
+            d += 1;
+        c = 0;
+    }
+    return d;
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -673,7 +732,18 @@ static void Main(string[] args)
 
 
 ```cs
-
+static int NbrTotalWine(Tank[] a)
+{
+    int wine1 = 0;
+    for (int i = 0; i < a.Length; i++)
+    {
+        for (int j = 0; j < a[i].Wine.Length; j++)
+        {
+            wine1 += (int)a[i].Wine[j].Quantity;
+        }
+    }
+    return wine1;
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -681,7 +751,89 @@ static void Main(string[] args)
 
 
 ```cs
+static int NbrEachWine(Tank[] a, Tank[] b)
+{
+    var d = 0; // number of wines
+    var nbrWinesA = NbrWines(a); // Get the number of wines in array a
 
+    if (nbrWinesA == 0)
+        return 0; // Return 0 if there are no wines in array a to avoid division by zero
+
+    for (var i = 0; i < a.Length; i++)
+    {
+        for (var j = 0; j < a[i].Wine.Length; j++)
+        {
+            var tankA = a[i].Wine[j].Quantity;
+            var tankB = b[i].Wine[j].Quantity;
+            if (tankA == tankB)
+                d += 2;
+            else if (tankA > tankB && tankA / 2 >= tankB)
+                d += 1;
+            else if (tankA < tankB && tankA >= tankB / 2)
+                d += 1;
+        }
+    }
+
+    d = d / nbrWinesA / 2;
+    return d;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Check if the child node moves away from the target in relation to a parent node.
+
+```cs
+public static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
+{
+    var parentSimilarity = Similarity(parent, target);
+    var childSimilarity = Similarity(child, target);
+
+    if (childSimilarity > parentSimilarity)
+        return true;
+    else
+        return false;
+}
+
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Reads the CSV file and returns a List of Wine objects
+
+```cs
+static Wine[] ReadCSV(string path)
+{
+    var reader = new StreamReader(File.OpenRead(path));
+    List<string> wine_name = new List<string>();
+    List<float> quantity = new List<float>();
+
+    reader.ReadLine();
+            
+    while (!reader.EndOfStream)
+    {
+        var line = reader.ReadLine();
+        var values = line.Split(',');
+                
+        wine_name.Add(values[0]);
+        quantity.Add(float.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture));
+                
+    }
+    foreach (var column1 in wine_name)
+    {
+        Console.WriteLine(column1);
+    }
+    foreach (var column2 in quantity)
+    {
+        Console.WriteLine(column2);
+    }
+    var wines = new Wine[wine_name.Count];
+    for (int i = 0; i < wine_name.Count; i++)
+    {
+        wines[i] = new Wine(quantity[i]);
+    }
+    return wines;
+}
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -689,23 +841,18 @@ static void Main(string[] args)
 
 
 ```cs
+static string printable(int[] input)
+{
+    var a = String.Empty;
 
-```
+    foreach (var b in input)
+        a = a + "," + b.ToString();
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+    a = a.TrimStart(',');
 
-
-
-```cs
-
-```
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
-
-
-
-```cs
-
+    a = a + " : " + input.Sum();
+    return a;
+}
 ```
 
 #### E. Program architecture diagram
@@ -827,12 +974,9 @@ Other vocabulary : sibling (two or more nodes that share the same parent), heigt
 
 [^16]: **BFS (Breadth First Search):**
 It's an algorithm for searching for data in a tree (binary or not) starting from the root and first visiting each child who is a sister (at the same height in the tree) before moving on to the "grandchildren".
-*source : [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search#Time_and_space_complexity)*
+The depth-first search (DFS) method also includes: pre-order (self, child A, child B), in-order (child A, self, child B), post-order (child A, child B, self)
+*source : [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search#Time_and_space_complexity) / [tree lesson by Christopher Diggins](doc_link/trees.pptx)*
 
 [^17]: **Pruning :**
 This involves deleting branches of a tree that are no longer needed. This makes the programme faster and more efficient.
 *source : [DEV Community](https://dev.to/ml_82/what-is-pruning-in-decision-tree-30e0#:~:text=Pruning%20is%20a%20technique%20used,the%20tree%20by%20reducing%20overfitting.)*
-
-[^18]: **Traverses the tree widthways :**
-. 
-*source : [Wikipedia](https://en.wikipedia.org/wiki/Treewidth)*
