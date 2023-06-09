@@ -9,7 +9,7 @@ using System.IO;
 
 namespace KrugApp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -70,7 +70,7 @@ namespace KrugApp
         /// <param name="b"></param>
         /// <returns>The similarity indicator between 0(opposite) and 10(same)</returns>
         /// <exception cref="ArgumentException"></exception>
-        static int Similarity(Tank[] a, Tank[] b)
+        public static int Similarity(Tank[] a, Tank[] b)
         {
             if (a == null || b == null || a.Length == 0 || b.Length == 0)
                 throw new ArgumentException("Both arrays must have at least one element.");
@@ -153,6 +153,11 @@ namespace KrugApp
         static int NbrEachWine(Tank[] a, Tank[] b)
         {
             var d = 0; // number of wines
+            var nbrWinesA = NbrWines(a); // Get the number of wines in array a
+
+            if (nbrWinesA == 0)
+                return 0; // Return 0 if there are no wines in array a to avoid division by zero
+
             for (var i = 0; i < a.Length; i++)
             {
                 for (var j = 0; j < a[i].Wine.Length; j++)
@@ -166,18 +171,16 @@ namespace KrugApp
                     else if (tankA < tankB && tankA >= tankB / 2)
                         d += 1;
                 }
-
             }
 
-            d = d / NbrWines(a) / 2;
+            d = d / nbrWinesA / 2;
             return d;
         }
 
         /// <summary>
-        /// check if the child node moves away from the target in relation to a parent node
+        /// Check if the child node moves away from the target in relation to a parent node
         /// </summary>
-
-        static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
+        public static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
         {
             var parentSimilarity = Similarity(parent, target);
             var childSimilarity = Similarity(child, target);
