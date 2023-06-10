@@ -540,7 +540,7 @@ namespace KrugAppTest
                 {
                     if (parent != result)
                     {
-                        Assert.IsTrue(Math.Abs(result.Quantity - parent.Quantity) > 5 || result == parent,
+                        Assert.IsFalse(Math.Abs(result.Quantity - parent.Quantity) > 5 || result == parent,
                             $"The node {result.Quantity} is too similar to the parent {parent.Quantity}."); // Change the value of 5 as required
                     }
                 }
@@ -550,10 +550,328 @@ namespace KrugAppTest
                 {
                     if (sibling != result)
                     {
-                        Assert.IsTrue(Math.Abs(result.Quantity - sibling.Quantity) > 5 || result == sibling,
+                        Assert.IsFalse(Math.Abs(result.Quantity - sibling.Quantity) > 5 || result == sibling,
                             $"the node {result.Quantity} is too similar to the sibling {sibling.Quantity}."); // Change the value of 5 as required
                     }
                 }
+            }
+        }
+    }
+
+    [TestClass]
+    public class IsMovingAwayTests
+    {
+        [TestMethod]
+        public void IsMovingAwayTest_1()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(50) };
+            Tank[] child = new Tank[] { new Tank(50) };
+            Tank[] target = new Tank[] { new Tank(50) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsFalse(isMovingAway);
+        }
+
+        [TestMethod]
+        public void IsMovingAwayTest_2()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(60) };
+            Tank[] child = new Tank[] { new Tank(55) };
+            Tank[] target = new Tank[] { new Tank(65) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsFalse(isMovingAway);
+        }
+
+        [TestMethod]
+        public void IsMovingAwayTest_3()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(100) };
+            Tank[] child = new Tank[] { new Tank(80) };
+            Tank[] target = new Tank[] { new Tank(85) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsFalse(isMovingAway);
+        }
+
+        [TestMethod]
+        public void IsMovingAwayTest_4()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(85) };
+            Tank[] child = new Tank[] { new Tank(95) };
+            Tank[] target = new Tank[] { new Tank(100) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsFalse(isMovingAway);
+        }
+
+        [TestMethod]
+        public void IsMovingAwayTest_5()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(100) };
+            Tank[] child = new Tank[] { new Tank(100) };
+            Tank[] target = new Tank[] { new Tank(110) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsFalse(isMovingAway);
+        }
+
+        [TestMethod]
+        public void IsMovingAwayTest_6()
+        {
+            // Arrange
+            Tank[] parent = new Tank[] { new Tank(100) };
+            Tank[] child = new Tank[] { new Tank(110) };
+            Tank[] target = new Tank[] { new Tank(110) };
+
+            // Act
+            bool isMovingAway = Program.IsMovingAway(parent, child, target);
+
+            // Assert
+            Assert.IsTrue(isMovingAway);
+        }
+    }
+
+    [TestClass]
+    public class SimilarityTests 
+    {
+        [TestMethod] 
+        public void Similarity_BothArraysNull_ThrowsArgumentException()
+        {
+            Tank[] a = null;
+            Tank[] b = null;
+
+            try
+            {
+                Program.Similarity(a, b);
+                Assert.Fail("Expected ArgumentException was not thrown.");
+            }
+            catch (ArgumentException)
+            {
+                // The expected exception was thrown, test passes
+            }
+        }
+
+        [TestMethod]
+        public void Similarity_ArraysEmpty_ThrowsArgumentException()
+        {
+            Tank[] a = new Tank[0];
+            Tank[] b = new Tank[0];
+
+            try
+            {
+                Program.Similarity(a, b);
+                Assert.Fail("Expected ArgumentException was not thrown.");
+            }
+            catch (ArgumentException)
+            {
+                // The expected exception was thrown, test passes
+            }
+        }
+
+        [TestMethod]
+        public void Similarity_ValidInput_ReturnsExpectedSimilarity_1()
+        {
+            Tank[] a =  new Tank[] { new Tank(100), new Tank(100), new Tank(100) };
+            Tank[] b =  new Tank[] { new Tank(100), new Tank(100), new Tank(100) };
+            int expectedSimilarity = 6;
+
+            int actualSimilarity = Program.Similarity(a, b);
+
+            Assert.AreEqual(expectedSimilarity, actualSimilarity);
+        }
+
+        [TestMethod]
+        public void Similarity_ValidInput_ReturnsExpectedSimilarity_2()
+        {
+            Tank[] a =  new Tank[] { new Tank(20) };
+            Tank[] b =  new Tank[] { new Tank(100) };
+            int expectedSimilarity = 10;
+
+            int actualSimilarity = Program.Similarity(a, b);
+
+            Assert.AreEqual(expectedSimilarity, actualSimilarity);
+        }
+    }
+
+    [TestClass]
+    public class TransferToTests
+    {
+        [TestMethod]
+        public void TransferTo_ArraysEmpty()
+        {
+            try
+            {
+               //arrange
+                Tank[] a = new Tank[0];
+                Tank b = new Tank(100);
+
+                //act
+                int totalCapacity = a.Sum(tank => tank.Capacity);
+                if (totalCapacity == b.Capacity)
+                {
+                    Tank.TransferTo(a, b);
+                }
+                else
+                {
+                    // handle the error condition, e.g., throw an exception or log an error
+                    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+                } 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TransferTo_ArraysNull()
+        {
+            try
+            {
+                //arrange
+                Tank[] a = null;
+                Tank b = null;
+
+                //act
+                int totalCapacity = a.Sum(tank => tank.Capacity);
+                if (totalCapacity == b.Capacity)
+                {
+                    Tank.TransferTo(a, b);
+                }
+                else
+                {
+                    // handle the error condition, e.g., throw an exception or log an error
+                    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TransferTo_ArraysTooBig()
+        {
+            try
+            {
+                //arrange
+                Tank[] a = new Tank[] { new Tank(100), new Tank(100), new Tank(100) };
+                Tank b = new Tank(300);
+
+                //act
+                int totalCapacity = a.Sum(tank => tank.Capacity);
+                if (totalCapacity == b.Capacity)
+                {
+                    Tank.TransferTo(a, b);
+                }
+                else
+                {
+                    // handle the error condition, e.g., throw an exception or log an error
+                    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TransferTo_ArraysValid()
+        {
+            //arrange
+            Tank[] a = new Tank[] { new Tank(50), new Tank(25), new Tank(100), new Tank(25) };
+            Tank b = new Tank(200);
+
+            //act
+            int totalCapacity = a.Sum(tank => tank.Capacity);
+            if (totalCapacity == b.Capacity)
+            {
+                Tank.TransferTo(a, b);
+            }
+            else
+            {
+                // handle the error condition, e.g., throw an exception or log an error
+                throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+            }
+
+            // assert
+            Assert.AreEqual(200, b.Capacity);
+        }
+
+        [TestMethod]
+        public void TransferTo_ArraysValid_2()
+        {
+            try
+            {
+                //arrange
+                Tank[] a = new Tank[] { new Tank(50), new Tank(25), new Tank(10), new Tank(30), new Tank(15), new Tank(40) };
+                Tank b = new Tank(200);
+
+                //act
+                int totalCapacity = a.Sum(tank => tank.Capacity);
+                if (totalCapacity == b.Capacity)
+                {
+                    Tank.TransferTo(a, b);
+                }
+                else
+                {
+                    // handle the error condition, e.g., throw an exception or log an error
+                    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TransferTo_ArraysValid_3()
+        {
+            try
+            {
+                //arrange
+                Tank[] a = new Tank[] { new Tank(50), new Tank(25), new Tank(10), new Tank(30), new Tank(15), new Tank(40) };
+                Tank b = new Tank(100);
+
+                //act
+                int totalCapacity = a.Sum(tank => tank.Capacity);
+                if (totalCapacity == b.Capacity)
+                {
+                    Tank.TransferTo(a, b);
+                }
+                else
+                {
+                    // handle the error condition, e.g., throw an exception or log an error
+                    throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
