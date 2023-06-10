@@ -2,7 +2,7 @@
 
 namespace KrugApp
 {
-    public class Wine
+    public class Wine 
     {
         public float Quantity { get; set; }
 

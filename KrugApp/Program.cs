@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace KrugApp
 {
@@ -60,7 +61,33 @@ namespace KrugApp
 
             Console.WriteLine("Similarity of the nodes: " + Similarity(tankArrayA, tankArrayB) + " / 10");
 
+            Tank[] table = new Tank[]
+            {
+                new Tank(100),
+                new Tank(new Wine[] {new Wine(70), new Wine(40), new Wine(60), new Wine(80) }),
+            };
 
+            Wine[] formul = new Wine[]
+            {
+                new Wine(70),
+                new Wine(40),
+                new Wine(60),
+                new Wine(80),
+            };
+            float a = 2.0f; 
+
+            // Call the CheckFormula function from File1
+            bool result = Tank.CheckFormula(table, formula, a);
+
+            // Use the result in your program logic
+            if (result)
+            {
+                Console.WriteLine("The formula meets the specified condition.");
+            }
+            else
+            {
+                Console.WriteLine("The formula does not meet the specified condition.");
+            }
         }
 
         /// <summary>
