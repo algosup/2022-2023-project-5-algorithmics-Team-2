@@ -868,7 +868,7 @@ This algorithm has been abandoned because :
 
 2. V.2 of the algorithm
 
-![Program Architechture Diagram](Images/)
+![Program Architechture Diagram](Images/Architecture_diagram2.png)
 
 ### III. Further considerations
 
