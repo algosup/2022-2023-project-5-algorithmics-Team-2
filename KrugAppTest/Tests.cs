@@ -1256,7 +1256,7 @@ namespace KrugAppTest
             };
 
             // Act
-            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+            Wine[] result = Tank.CalculateSimilarity(formula, tanks);
 
             // Assert
             Assert.AreEqual(20, result[0].Quantity);
@@ -1283,7 +1283,7 @@ namespace KrugAppTest
             };
 
             // Act
-            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+            Wine[] result = Tank.CalculateSimilarity(formula, tanks);
 
             // Assert
             Assert.AreEqual(0, result[0].Quantity);
@@ -1310,12 +1310,12 @@ namespace KrugAppTest
             };
 
             // Act
-            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+            Wine[] result = Tank.CalculateSimilarity(formula, tanks);
 
             // Assert
-            Assert.AreEqual(10, result[0].Quantity);
-            Assert.AreEqual(5, result[1].Quantity);
-            Assert.AreEqual(20, result[2].Quantity);
+            Assert.AreEqual(-10, result[0].Quantity);
+            Assert.AreEqual(-5, result[1].Quantity);
+            Assert.AreEqual(-20, result[2].Quantity);
         }
 
         [TestMethod]
@@ -1337,12 +1337,100 @@ namespace KrugAppTest
             };
 
             // Act
-            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+            Wine[] result = Tank.CalculateSimilarity(formula, tanks);
 
             // Assert
-            Assert.AreEqual(-10, result[0].Quantity);
-            Assert.AreEqual(-5, result[1].Quantity);
-            Assert.AreEqual(-10, result[2].Quantity);
+            Assert.AreEqual(10, result[0].Quantity);
+            Assert.AreEqual(5, result[1].Quantity);
+            Assert.AreEqual(10, result[2].Quantity);
+        }
+    }
+
+    [TestClass]
+    public class GenerateSumCombiniationsTests
+    {
+        [TestMethod]
+        public void GenerateSumCombinations_ReturnsEmptyList_WhenGivenEmptyInput()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[0];
+
+            // Act
+            List<int[]> combinations = Tank.GenerateSumCombinations(tanks);
+
+            // Assert
+            Assert.AreEqual(0, combinations.Count);
+        }
+
+        [TestMethod]
+        public void GenerateSumCombinations_ReturnsSingleCombination_WhenGivenSingleTank()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[] { new Tank { Capacity = 5 } };
+
+            // Act
+            List<int[]> combinations = Tank.GenerateSumCombinations(tanks);
+
+            // Assert
+            Assert.AreEqual(1, combinations.Count);
+            CollectionAssert.AreEqual(new int[] { 5 }, combinations[0]);
+        }
+
+        [TestMethod]
+        public void GenerateSumCombinations_WhenCalledWithMultipleTanks_ReturnsCorrectCombinations()
+        {
+            // Arrange
+            Tank[] values = new Tank[]
+            {
+                new Tank { Capacity = 5 },
+                new Tank { Capacity = 10 },
+                new Tank { Capacity = 15 }
+            };
+
+            // Act
+            List<int[]> result = Tank.GenerateSumCombinations(values);
+
+            // Assert
+            Assert.AreEqual(8, result.Count);
+        }
+
+        [TestMethod]
+        public void GenerateSumCombinations_WhenCalledWithDifferentTanks_ReturnsCorrectCombinations()
+        {   
+            // Arrange
+            Tank[] values = new Tank[]
+            {
+                new Tank { Capacity = 2 },
+                new Tank { Capacity = 3 },
+                new Tank { Capacity = 5 },
+                new Tank { Capacity = 7 }
+            };
+
+            // Act
+            List<int[]> result = Tank.GenerateSumCombinations(values);
+
+            // Assert
+            Assert.AreEqual(17, result.Count);
+        }
+
+        [TestMethod]
+        public void GenerateSumCombinations_WhenCalledWithAdditionalTanks_ReturnsCorrectCombinations()
+        {
+            // Arrange
+            Tank[] values = new Tank[]
+            {
+                new Tank { Capacity = 1 },
+                new Tank { Capacity = 2 },
+                new Tank { Capacity = 3 },
+                new Tank { Capacity = 4 },
+                new Tank { Capacity = 5 }
+            };
+        
+            // Act
+            List<int[]> result = Tank.GenerateSumCombinations(values);
+        
+            // Assert
+            Assert.AreEqual(41, result.Count);
         }
     }
 }
