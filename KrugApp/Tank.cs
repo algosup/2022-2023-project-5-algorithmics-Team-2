@@ -62,6 +62,11 @@ namespace KrugApp
         /// <param name="total"> Array of the wines' capacity.</param>
         public Tank(Wine[] total)
         {
+            if (total.Sum(wine => wine.Quantity) == 0)
+            {
+                throw new Exception("The total quantity of wine is too small for the tank.");
+            }
+
             if(total.Length == MAX_WINES)
             {
                 if (total.Sum(wine => wine.Quantity) > MAX_CAPACITY)
@@ -106,7 +111,7 @@ namespace KrugApp
         /// </summary>
         /// <param name="tanks">The array of tanks to transfer from.</param>
         /// <returns>A new tank with the combined capacity and quantity from the input tanks.</returns>
-        public Tank TankFrom(Tank[] tanks)
+        public static Tank TankFrom(Tank[] tanks)
         {
             float totalCapacity = tanks.Sum(tank => tank.Capacity);
             Wine[] totalWines = new Wine[MAX_WINES];
@@ -154,14 +159,12 @@ namespace KrugApp
             return res;
         }
 
-
-
         /// <summary>
         /// Calculates the percentages of the total capacity for each tank in the provided array.
         /// </summary>
         /// <param name="tanks">The array of tanks.</param>
         /// <returns>An array of tanks with the calculated percentages.</returns>
-        public Tank[] CalculatePercentages(Tank[] tanks)
+        public static Tank[] CalculatePercentages(Tank[] tanks)
         {
             float total = tanks.Sum(tank => tank.Capacity);
 

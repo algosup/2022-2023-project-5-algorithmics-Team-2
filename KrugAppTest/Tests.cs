@@ -875,4 +875,474 @@ namespace KrugAppTest
             }
         }
     }
+
+    public class FillWithOneWine
+    {
+        [TestMethod]
+        public void FillWithOneWine_1()
+        {
+            Tank tank = new Tank(100);
+            Wine[] wines = new Wine[] { new Wine(100) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = tank.Capacity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(100, tank.Wine[0].Quantity);
+        }
+
+        [TestMethod]
+        public void FillWithOneWine_2()
+        {
+            Tank tank = new Tank(100);
+            Wine[] wines = new Wine[] { new Wine(50) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = wines[0].Quantity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(50, tank.Wine[0].Quantity);
+        }
+
+        [TestMethod]
+        public void FillWithOneWine_3()
+        {
+            Tank tank = new Tank(100);
+            Wine[] wines = new Wine[] { new Wine(75) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = wines[0].Quantity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(75, tank.Wine[0].Quantity);
+        }
+
+        [TestMethod]
+        public void FillWithOneWine_4()
+        {
+            Tank tank = new Tank(200);
+            Wine[] wines = new Wine[] { new Wine(150) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = wines[0].Quantity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(150, tank.Wine[0].Quantity);
+        }
+
+        [TestMethod]
+        public void FillWithOneWine_5()
+        {
+            Tank tank = new Tank(200);
+            Wine[] wines = new Wine[] { new Wine(50) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = wines[0].Quantity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(50, tank.Wine[0].Quantity);
+        }
+
+        [TestMethod]
+        public void FillWithOneWine_6()
+        {
+            Tank tank = new Tank(200);
+            Wine[] wines = new Wine[] { new Wine(250) };
+
+            if (tank.Wine.Sum(wine => wine.Quantity) == 0)
+                tank.Wine[0].Quantity = wines[0].Quantity;
+            else
+                throw new Exception("Cannot fill a full tank.");
+
+            Assert.AreEqual(250, tank.Wine[0].Quantity);
+        }
+    }
+
+    [TestClass]
+    public class EmptyArrayTests
+    {
+        [TestMethod]
+        public void EmptyTank_EmptyArray_NoExceptionThrown()
+        {
+            Wine[] wines = new Wine[0];
+
+            try
+            {
+                Tank.EmptyTank<Wine>(wines);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"Unexpected exception: {ex.Message}");
+            }
+
+            Assert.AreEqual(0, wines.Length);
+        }
+
+        [TestMethod]
+        public void EmptyTank_NonEmptyArray_ArrayCleared()
+        {
+            Wine[] wines = new Wine[] { new Wine(100), new Wine(200), new Wine(300) };
+
+            Tank.EmptyTank<Wine>(wines);
+
+            Assert.IsNull(wines[0]);
+            Assert.IsNull(wines[1]);
+            Assert.IsNull(wines[2]);
+        }
+
+        [TestMethod]
+        public void EmptyTank_NullArray_ThrowsNullReferenceException()
+        {
+            Wine[] wines = null;
+
+            Assert.ThrowsException<NullReferenceException>(() => Tank.EmptyTank<Wine>(wines));
+        }
+
+        [TestMethod]
+        public void EmptyTank_EmptyArray_NoEffectOnOtherArrays()
+        {
+            Wine[] wines1 = new Wine[0];
+            Wine[] wines2 = new Wine[] { new Wine(50), new Wine(100), new Wine(150) };
+
+            Tank.EmptyTank<Wine>(wines1);
+
+            Assert.AreEqual(0, wines1.Length);
+            Assert.AreEqual(3, wines2.Length);
+            Assert.AreEqual(50, wines2[0].Quantity);
+            Assert.AreEqual(100, wines2[1].Quantity);
+            Assert.AreEqual(150, wines2[2].Quantity);
+        }
+
+        [TestMethod]
+        public void EmptyTank_EmptyArray_KeepsReferenceIntegrity()
+        {
+            Wine wine1 = new Wine(100);
+            Wine wine2 = new Wine(200);
+            Wine[] wines = new Wine[] { wine1, wine2 };
+
+            Tank.EmptyTank<Wine>(wines);
+
+            Assert.IsNull(wines[0]);
+            Assert.IsNull(wines[1]);
+            Assert.IsNotNull(wine1);
+            Assert.IsNotNull(wine2);
+        }
+
+        [TestMethod]
+        public void EmptyTank_ArrayWithNullElements_NullElementsCleared()
+        {
+            Wine[] wines = new Wine[] { null, new Wine(50), null, new Wine(100), null };
+
+            Tank.EmptyTank<Wine>(wines);
+
+            Assert.AreEqual(5, wines.Length);
+            Assert.IsNull(wines[0]);
+            Assert.IsNull(wines[2]);
+            Assert.IsNull(wines[4]);
+        }
+    }
+    [TestClass]
+    public class TankFromTests
+    {
+        [TestMethod]
+        public void TankFrom_EmptyTanks_ThrowsExceptionWithExpectedMessage()
+        {
+            Tank[] tanks = new Tank[0];
+            string expectedMessage = "The total quantity of wine is too small for the tank.";
+
+            Exception exception = Assert.ThrowsException<Exception>(() => Tank.TankFrom(tanks));
+            Assert.AreEqual(expectedMessage, exception.Message);
+        }
+
+        [TestMethod]
+        public void TankFrom_SingleTank_ReturnsTankWithCorrectWineQuantities()
+        {
+            Tank[] tanks = new Tank[] { new Tank() };
+
+            tanks[0].Capacity = 100;
+            tanks[0].Wine[0].Quantity = 50;
+            tanks[0].Wine[1].Quantity = 60;
+
+            Tank result = Tank.TankFrom(tanks);
+
+            Assert.AreEqual(110, result.Capacity);
+            Assert.AreEqual(50, result.Wine[0].Quantity);
+            Assert.AreEqual(60, result.Wine[1].Quantity);
+        }
+
+        [TestMethod]
+        public void TankFrom_TwoTanks_ReturnsTankWithCorrectWineQuantities()
+        {
+            Tank[] tanks = new Tank[] { new Tank(), new Tank() };
+
+            tanks[0].Capacity = 10;
+            tanks[0].Wine[0].Quantity = 30;
+            tanks[0].Wine[1].Quantity = 40;
+
+            tanks[1].Capacity = 190;
+            tanks[1].Wine[0].Quantity = 50;
+            tanks[1].Wine[1].Quantity = 80;
+
+            Tank result = Tank.TankFrom(tanks);
+
+            Assert.AreEqual(200, result.Capacity);
+            Assert.AreEqual(80, result.Wine[0].Quantity);
+            Assert.AreEqual(120, result.Wine[1].Quantity);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TankFrom_SingleTankWithZeroCapacity_ReturnsTankWithZeroCapacityAndZeroWineQuantities()
+        {
+            Tank[] tanks = new Tank[] { new Tank() };
+
+            tanks[0].Capacity = 0;
+            tanks[0].Wine[0].Quantity = 0;
+            tanks[0].Wine[1].Quantity = 0;
+
+            Tank result = Tank.TankFrom(tanks);
+
+            Assert.AreEqual(0, result.Capacity);
+            for (int i = 0; i < Tank.MAX_WINES; i++)
+            {
+                Assert.AreEqual(0, result.Wine[i].Quantity);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TankFrom_SingleTankWithNoWineQuantities_ReturnsTankWithZeroCapacityAndZeroWineQuantities()
+        {
+            Tank[] tanks = new Tank[] { new Tank() };
+
+            tanks[0].Capacity = 100;
+
+            Tank result = Tank.TankFrom(tanks);
+
+            Assert.AreEqual(100, result.Capacity);
+            for (int i = 0; i < Tank.MAX_WINES; i++)
+            {
+                Assert.AreEqual(0, result.Wine[i].Quantity);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TankFrom_TwoTanksWithNoWineQuantities_ReturnsTankWithZeroCapacityAndZeroWineQuantities()
+        {
+            Tank[] tanks = new Tank[] { new Tank(), new Tank() };
+
+            tanks[0].Capacity = 0;
+            tanks[1].Capacity = 0;
+
+            Tank result = Tank.TankFrom(tanks);
+
+            Assert.AreEqual(0, result.Capacity);
+            for (int i = 0; i < Tank.MAX_WINES; i++)
+            {
+                Assert.AreEqual(0, result.Wine[i].Quantity);
+            }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TankFrom_TwoTanksWithEmptyWines_ThrowsException()
+        {
+            Tank[] tanks = new Tank[] { new Tank(), new Tank() };
+
+            tanks[0].Capacity = 50;
+            tanks[1].Capacity = 70;
+
+            Tank result = Tank.TankFrom(tanks);
+        }
+    }
+
+    [TestClass]
+    public class CalculatePercentagesTests
+    {
+        [TestMethod]
+        public void CalculatePercentages_ReturnsCorrectPercentages_1()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),   // 50% of total capacity
+                new Tank(30),   // 30% of total capacity
+                new Tank(20)    // 20% of total capacity
+            };
+    
+            // Act
+            var result = Tank.CalculatePercentages(tanks);
+    
+            // Assert
+            Assert.AreEqual(50, result[0].Capacity);
+            Assert.AreEqual(30, result[1].Capacity);
+            Assert.AreEqual(20, result[2].Capacity);
+        }
+
+        [TestMethod]
+        public void CalculatePercentages_ReturnsCorrectPercentages_2()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(75),
+                new Tank(100),
+                new Tank(125)
+            };
+
+            // Act
+            var result = Tank.CalculatePercentages(tanks);
+
+            // Assert
+            Assert.AreEqual(14, result[0].Capacity);
+            Assert.AreEqual(21, result[1].Capacity);
+            Assert.AreEqual(28, result[2].Capacity);
+            Assert.AreEqual(35, result[3].Capacity);
+        }
+    
+        [TestMethod]
+        public void CalculatePercentages_ReturnsZeroPercentForEmptyTanks()
+        {
+            // Arrange & Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => new Tank(0));
+        }
+    
+        [TestMethod]
+        public void CalculatePercentages_ReturnsEqualPercentagesForEqualCapacityTanks()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(50),
+                new Tank(50)
+            };
+    
+            // Act
+            var result = Tank.CalculatePercentages(tanks);
+    
+            // Assert
+            Assert.AreEqual(33, result[0].Capacity);
+            Assert.AreEqual(33, result[1].Capacity);
+            Assert.AreEqual(33, result[2].Capacity);
+        }
+    }
+
+    [TestClass]
+    public class CalculateSimilarityTests
+    {
+        [TestMethod]
+        public void CalculateSimilarity_ReturnsCorrectDifferences()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(75),
+                new Tank(100)
+            };
+
+            Wine[] formula = new Wine[]
+            {
+                new Wine(30),
+                new Wine(50),
+                new Wine(80)
+            };
+
+            // Act
+            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+
+            // Assert
+            Assert.AreEqual(20, result[0].Quantity);
+            Assert.AreEqual(25, result[1].Quantity);
+            Assert.AreEqual(20, result[2].Quantity);
+        }
+
+        [TestMethod]
+        public void CalculateSimilarity_ReturnsZeroDifferences_ForIdenticalFormulaAndTankQuantities()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(75),
+                new Tank(100)
+            };
+
+            Wine[] formula = new Wine[]
+            {
+                new Wine(50),
+                new Wine(75),
+                new Wine(100)
+            };
+
+            // Act
+            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+
+            // Assert
+            Assert.AreEqual(0, result[0].Quantity);
+            Assert.AreEqual(0, result[1].Quantity);
+            Assert.AreEqual(0, result[2].Quantity);
+        }
+
+        [TestMethod]
+        public void CalculateSimilarity_ReturnsPositiveDifferences_WhenFormulaQuantitiesAreGreater()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(75),
+                new Tank(100)
+            };
+
+            Wine[] formula = new Wine[]
+            {
+                new Wine(60),
+                new Wine(80),
+                new Wine(120)
+            };
+
+            // Act
+            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+
+            // Assert
+            Assert.AreEqual(10, result[0].Quantity);
+            Assert.AreEqual(5, result[1].Quantity);
+            Assert.AreEqual(20, result[2].Quantity);
+        }
+
+        [TestMethod]
+        public void CalculateSimilarity_ReturnsNegativeDifferences_WhenTankQuantitiesAreGreater()
+        {
+            // Arrange
+            Tank[] tanks = new Tank[]
+            {
+                new Tank(50),
+                new Tank(75),
+                new Tank(100)
+            };
+
+            Wine[] formula = new Wine[]
+            {
+                new Wine(40),
+                new Wine(70),
+                new Wine(90)
+            };
+
+            // Act
+            Wine[] result = tanks[0].CalculateSimilarity(formula, tanks);
+
+            // Assert
+            Assert.AreEqual(-10, result[0].Quantity);
+            Assert.AreEqual(-5, result[1].Quantity);
+            Assert.AreEqual(-10, result[2].Quantity);
+        }
+    }
 }
