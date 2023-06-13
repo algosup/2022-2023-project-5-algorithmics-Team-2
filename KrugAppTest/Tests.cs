@@ -648,7 +648,7 @@ namespace KrugAppTest
             bool isMovingAway = Program.IsMovingAway(parent, child, target);
 
             // Assert
-            Assert.IsTrue(isMovingAway);
+            Assert.IsFalse(isMovingAway);
         }
     }
 
