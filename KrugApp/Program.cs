@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Linq;
-using KrugApp;
+﻿using System.Diagnostics;
 
 namespace KrugApp
 {
@@ -9,28 +6,55 @@ namespace KrugApp
     {
         static void Main(string[] args)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            // Will be changed to a user input
             Tank[] tanks = new Tank[330];
             Random random = new Random();
             for (int i = 0; i < tanks.Length; i++)
                 tanks[i] = new Tank(random.Next(10,100));
 
+            // Will be changed to a user input
+            Wine[] formula = new Wine[Tank.MAX_WINES];
 
+            // Will be changed to a user input
+            for (int i = 0; i < 15; i++)
+                tanks[i].FillWithOneWine(i);
 
+            // Generate all possible combinaisons (ligther than storing them in each tank of each node)
             var combinaison = new List<Tuple<int, int>>[tanks.Length];
             for (int i = 0; i < tanks.Length; i++)
                 combinaison[i] = Tank.GenerateCombinaison(tanks[i], tanks);
 
-
-            for (int i = 0; i < 15; i++)
-                tanks[i].FillWithOneWine(i);
-
+            // Create the root node
             TankTree tankTree = new TankTree(tanks);
 
-            tankTree.GenerateChilds(4, combinaison);
+            var a = new TankTree((Tank[])tanks.Clone());
+            // Create the tree with a depth defined by the programmer
+            tankTree.GenerateChilds(1, combinaison);
 
-            //var a = tankTree.ChildNodes.First().ChildNodes.First().value[0];
+            //TODO Breadth search for the best solution
+            /*TankTree? solutionNode = tankTree.BreadthSearch(formula);
+            //TODO Breadth search for the best solution
 
-            Console.WriteLine("\n\tDone" + tankTree.ChildNodes.Count);
+            // Print the solution
+            Console.WriteLine("\n\tSolution:");
+            while (solutionNode != null)
+            {
+                Console.WriteLine(solutionNode.Step);
+                solutionNode = solutionNode.ParentNode;
+            }*/
+
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            ts.Hours, ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
+
+            Console.WriteLine("\n\tDone \t" + tankTree.ChildNodes.Count);
+            Console.WriteLine();
         }
     }
 }

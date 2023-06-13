@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
-
-namespace KrugApp
+﻿namespace KrugApp
 {
     public class Tank
     {
@@ -13,17 +7,14 @@ namespace KrugApp
 
         public const int MAX_WINES = 400;
         public bool IsEmpty { get; set; }
-        //public List<Tuple<int, int>> Steps { get; set; }
             
-        public int Capacity { get; }
+        public float Capacity { get; }
         public Wine[] Wine { get; set; }
 
-        //public int[][] Node { get; set; }
 
         /// <summary>
         /// Create a tank with a random capacity between 10 and 100
         /// </summary>
-
         public Tank()
         {
             Random rnd = new Random();
@@ -40,7 +31,7 @@ namespace KrugApp
         /// create a tank with a define capacity
         /// </summary>
         /// <param name="capacity"></param>
-        public Tank(int capacity)
+        public Tank(float capacity)
         {
             this.Capacity = capacity;
             this.Wine = new Wine[MAX_WINES];
@@ -151,7 +142,7 @@ namespace KrugApp
             
             for (int i = 0; i < tanks.Length; i++)
             {
-                res[i] = tankInput * (tanks[1].Capacity / tankInput.Capacity);
+                res[i] = tankInput * (tanks[i].Capacity / tankInput.Capacity);
                 res[i].IsEmpty = false;
             }
             
@@ -186,7 +177,7 @@ namespace KrugApp
                     "capacity : " + tank.Capacity + " with " + tank.Wine.Sum(wine => wine.Quantity) + "\n" );
         }
 
-        public static Tank operator /(Tank tank, int divider)
+        public static Tank operator /(Tank tank, float divider)
         {
             if (divider == 0)
                 throw new DivideByZeroException();
@@ -203,7 +194,7 @@ namespace KrugApp
             return res;
         }
 
-        public static Tank operator *(Tank tank, int multiplier)
+        public static Tank operator *(Tank tank, float multiplier)
         {
             Tank res = new Tank(tank.Capacity * multiplier);
 
@@ -212,7 +203,7 @@ namespace KrugApp
                 res.Wine[i].Quantity = tank.Wine[i].Quantity * multiplier;
             }
 
-            if (Math.Round (res.Wine.Sum(wine => wine.Quantity), 4) != res.Capacity)
+            if (Math.Abs(res.Wine.Sum(wine => wine.Quantity) - Math.Round(res.Capacity, 2)) > 0.1)// If the difference is more than 0.1 unit
                 throw new Exception("Quantity" + tank.Capacity +"\ncapacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nMultiplier : " + multiplier);
 
             return res;
@@ -222,16 +213,6 @@ namespace KrugApp
         /// O(n^2)
         /// </summary>
         /// <param name="tanks"></param>
-/*        public void GenrerateCombinaison(Tank[] tanks)
-        {
-            for (int i = 0; i < tanks.Length - 1; i++)
-                if (i != this.Index)
-                    for (int j = i + 1; j < tanks.Length; j++)
-                        if (j != this.Index)
-                            if (tanks[i].Capacity + tanks[j].Capacity == this.Capacity)
-                                this.Steps.Add(new Tuple<int, int>(i, j));
-        }
-*/
         public static List<Tuple<int,int>> GenerateCombinaison(Tank tank, Tank[] tanks)
         {
             var tempTupleList = new List<Tuple<int, int>>();
@@ -253,8 +234,19 @@ namespace KrugApp
             this.IsEmpty = true;
         }
 
-        public static Tank[] getStateAfterStep(Tank[] currentState, Tuple<int?, Tuple<int, int>, int?> step)
+        public static Tank[] getStateAfterStep(Tank[] input, Tuple<int?, Tuple<int, int>, int?> step)
         {
+            var currentState = new Tank[input.Length];
+            for (int i = 0; i < input.Length; i++)
+            {
+                currentState[i] = new Tank(input[i].Capacity);
+                for (int j = 0; j < input[i].Wine.Length; j++)
+                {
+                    currentState[i].Wine[j].Quantity = input[i].Wine[j].Quantity;
+                }
+                currentState[i].IsEmpty = input[i].IsEmpty;
+            }
+
             if (step.Item1 != null) // (source => (target1 , target 2))
             {
                 if (!currentState[step.Item1.Value].IsEmpty && currentState[step.Item2.Item1].IsEmpty && currentState[step.Item2.Item2].IsEmpty)

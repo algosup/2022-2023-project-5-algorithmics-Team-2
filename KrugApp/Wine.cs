@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KrugApp
+﻿namespace KrugApp
 {
     public class Wine
     {
