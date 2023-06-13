@@ -271,33 +271,43 @@ namespace KrugApp
 
             return copiedNodes;
         }
+
        public static bool CheckFormula(Tank[] table, Wine[] formula, float a)
         {
             int i = 0;
             var res = false;
+            float c = 0;
 
             float[] output = new float[formula.Length];
-
+           
 
             foreach (var tanks in table)
             {
                 foreach (var wine in tanks.Wine)
                 {
-                    output[i] = Math.Abs(formula[i].Quantity - tanks.Wine[i].Quantity);
+                    if (i < formula.Length && i < tanks.Wine.Length)
+                    {
+                        c = Math.Abs(formula[i].Quantity - tanks.Wine[i].Quantity);
 
+                        
+                            if (c > a)
+                            {
+                                res = false;
+                            break;
+                            }
 
+                            if (c <= a)
+                            {
+                                res = true;
+
+                            }
+                            
+                        
+                    }
                     i++;
-
-                    if (a <= output[i])
-                    {
-                        res = true;
-                    }
-                    else
-                    {
-                        res = false;
-                    }
                 }
             }
+            
             return res;
         }
 

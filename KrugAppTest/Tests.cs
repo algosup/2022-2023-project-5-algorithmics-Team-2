@@ -874,5 +874,9 @@ namespace KrugAppTest
                 Console.WriteLine(e.Message);
             }
         }
+
+        [TestMethod]
+
+        public void 
     }
 }

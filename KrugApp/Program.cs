@@ -15,7 +15,7 @@ namespace KrugApp
         static void Main(string[] args)
         {
 
-            var tanksIn = ReadCSV("./formulaTest.csv");
+           // var tanksIn = ReadCSV("./formulaTest.csv");
 
             // Define the wines and their quantities in the given formula
             Wine[] formula = new Wine[]
@@ -64,30 +64,23 @@ namespace KrugApp
             Tank[] table = new Tank[]
             {
                 new Tank(100),
-                new Tank(new Wine[] {new Wine(70), new Wine(40), new Wine(60), new Wine(80) }),
+                new Tank(new Wine[] {new Wine(49), new Wine(39), new Wine(59), new Wine(7) }),
             };
 
             Wine[] formul = new Wine[]
             {
-                new Wine(70),
+                new Wine(50),
                 new Wine(40),
                 new Wine(60),
-                new Wine(80),
+                new Wine(10),
             };
-            float a = 2.0f; 
+            float a = 2.0f;
 
             // Call the CheckFormula function from File1
-            bool result = Tank.CheckFormula(table, formula, a);
+            Console.WriteLine("The formula is similar with the wine in the tank ? " + Tank.CheckFormula(table, formul, a));
 
             // Use the result in your program logic
-            if (result)
-            {
-                Console.WriteLine("The formula meets the specified condition.");
-            }
-            else
-            {
-                Console.WriteLine("The formula does not meet the specified condition.");
-            }
+           
         }
 
         /// <summary>
@@ -238,7 +231,7 @@ namespace KrugApp
                 wines[i] = new Wine(quantity[i]);
             }
             return wines;
-        }
+        } 
 
         static string printable(int[] input)
         {
