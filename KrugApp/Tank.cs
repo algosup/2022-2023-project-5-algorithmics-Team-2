@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace KrugApp
@@ -12,51 +13,40 @@ namespace KrugApp
 
         public const int MAX_WINES = 400;
         public bool IsEmpty { get; set; }
-        public List<Tuple<int, int>> Steps { get; set; }
+        //public List<Tuple<int, int>> Steps { get; set; }
             
-        public int Capacity { get; set; }
+        public int Capacity { get; }
         public Wine[] Wine { get; set; }
-        public int Index { get; set; }
 
         //public int[][] Node { get; set; }
 
         /// <summary>
         /// Create a tank with a random capacity between 10 and 100
         /// </summary>
-        public Tank(int index)
+
+        public Tank()
         {
             Random rnd = new Random();
             this.Capacity = rnd.Next(MIN_CAPACITY, MAX_CAPACITY);
             this.Wine = new Wine[MAX_WINES];
-            this.Steps = new List<Tuple<int, int>>();
+            //this.Steps = new List<Tuple<int, int>>();
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
-            this.Index = index;
             this.IsEmpty = true;
         }
 
-        public Tank()
-        {
-            new Tank(0);
-        }
-
-        public Tank(Wine[] wine)
-        {
-            new Tank(wine, 0);
-        }
 
         /// <summary>
         /// create a tank with a define capacity
         /// </summary>
         /// <param name="capacity"></param>
-        public Tank(int capacity, int index)
+        public Tank(int capacity)
         {
             this.Capacity = capacity;
             this.Wine = new Wine[MAX_WINES];
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
-            this.Index = index;
-            this.Steps = new List<Tuple<int, int>>();
+            //this.Steps = new List<Tuple<int, int>>();
             this.IsEmpty = true;
         }
 
@@ -64,7 +54,7 @@ namespace KrugApp
         /// Return the total quantity of a tank, that have multiple wines in it.
         /// </summary>
         /// <param name="total"> Array of the wines' capacity</param>
-        public Tank(Wine[] total, int index)
+        public Tank(Wine[] total)
         {
             if(total.Length == MAX_WINES)
             {
@@ -74,8 +64,7 @@ namespace KrugApp
                     throw new Exception("The total quantity of wine is too small for the tank.");
                 this.Capacity = (int)total.Sum(wine => wine.Quantity);
                 this.Wine = total;
-                this.Index = index;
-                this.Steps = new List<Tuple<int, int>>();
+                //this.Steps = new List<Tuple<int, int>>();
                 this.IsEmpty = false;
             }
             else
@@ -125,7 +114,7 @@ namespace KrugApp
         {
             float total = tanks.Sum(tank => tank.Capacity);
 
-            return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100), 0)).ToArray();
+            return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100))).ToArray();
         }
 
         /// <summary>
@@ -162,8 +151,7 @@ namespace KrugApp
             
             for (int i = 0; i < tanks.Length; i++)
             {
-                res[i] = (tankInput * tanks[1].Capacity) / tankInput.Capacity;
-                res[i].Index = tanks[i].Index;
+                res[i] = tankInput * (tanks[1].Capacity / tankInput.Capacity);
                 res[i].IsEmpty = false;
             }
             
@@ -186,7 +174,7 @@ namespace KrugApp
                 wine[i] = new Wine(tank1.Wine[i].Quantity + tank2.Wine[i].Quantity);
             }
 
-            Tank tank = new Tank(wine, 0);
+            Tank tank = new Tank(wine);
 
             tank.IsEmpty = false;
 
@@ -203,36 +191,38 @@ namespace KrugApp
             if (divider == 0)
                 throw new DivideByZeroException();
 
-            Tank res = new Tank(tank.Capacity / divider, 0);
+            Tank res = new Tank(tank.Capacity / divider);
             for (int i = 0; i < res.Wine.Length; i++)
             {
                 res.Wine[i].Quantity = tank.Wine[i].Quantity / divider;
             }
 
-            res.Index = tank.Index;
-
             if (res.Wine.Sum(wine => wine.Quantity) != res.Capacity)
-                throw new Exception("capacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nDivider : " + divider);
+                throw new Exception("capacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "L in wine\nDivider : " + divider);
 
             return res;
         }
 
         public static Tank operator *(Tank tank, int multiplier)
         {
-            Tank res = new Tank(tank.Capacity * multiplier, 0);
+            Tank res = new Tank(tank.Capacity * multiplier);
 
             for (int i = 0; i < res.Wine.Length; i++)
             {
                 res.Wine[i].Quantity = tank.Wine[i].Quantity * multiplier;
             }
 
-            if (res.Wine.Sum(wine => wine.Quantity) != res.Capacity)
+            if (Math.Round (res.Wine.Sum(wine => wine.Quantity), 4) != res.Capacity)
                 throw new Exception("Quantity" + tank.Capacity +"\ncapacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nMultiplier : " + multiplier);
 
             return res;
         }
 
-        public void GenrerateCombinaison(Tank[] tanks)
+        /// <summary>
+        /// O(n^2)
+        /// </summary>
+        /// <param name="tanks"></param>
+/*        public void GenrerateCombinaison(Tank[] tanks)
         {
             for (int i = 0; i < tanks.Length - 1; i++)
                 if (i != this.Index)
@@ -241,7 +231,18 @@ namespace KrugApp
                             if (tanks[i].Capacity + tanks[j].Capacity == this.Capacity)
                                 this.Steps.Add(new Tuple<int, int>(i, j));
         }
-
+*/
+        public static List<Tuple<int,int>> GenerateCombinaison(Tank tank, Tank[] tanks)
+        {
+            var tempTupleList = new List<Tuple<int, int>>();
+            for (int i = 0; i < tanks.Length - 1; i++)
+                if (tanks[i].Capacity < tank.Capacity)
+                    for (int j = i + 1; j < tanks.Length; j++)
+                        if (tanks[j].Capacity < tank.Capacity)
+                            if (tanks[i].Capacity + tanks[j].Capacity == tank.Capacity)
+                                tempTupleList.Add(new Tuple<int, int>(i, j));
+            return tempTupleList;
+        }
 
         private void empty()
         {
@@ -252,17 +253,21 @@ namespace KrugApp
             this.IsEmpty = true;
         }
 
-
         public static Tank[] getStateAfterStep(Tank[] currentState, Tuple<int?, Tuple<int, int>, int?> step)
         {
             if (step.Item1 != null) // (source => (target1 , target 2))
             {
                 if (!currentState[step.Item1.Value].IsEmpty && currentState[step.Item2.Item1].IsEmpty && currentState[step.Item2.Item2].IsEmpty)
                 {
-                var split = splitTanks(currentState[step.Item1.Value], new Tank[] { currentState[step.Item2.Item1], currentState[step.Item2.Item2] });
-                currentState[step.Item2.Item1] = split[0];
-                currentState[step.Item2.Item2] = split[1];
-                currentState[step.Item1.Value].empty();
+                    var split = splitTanks(currentState[step.Item1.Value], new Tank[] { currentState[step.Item2.Item1], currentState[step.Item2.Item2] });
+
+                    currentState[step.Item2.Item1].Wine = split[0].Wine;
+                    currentState[step.Item2.Item1].IsEmpty = split[0].IsEmpty;
+
+                    currentState[step.Item2.Item2].Wine = split[1].Wine;
+                    currentState[step.Item2.Item2].IsEmpty = split[1].IsEmpty;
+
+                    currentState[step.Item1.Value].empty(); ;
                 }
             }
             else // ((source1, source2) => target)
@@ -274,17 +279,17 @@ namespace KrugApp
                 {
                     //currentState[step.Item2.Item1] + currentState[step.Item2.Item2];
 
-                    var tmp = new Tank(currentState[step.Item2.Item1].Capacity + currentState[step.Item2.Item2].Capacity, 0);
+                    var tmp = new Tank(currentState[step.Item2.Item1].Capacity + currentState[step.Item2.Item2].Capacity);
                     tmp.Wine = new Wine[currentState[step.Item2.Item1].Wine.Length];
                     for(int i = 0; i < tmp.Wine.Length; i++)
                     {
                         tmp.Wine[i] = new Wine(currentState[step.Item2.Item1].Wine[i].Quantity + currentState[step.Item2.Item2].Wine[i].Quantity);
                     }
-                    tmp.Index = currentState[step.Item3.Value].Index;
                     if (tmp.Capacity == currentState[step.Item3.Value].Capacity)
                     {
-                        Console.WriteLine("Great success");
-                        currentState[step.Item3.Value] = tmp;
+                        currentState[step.Item3.Value].Wine = tmp.Wine;
+                        currentState[step.Item3.Value].IsEmpty = false;
+
                         currentState[step.Item2.Item1].empty();
                         currentState[step.Item2.Item2].empty();
                     }
@@ -293,9 +298,9 @@ namespace KrugApp
                         throw new Exception("Invalid step : \n"+
                             "Indexes  (("+step.Item2.Item1+"."+step.Item2.Item2+")=>"+step.Item3+")"+" .\n" +
                             "capacity ((" + currentState[step.Item2.Item1].Capacity + "." + currentState[step.Item2.Item2].Capacity + ")=>" + currentState[step.Item3.Value].Capacity + ")" + " .\n" +
-                            "Tank at index " + step.Item3.Value + " or " + tmp.Index + "has capacity of " + tmp.Capacity + " or " + currentState[step.Item3.Value].Capacity + ".\n" +
+                            "Tank at index " + step.Item3.Value + " or " + "has capacity of " + tmp.Capacity + " or " + currentState[step.Item3.Value].Capacity + ".\n" +
                             "The capacity of the tank should be equal to the sum of the capacities of the two tanks.\n" +
-                            "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".\n");
+                            "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".");
                     }
                 }
             }

@@ -10,28 +10,27 @@ namespace KrugApp
         static void Main(string[] args)
         {
             Tank[] tanks = new Tank[330];
+            Random random = new Random();
             for (int i = 0; i < tanks.Length; i++)
-                tanks[i] = new Tank(i);
+                tanks[i] = new Tank(random.Next(10,100));
 
 
-            for(int i = 0; i < 5; i++)
-            {
+
+            var combinaison = new List<Tuple<int, int>>[tanks.Length];
+            for (int i = 0; i < tanks.Length; i++)
+                combinaison[i] = Tank.GenerateCombinaison(tanks[i], tanks);
+
+
+            for (int i = 0; i < 15; i++)
                 tanks[i].FillWithOneWine(i);
-                tanks[i].IsEmpty = false;
-            }
-
-            for (int i = 0; i < tanks.Length; i++)
-            {
-                tanks[i].GenrerateCombinaison(tanks);
-            }
 
             TankTree tankTree = new TankTree(tanks);
 
-            tankTree.GenerateChilds(4);
+            tankTree.GenerateChilds(4, combinaison);
 
-            var a = tankTree.ChildNodes.First().ChildNodes.First().value[0];
+            //var a = tankTree.ChildNodes.First().ChildNodes.First().value[0];
 
-            Console.WriteLine("\n\tDone" + a.Capacity);
+            Console.WriteLine("\n\tDone" + tankTree.ChildNodes.Count);
         }
     }
 }

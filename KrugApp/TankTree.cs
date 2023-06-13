@@ -27,66 +27,66 @@ namespace KrugApp
              *      Child too similar to any parent
              *      Child too similar to other child
              */
-            if (this.ParentNode == null || this.ParentNode.ChildNodes.Count < 60)
-                return true;
-            return false;
+            return true;
         }
 
-        public TankTree(Tank[] value)
+        public TankTree(Tank[] value, Tuple<int?, Tuple<int, int>, int?>? step = null)
         {
             this.ParentNode = null;
             this.value = value;
             this.ChildNodes = new();
-            this.Step = null;
+            this.Step = step;
         }
 
-        public List<TankTree> GetPossibleChilds()
+        public List<TankTree> GetPossibleChilds(List<Tuple<int, int>>[] combinaison)
         {
             List<TankTree> possibleChilds = new();
 
-            for(int i = 0; i < this.value.Length; i++)
-                this.value[i].Index = i;
+            for (int tankIndex = 0; tankIndex < this.value.Length; tankIndex++)
+            {
+                if (possibleChilds.Count > 30)
+                    break;
 
-            foreach (var tank in this.value)
-                foreach(var step in tank.Steps)
+                foreach (var step in combinaison[tankIndex])
                 {
-                    if (tank.IsEmpty)
-                    {
-                        var stepTuple = new Tuple<int?, Tuple<int, int>, int?>(null, step, tank.Index);
-                        for (int i = 0; i < this.value.Length; i++)
-                            this.value[i].Index = i;
-                        var stepTree = new TankTree(Tank.getStateAfterStep(this.value, stepTuple));
-                        stepTree.Step = stepTuple;
-                        possibleChilds.Add(stepTree);
-                    }
+                    // Create the step tuple
+                    var Step = new Tuple<int?, Tuple<int, int>, int?>(null, new Tuple<int, int>(0,0), null);
+                    if (this.value[tankIndex].IsEmpty)
+                        Step = new (null, step, tankIndex);
                     else
-                    {
-                        var stepTuple = new Tuple<int?, Tuple<int, int>, int?>(tank.Index, step, null);
-                        var stepTree = new TankTree(Tank.getStateAfterStep(this.value, stepTuple));
-                        stepTree.Step = stepTuple;
-                        possibleChilds.Add(stepTree);
-                    }
+                        Step = new (tankIndex, step, null);
+
+                    // Get the new state after the step
+                    var nextState = Tank.getStateAfterStep(value, Step);
+                    var childNode = new TankTree(nextState, Step);
+
+                    // Keep track of the step that generated the child
+                    childNode.Step = Step;
+                    // Add the new state to the possible childs
+                    possibleChilds.Add(childNode);
                 }
-
-            for (int i = 0; i < this.value.Length; i++)
-                this.value[i].Index = i;
-
+            }
             return possibleChilds;
         }
 
 
-        public void GenerateChilds(int depth)
+        public void GenerateChilds(int depth, List<Tuple<int, int>>[] combinaison)
         {
             if (depth > 0)
             {
-                var possibleChilds = this.GetPossibleChilds();
+                var possibleChilds = this.GetPossibleChilds(combinaison);
                 foreach (var childNode in possibleChilds)
                 {
                     if (!childNode.IsValid())
+                    {
                         continue;
-                    childNode.ParentNode = this;
-                    this.ChildNodes.Prepend(childNode);
-                    childNode.GenerateChilds(depth - 1);
+                    }
+                    else
+                    {
+                        childNode.ParentNode = this;
+                        this.ChildNodes.Add(childNode);
+                        childNode.GenerateChilds(depth - 1, combinaison);
+                    }
                 }
             }
         }

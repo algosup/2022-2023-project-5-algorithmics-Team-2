@@ -47,6 +47,7 @@ namespace KrugApp
                 throw new DivideByZeroException("Cannot divide by zero.");
         }
 
+
         public override string ToString()
         {
             return "Quantity: " + this.Quantity;
