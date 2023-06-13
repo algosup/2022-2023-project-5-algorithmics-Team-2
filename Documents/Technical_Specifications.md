@@ -246,6 +246,10 @@ The parameter "total" is the array of the wines' capacity.
 ```cs
 public Tank(Wine[] total)
 {
+    if (total.Sum(wine => wine.Quantity) == 0)
+    {
+        throw new Exception("The total quantity of wine is too small for the tank.");
+    }
     if(total.Length == MAX_WINES)
     {
         if (total.Sum(wine => wine.Quantity) > MAX_CAPACITY)
@@ -352,7 +356,7 @@ public Tank[] CalculatePercentages(Tank[] tanks)
 {
     float total = tanks.Sum(tank => tank.Capacity);
 
-    return tanks.Select(tank => new Tank(tank.Capacity / total * 100)).ToArray();
+    return tanks.Select(tank => new Tank((int)(tank.Capacity / total * 100))).ToArray();
 }
 ```
 
@@ -361,18 +365,19 @@ public Tank[] CalculatePercentages(Tank[] tanks)
 Calculates the similarity between a given formula of wines (represent the desired quantities of wines in the final mix.) and the quantities of wines in a set of tanks and return an array of wines representing the differences between the desired quantities and the tank quantities.
 
 ```cs
-public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
+public static Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
 {
-    Wine[] tank1 = tanks.SelectMany(tank => tank.Wine).ToArray();
     Wine[] diff = new Wine[formula.Length];
-
+        
     for (int i = 0; i < formula.Length; i++)
     {
-        diff[i] = new Wine(formula[i].Quantity - tank1[i].Quantity);
+        int quantityDifference = (int)(tanks[i].Capacity - formula[i].Quantity);
+        diff[i] = new Wine(quantityDifference);
     }
 
     return diff;
 }
+
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -419,29 +424,34 @@ public static List<int[]> GenerateSumCombinations(Tank[] values)
 Create all combinations possible of length given with tanks available to make the blending of differents wines together.
 
 ```cs
-private static void GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)
+private static void GenerateSumCombinations(Tank[] values, int remainingCapacity, int[] combination, List<int[]> result, int currentIndex, int currentTankIndex)
 {
-    if (target == 0 && length > 1)
+    if (remainingCapacity == 0)
     {
-        // Found a valid combination that sums up to the target and has more than one element
-        int[] validCombination = new int[length];
-        Array.Copy(combination, validCombination, length);
-        result.Add(validCombination);
+        // We have reached the desired sum, add the combination to the result
+        result.Add((int[])combination.Clone());
         return;
     }
 
-    if (target < 0 || startIndex == tanks.Length)
+    if (currentTankIndex >= values.Length || remainingCapacity < 0 || currentIndex >= combination.Length)
     {
-        // The current combination exceeds the target value or reached the end of the values array, backtrack
+        // We have exhausted all tanks, exceeded the remaining capacity, or filled the combination array, backtrack
         return;
     }
 
-    // Exclude the current value and move to the next index
-    GenerateSumCombinations(tanks, target, combination, result, startIndex + 1, length);
+    // Skip the current tank and move to the next one
+    GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
 
-    // Include the current value and continue with the same index
-    combination[length] = tanks[startIndex].Capacity;
-    GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
+    // Try using the current tank if it doesn't exceed remaining capacity
+    if (values[currentTankIndex].Capacity <= remainingCapacity)
+    {
+        combination[currentIndex] = values[currentTankIndex].Capacity;
+        GenerateSumCombinations(values, remainingCapacity - values[currentTankIndex].Capacity, combination, result, currentIndex + 1, currentTankIndex);
+        combination[currentIndex] = 0; // Reset the value to 0 for backtracking
+
+        // Move to the next tank with the same remaining capacity
+        GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
+    }
 }
 ```
 
@@ -467,6 +477,49 @@ public Wine[] TraverseNodes(Wine[] nodes)
     }
 
     return copiedNodes;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Compare the quantity of each wine of the tank array with the quantity wanted in the formula for the same wine and return false if the difference is superior to the variable a (tolerance of the difference) or retrun true if the difference is inferior or equal to a.
+
+```cs
+public static bool CheckFormula(Tank[] table, Wine[] formula, float a)
+{
+    int i = 0;
+    var res = false;
+    float c = 0;
+
+    float[] output = new float[formula.Length];
+           
+    foreach (var tanks in table)
+    {
+        foreach (var wine in tanks.Wine)
+        {
+            if (i < formula.Length && i < tanks.Wine.Length)
+            {
+                c = Math.Abs(formula[i].Quantity - tanks.Wine[i].Quantity);
+                        
+                    if (c > a)
+                    {
+                        res = false;
+                    break;
+                    }
+
+                    if (c <= a)
+                    {
+                        res = true;
+
+                    }
+                            
+                        
+            }
+            i++;
+        }
+    }
+            
+    return res;
 }
 ```
 
@@ -583,7 +636,7 @@ namespace KrugApp
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-The Main function will call up all the functions it needs to calculate the mix.
+The Main function will call up all the functions it needs to calculate the mix and make verification.
 
 ```cs
 static void Main(string[] args)
@@ -633,6 +686,24 @@ static void Main(string[] args)
     };
 
     Console.WriteLine("Similarity of the nodes: " + Similarity(tankArrayA, tankArrayB) + " / 10");
+
+    Tank[] table = new Tank[]
+    {
+        new Tank(100),
+        new Tank(new Wine[] {new Wine(50), new Wine(40), new Wine(60), new Wine(10) }),
+    };
+
+    Wine[] formul = new Wine[]
+    {
+        new Wine(50),
+        new Wine(40),
+        new Wine(60),
+        new Wine(10),
+    };
+    float a = 2.0f;
+
+    // Call the CheckFormula function from File1
+    Console.WriteLine("The formula is similar with the wine in the tank ? " + Tank.CheckFormula(table, formul, a));
 }
 ```
 
@@ -680,9 +751,9 @@ static int SimiPoint(int c, int d)
 {
     if (c == d)
         return 2;
-    else if (c > d && c / 2 > d)
+    else if (c > d && c / 2 <= d)
         return 1;
-    else if (c < d && c > d / 2)
+    else if (c < d && d / 2 <= c)
         return 1;
     else
         return 0;
@@ -754,11 +825,6 @@ Calculate the similarity of wine between 2 array of tank
 static int NbrEachWine(Tank[] a, Tank[] b)
 {
     var d = 0; // number of wines
-    var nbrWinesA = NbrWines(a); // Get the number of wines in array a
-
-    if (nbrWinesA == 0)
-        return 0; // Return 0 if there are no wines in array a to avoid division by zero
-
     for (var i = 0; i < a.Length; i++)
     {
         for (var j = 0; j < a[i].Wine.Length; j++)
@@ -772,9 +838,10 @@ static int NbrEachWine(Tank[] a, Tank[] b)
             else if (tankA < tankB && tankA >= tankB / 2)
                 d += 1;
         }
+
     }
 
-    d = d / nbrWinesA / 2;
+    d = d / NbrWines(a) / 2;
     return d;
 }
 ```
@@ -794,7 +861,6 @@ public static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
     else
         return false;
 }
-
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
