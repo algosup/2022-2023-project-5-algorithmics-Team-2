@@ -1448,9 +1448,9 @@ namespace KrugAppTest
                     Wine = new Wine[]
                     {
                         new Wine { Quantity = 50 },
-                        new Wine { Quantity = 50 },
-                        new Wine { Quantity = 50 },
-                        new Wine { Quantity = 50 },
+                        new Wine { Quantity = 44 },
+                        new Wine { Quantity = 57 },
+                        new Wine { Quantity = 5 },
                     }
                 }
             };
@@ -1463,7 +1463,7 @@ namespace KrugAppTest
                 new Wine { Quantity = 10 }
             };
 
-            float a = 2.0f;
+            float a =2.0f;
 
             bool result = Tank.CheckFormula(table, formule, a);
             Assert.IsFalse(result);
@@ -1498,6 +1498,70 @@ namespace KrugAppTest
 
                
                 Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+
+        public void CheckFormula_WhenATankIsEmpty()
+        {
+            Tank[] table = new Tank[]
+            {
+                new Tank
+                {
+                    Wine = new Wine[]
+                    {
+                        new Wine { Quantity = 0 },
+                        new Wine { Quantity = 0 },
+                        new Wine { Quantity = 0 }
+                    }
+                }
+            };
+
+            Wine[] formule = new Wine[]
+            {
+                new Wine { Quantity = 10 },
+                new Wine { Quantity = 20 },
+                new Wine { Quantity = 30 }
+            };
+
+            float a = 2;
+
+            bool result = Tank.CheckFormula(table, formule, a);
+
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+
+        public void CheckFormula_WhenTheFormulaIsEmpty()
+        {
+            Tank[] table = new Tank[]
+            {
+                new Tank
+                {
+                    Wine = new Wine[]
+                    {
+                        new Wine { Quantity = 50 },
+                        new Wine { Quantity = 40 },
+                        new Wine { Quantity = 10 }
+                    }
+                }
+            };
+
+            Wine[] formule = new Wine[]
+            {
+                new Wine { Quantity = 0 },
+                new Wine { Quantity = 0 },
+                new Wine { Quantity = 0 }
+            };
+
+            float a = 2;
+
+            bool result = Tank.CheckFormula(table, formule, a);
+
+
+            Assert.IsFalse(result);
         }
     }
 }

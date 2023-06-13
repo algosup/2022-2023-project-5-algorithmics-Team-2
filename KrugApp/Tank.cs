@@ -298,6 +298,7 @@ namespace KrugApp
                             {
                                 res = true;
                             }
+                    
                     }
                     i++;
                 }
