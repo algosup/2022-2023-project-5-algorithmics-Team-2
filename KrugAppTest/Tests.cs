@@ -876,6 +876,7 @@ namespace KrugAppTest
         }
     }
 
+    [TestClass]
     public class FillWithOneWineTests
     {
         [TestMethod]
