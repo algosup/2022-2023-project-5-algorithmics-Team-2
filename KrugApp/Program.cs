@@ -64,7 +64,7 @@ namespace KrugApp
             Tank[] table = new Tank[]
             {
                 new Tank(100),
-                new Tank(new Wine[] {new Wine(49), new Wine(39), new Wine(59), new Wine(7) }),
+                new Tank(new Wine[] {new Wine(50), new Wine(40), new Wine(60), new Wine(10) }),
             };
 
             Wine[] formul = new Wine[]

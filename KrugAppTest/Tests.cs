@@ -873,11 +873,7 @@ namespace KrugAppTest
             {
                 Console.WriteLine(e.Message);
             }
-        }
-
-        [TestMethod]
-
-        public void 
+        } 
     }
 
     [TestClass]
@@ -1401,7 +1397,7 @@ namespace KrugAppTest
 
         [TestMethod]
         public void GenerateSumCombinations_WhenCalledWithDifferentTanks_ReturnsCorrectCombinations()
-        {   
+        {
             // Arrange
             Tank[] values = new Tank[]
             {
@@ -1430,12 +1426,78 @@ namespace KrugAppTest
                 new Tank { Capacity = 4 },
                 new Tank { Capacity = 5 }
             };
-        
+
             // Act
             List<int[]> result = Tank.GenerateSumCombinations(values);
-        
+
             // Assert
             Assert.AreEqual(41, result.Count);
+        }
+    }
+
+    [TestClass]
+    public class CheckFormulaTests
+    {
+        [TestMethod]
+        public void CheckFormula_WhenTheDifferenceBetweenTheFormulaAndTheWineInTank_IsGreaterthanMargin_ReturnFalse()
+        {
+            Tank[] table = new Tank[]
+            {
+                new Tank
+                {
+                    Wine = new Wine[]
+                    {
+                        new Wine { Quantity = 50 },
+                        new Wine { Quantity = 50 },
+                        new Wine { Quantity = 50 },
+                        new Wine { Quantity = 50 },
+                    }
+                }
+            };
+
+            Wine[] formule = new Wine[]
+            {
+                new Wine { Quantity = 50 },
+                new Wine { Quantity = 40 },
+                new Wine { Quantity = 60 },
+                new Wine { Quantity = 10 }
+            };
+
+            float a = 2.0f;
+
+            bool result = Tank.CheckFormula(table, formule, a);
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void CheckFormula_WhenTheDifferenceBetweenTheFormulaAndTheWineInTank_IsLessthanOrEqualMargin_ReturnTrue()
+        {
+            Tank[] table = new Tank[]
+            {
+                new Tank
+                {
+                    Wine = new Wine[]
+                    {
+                        new Wine { Quantity = 10 },
+                        new Wine { Quantity = 20 },
+                        new Wine { Quantity = 30 }
+                    }
+                }
+            };
+
+            Wine[] formule = new Wine[]
+            {
+                new Wine { Quantity = 10 },
+                new Wine { Quantity = 20 },
+                new Wine { Quantity = 30 }
+            };
+
+                float a = 2;
+
+                bool result = Tank.CheckFormula(table, formule, a);
+
+               
+                Assert.IsTrue(result);
         }
     }
 }

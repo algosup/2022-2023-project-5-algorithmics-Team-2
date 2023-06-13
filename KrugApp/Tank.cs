@@ -284,10 +284,7 @@ namespace KrugApp
             int i = 0;
             var res = false;
             float c = 0;
-
-            float[] output = new float[formula.Length];
            
-
             foreach (var tanks in table)
             {
                 foreach (var wine in tanks.Wine)
