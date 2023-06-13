@@ -48,6 +48,63 @@
       - [7E](#7e)
     - [Eight Test Part](#eight-test-part)
       - [8A](#8a)
+    - [Ninth Test Part](#ninth-test-part)
+      - [9A](#9a)
+      - [9B](#9b)
+      - [9C](#9c)
+      - [9D](#9d)
+      - [9E](#9e)
+      - [9F](#9f)
+    - [Tenth Test Part](#tenth-test-part)
+      - [10A](#10a)
+      - [10B](#10b)
+      - [10C](#10c)
+      - [10D](#10d)
+    - [Eleventh Test Part](#eleventh-test-part)
+      - [11A](#11a)
+      - [11B](#11b)
+      - [11C](#11c)
+      - [11D](#11d)
+      - [11E](#11e)
+      - [11F](#11f)
+    - [Twelfth Test Part](#twelfth-test-part)
+      - [12A](#12a)
+      - [12B](#12b)
+      - [12C](#12c)
+      - [12D](#12d)
+      - [12E](#12e)
+      - [12F](#12f)
+    - [Thirteenth Test Part](#thirteenth-test-part)
+      - [13A](#13a)
+      - [13B](#13b)
+      - [13C](#13c)
+      - [13D](#13d)
+      - [13E](#13e)
+      - [13F](#13f)
+    - [Fourteenth Test Part](#fourteenth-test-part)
+      - [14A](#14a)
+      - [14B](#14b)
+      - [14C](#14c)
+      - [14D](#14d)
+      - [14E](#14e)
+      - [14F](#14f)
+      - [14G](#14g)
+    - [Fifteenth Test Part](#fifteenth-test-part)
+      - [15A](#15a)
+      - [15B](#15b)
+      - [15C](#15c)
+      - [15D](#15d)
+    - [Sixteenth Test Part](#sixteenth-test-part)
+      - [16A](#16a)
+      - [16B](#16b)
+      - [16C](#16c)
+      - [16D](#16d)
+    - [Seventeenth Test Part](#seventeenth-test-part)
+      - [17A](#17a)
+      - [17B](#17b)
+      - [17C](#17c)
+      - [17D](#17d)
+      - [17E](#17e)
 
 </details>
 
@@ -58,7 +115,7 @@ Each part has its own tests, all related to each other.
 
 ### First Test Part
 
-**TITLE: Tank Default Constructor Tests Overview**
+**TITLE: Tank Default Constructor Tests Overview:**
 
 #### 1A
 
@@ -102,7 +159,7 @@ The final test in the list confirms that the default constructor of the Tank cla
 
 ### Second Test Part
 
-**TITLE: Tank Constructor with Capacity Tests Overview**
+**TITLE: Tank Constructor with Capacity Tests Overview:**
 
 #### 2A
 
@@ -146,7 +203,7 @@ This test combines the validation of both the capacity and wine array initializa
 
 ### Third Test Part
 
-**TITLE: Tank Constructor Tests with Wine Array Overview**
+**TITLE: Tank Constructor Tests with Wine Array Overview:**
 
 #### 3A
 
@@ -190,7 +247,7 @@ The final test in the list combines wines with positive, zero, and negative quan
 
 ### Fourth Test Part
 
-**TITLE: Operator Plus Tests for Wine Addition**
+**TITLE: Operator Plus Tests for Wine Addition:**
 
 #### 4A
 
@@ -310,7 +367,7 @@ The final test in the list verifies that the operator multiply function (*) corr
 
 ### Seventh Test Part
 
-**TITLE: OperatorDivide Tests for Wine Division**
+**TITLE: OperatorDivide Tests for Wine Division:**
 
 #### 7A
 
@@ -354,11 +411,575 @@ The final test in the list validates that the operator divide function (/) corre
 
 ### Eight Test Part
 
+**TITLE: Node Traversal Tests Overview:**
+
 #### 8A
 
-**TITLE: TestNodeTraversal()**
+**TITLE: TestNodeTraversal():**
 
 `
 This test aims to verify the node traversal functionality in a "Tank" object using a simulated array of nodes. Here's a brief summary in English:
 The purpose of this test is to ensure that the node traversal in a "Tank" object meets specific conditions. The test creates a simulated array of nodes and initializes them with different quantities. It then calls the "TraverseNodes" method and verifies the results. The assertions check that the number of results is correct, each node has a quantity within a valid range, and each node differs from its parent and siblings by at least 5 units. The test helps validate the correctness of the node traversal logic in the "Tank" object.
+`
+
+### Ninth Test Part
+
+**TITLE: Is Moving Away Tests Overview:**
+
+#### 9A
+
+**TITLE: IsMovingAwayTest_1():**
+
+`
+This test case checks whether the IsMovingAway method correctly returns false when called with three tanks, parent, child, and target, all having a health value of 50. The IsMovingAway method determines if the tanks are moving away from each other.
+`
+
+#### 9B
+
+**TITLE: IsMovingAwayTest_2():**
+
+`
+This test case examines the behavior of the IsMovingAway method with different tank health values. The test sets up three tanks (parent, child, and target) with health values of 60, 55, and 65, respectively.
+`
+
+#### 9C
+
+**TITLE: IsMovingAwayTest_3():**
+
+`
+This test case checks whether the IsMovingAway method correctly returns false when called with three tanks (parent, child, and target) having health values of 100, 80, and 85 respectively. The test verifies that the tanks are not moving away from each other.
+`
+
+#### 9D
+
+**TITLE: IsMovingAwayTest_4():**
+
+`
+This test case examines the behavior of the IsMovingAway method with different tank health values. The test sets up three tanks (parent, child, and target) with health values of 85, 95, and 100, respectively.
+`
+
+#### 9E
+
+**TITLE: IsMovingAwayTest_5():**
+
+`
+This test case examines the behavior of the IsMovingAway method with different tank health values. The test sets up three tanks: parent, child, and target with health values of 100, 100, and 110, respectively.
+`
+
+#### 9F
+
+**TITLE: IsMovingAwayTest_6():**
+
+`
+This test case examines the behavior of the IsMovingAway method with different tank health values. The test sets up three tanks: parent, child, and target with health values of 100, 110, and 110, respectively.
+`
+
+### Tenth Test Part
+
+**TITLE: Similarity Tests Overview:**
+
+#### 10A
+
+**TITLE: Similarity_BothArraysNull_ThrowsArgumentException():**
+
+`
+Sets both input arrays a and b to null.
+Calls the Program.Similarity method with the null arrays.
+Expects an ArgumentException to be thrown.
+If the exception is thrown, the test passes.
+`
+
+#### 10B
+
+**Similarity_ArraysEmpty_ThrowsArgumentException():**
+
+`
+Creates empty arrays a and b of type Tank.
+Calls the Program.Similarity method with the empty arrays.
+Expects an ArgumentException to be thrown.
+If the exception is thrown, the test passes.
+`
+
+#### 10C
+
+**TITLE: Similarity_ValidInput_ReturnsExpectedSimilarity_1():**
+
+`
+Creates two arrays a and b of type Tank, each containing three Tank objects with a capacity of 100.
+Defines the expected similarity value as 6.
+Calls the Program.Similarity method with arrays a and b.
+Compares the returned similarity value with the expected value using Assert.AreEqual.
+If the values are equal, the test passes.
+`
+
+#### 10D
+
+**TITLE: Similarity_ValidInput_ReturnsExpectedSimilarity_2():**
+
+`
+Creates two arrays a and b of type Tank, each containing one Tank object with capacities 20 and 100, respectively.
+Defines the expected similarity value as 10.
+Calls the Program.Similarity method with arrays a and b.
+Compares the returned similarity value with the expected value using Assert.AreEqual.
+If the values are equal, the test passes.
+`
+
+### Eleventh Test Part
+
+**TITLE: Transfer To Tests Overview:**
+
+#### 11A
+
+**TITLE: TransferTo_ArraysEmpty():**
+
+`
+Verifies that if both input arrays (a and b) are empty, the method Tank.TransferTo throws an exception with the message "Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank."
+`
+
+#### 11B
+
+**TITLE: TransferTo_ArraysNull():**
+
+`
+Verifies that if both input arrays (a and b) are null, the method Tank.TransferTo throws an exception with the message "Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank."
+`
+
+#### 11C
+
+**TITLE: TransferTo_ArraysTooBig():**
+
+`
+Verifies that if the total capacity of input array a is not equal to the capacity of input tank b, the method Tank.TransferTo throws an exception with the message "Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank."
+`
+
+#### 11D
+
+**TITLE: TransferTo_ArraysValid():**
+
+`
+Tests the method TransferTo with valid input arrays (a) and a valid target tank (b) of capacity 200.
+Transfers the contents of tanks in array a to tank b if the total capacity of a is equal to the capacity of b.
+Asserts that the capacity of tank b after the transfer is 200.
+`
+
+#### 11E
+
+**TITLE: TransferTo_ArraysValid_2():**
+
+`
+Verifies the behavior of Tank.TransferTo when transferring from an array a with multiple tanks to a target tank b of capacity 200.
+If the total capacity of tanks in array a is equal to the capacity of b, the transfer is successful.
+Otherwise, an exception with the message "Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank" is thrown.
+`
+
+#### 11F
+
+**TITLE: TransferTo_ArraysValid_3():**
+
+`
+Verifies the behavior of Tank.TransferTo when transferring from an array a with multiple tanks to a target tank b of capacity 100.
+If the total capacity of tanks in array a is equal to the capacity of b, the transfer is successful.
+Otherwise, an exception with the message "Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank" is thrown.
+`
+
+### Twelfth Test Part
+
+**TITLE: Fill With One Wine Tests Overview:**
+
+#### 12A
+
+**TITLE: FillWithOneWine_1():**
+
+`
+Fills a tank with a capacity of 100 using one wine of quantity 100.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the tank's capacity (100).
+Asserts that the quantity of the tank's wine is 100.
+`
+
+#### 12B
+
+**TITLE: FillWithOneWine_2():**
+
+`
+Fills a tank with a capacity of 100 using one wine of quantity 50.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the quantity of the provided wine (50).
+Asserts that the quantity of the tank's wine is 50.
+`
+
+#### 12C
+
+**TITLE: FillWithOneWine_3():**
+
+`
+Fills a tank with a capacity of 100 using one wine of quantity 75.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the quantity of the provided wine (75).
+Asserts that the quantity of the tank's wine is 75.
+`
+
+#### 12D
+
+**TITLE: FillWithOneWine_4():**
+
+`
+Fills a tank with a capacity of 200 using one wine of quantity 150.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the quantity of the provided wine (150).
+Asserts that the quantity of the tank's wine is 150.
+`
+
+#### 12E
+
+**TITLE: FillWithOneWine_5():**
+
+`
+Fills a tank with a capacity of 200 using one wine of quantity 50.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the quantity of the provided wine (50).
+Asserts that the quantity of the tank's wine is 50.
+`
+
+#### 12F
+
+**TITLE: FillWithOneWine_6():**
+
+`
+Fills a tank with a capacity of 200 using one wine of quantity 250.
+If the tank is empty (no existing wine), sets the quantity of the tank's wine to the quantity of the provided wine (250).
+Asserts that the quantity of the tank's wine is 250.
+`
+
+### Thirteenth Test Part
+
+**TITLE: Empty Array Tests Overview:**
+
+#### 13A
+
+**TITLE: EmptyTank_EmptyArray_NoExceptionThrown():**
+
+`
+Tests emptying an empty array of wines.
+Calls the EmptyTank method with an empty array.
+Expects no exceptions to be thrown.
+Asserts that the length of the array is 0.
+`
+
+#### 13B
+
+**TITLE: EmptyTank_NonEmptyArray_ArrayCleared():**
+
+`
+Tests emptying a non-empty array of wines.
+Creates an array of wines with three elements.
+Calls the EmptyTank method with the array.
+Expects the array to be cleared, with all elements set to null.
+Asserts that all elements of the array are null.
+`
+
+#### 13C
+
+**TITLE: EmptyTank_NullArray_ThrowsNullReferenceException():**
+
+`
+Tests emptying a null array of wines.
+Initializes the wines array as null.
+Expects a NullReferenceException to be thrown when calling the EmptyTank method.
+Asserts that the expected exception is thrown.
+`
+
+#### 13D
+
+**TITLE: EmptyTank_EmptyArray_NoEffectOnOtherArrays():**
+
+`
+Tests emptying an empty array of wines and checks if it affects other arrays.
+Initializes one empty wines array and another array with three wines.
+Calls the EmptyTank method with the empty array.
+Expects the empty array to be cleared, while the other array remains unaffected.
+Asserts the length of the empty array is 0 and the length and quantities of the other array remain unchanged.
+`
+
+#### 13E
+
+**TITLE: EmptyTank_EmptyArray_KeepsReferenceIntegrity():**
+
+`
+Tests emptying an empty array of wines and checks if reference integrity is maintained.
+Creates two wine objects and an array of wines referencing those objects.
+Calls the EmptyTank method with the array.
+Expects the array to be cleared, while the original wine objects remain intact.
+Asserts that the elements of the array are null and the original wine objects are not null.
+`
+
+#### 13F
+
+**TITLE: EmptyTank_ArrayWithNullElements_NullElementsCleared():**
+
+`
+Tests emptying an array of wines with null elements.
+Creates an array of wines with null elements and non-null elements.
+Calls the EmptyTank method with the array.
+Expects the null elements to be cleared while the non-null elements remain unchanged.
+Asserts the length of the array remains the same, and the null elements are cleared while the non-null elements are preserved.
+`
+
+### Fourteenth Test Part
+
+**TITLE: Tank From Tests Overview:**
+
+#### 14A
+
+**TITLE: TankFrom_EmptyTanks_ThrowsExceptionWithExpectedMessage():**
+
+`
+Tests the scenario where no tanks are provided.
+Initializes an empty array of tanks.
+Expects an exception to be thrown when calling the TankFrom method with the empty array.
+Asserts that the exception message matches the expected message.
+`
+
+#### 14B
+
+**TITLE: TankFrom_SingleTank_ReturnsTankWithCorrectWineQuantities():**
+
+`
+Tests the scenario where a single tank is provided.
+Creates an array with a single tank.
+Sets the capacity and wine quantities of the tank.
+Calls the TankFrom method with the array of tanks.
+Expects a tank object to be returned with the correct capacity and wine quantities.
+Asserts that the returned tank object has the expected capacity and wine quantities.
+`
+
+#### 14C
+
+**TITLE: TankFrom_TwoTanks_ReturnsTankWithCorrectWineQuantities():**
+
+`
+Tests the scenario where two tanks are provided.
+Creates an array with two tanks.
+Sets the capacities and wine quantities of the tanks.
+Calls the TankFrom method with the array of tanks.
+Expects a tank object to be returned with the correct capacity and combined wine quantities.
+Asserts that the returned tank object has the expected capacity and combined wine quantities.
+`
+
+#### 14D
+
+**TITLE: TankFrom_SingleTankWithZeroCapacity_ReturnsTankWithZeroCapacityAndZeroWineQuantities():**
+
+`
+Tests the scenario where a single tank with zero capacity and zero wine quantities is provided.
+Creates an array with a single tank.
+Sets the capacity and wine quantities of the tank to zero.
+Calls the TankFrom method with the array of tanks.
+Expects an exception to be thrown due to the tank having zero capacity.
+Asserts that the exception is thrown.
+`
+
+#### 14E
+
+**TITLE: TankFrom_SingleTankWithNoWineQuantities_ReturnsTankWithZeroCapacityAndZeroWineQuantities():**
+
+`
+Tests the scenario where a single tank with no wine quantities is provided.
+Creates an array with a single tank.
+Sets the capacity of the tank.
+Calls the TankFrom method with the array of tanks.
+Expects an exception to be thrown due to the tank having no wine quantities specified.
+Asserts that the exception is thrown.
+`
+
+#### 14F
+
+**TITLE: TankFrom_TwoTanksWithNoWineQuantities_ReturnsTankWithZeroCapacityAndZeroWineQuantities():**
+
+`
+Tests the scenario where two tanks with no wine quantities are provided.
+Creates an array with two tanks.
+Sets the capacities of the tanks to zero.
+Calls the TankFrom method with the array of tanks.
+Expects an exception to be thrown due to the tanks having no wine quantities specified.
+Asserts that the exception is thrown.
+`
+
+#### 14G
+
+**TITLE: TankFrom_TwoTanksWithEmptyWines_ThrowsException():**
+
+`
+Tests the scenario where two tanks with empty wines are provided.
+Creates an array with two tanks.
+Sets the capacities of the tanks.
+Calls the TankFrom method with the array of tanks.
+Expects an exception to be thrown due to the tanks having empty wines.
+Asserts that the exception is thrown.
+`
+
+### Fifteenth Test Part
+
+**TITLE: Calculate Percentage Tests Overview:**
+
+#### 15A
+
+**TITLE: CalculatePercentages_ReturnsCorrectPercentages_1():**
+
+`
+Tests the scenario where an array of tanks with different capacities is provided.
+Creates an array with three tanks and sets their capacities.
+Calls the CalculatePercentages method with the array of tanks.
+Expects a new array of tanks with updated capacities representing the percentage of the total capacity.
+Asserts that the returned tank objects have the expected capacities.
+`
+
+#### 15B
+
+**TITLE: CalculatePercentages_ReturnsCorrectPercentages_2():**
+
+`
+Tests the scenario where an array of tanks with different capacities is provided.
+Creates an array with four tanks and sets their capacities.
+Calls the CalculatePercentages method with the array of tanks.
+Expects a new array of tanks with updated capacities representing the percentage of the total capacity.
+Asserts that the returned tank objects have the expected capacities.
+`
+
+#### 15C
+
+**TITLE: CalculatePercentages_ReturnsZeroPercentForEmptyTanks():**
+
+`
+Tests the scenario where a tank with zero capacity is provided.
+Creates a tank with zero capacity.
+Calls the CalculatePercentages method with the tank.
+Expects an exception to be thrown due to the tank having zero capacity.
+Asserts that the exception is thrown.
+`
+
+#### 15D
+
+**TITLE: CalculatePercentages_ReturnsEqualPercentagesForEqualCapacityTanks():**
+
+`
+Tests the scenario where an array of tanks with equal capacities is provided.
+Creates an array with three tanks and sets their capacities to be equal.
+Calls the CalculatePercentages method with the array of tanks.
+Expects a new array of tanks with updated capacities representing equal percentages.
+Asserts that the returned tank objects have the expected capacities.
+`
+
+### Sixteenth Test Part
+
+**TITLE: Calculate Similarity Tests Overview:**
+
+#### 16A
+
+**TITLE: CalculateSimilarity_ReturnsCorrectDifferences():**
+
+`
+Tests the scenario where an array of tanks and a formula of wines are provided.
+Creates an array with three tanks and sets their capacities.
+Creates an array with three wines and sets their quantities.
+Calls the CalculateSimilarity method with the formula and tanks.
+Expects a new array of wines with updated quantities representing the differences between the formula and the tanks.
+Asserts that the returned wine objects have the expected quantities.
+`
+
+#### 16B
+
+**TITLE: CalculateSimilarity_ReturnsZeroDifferences_ForIdenticalFormulaAndTankQuantities():**
+
+`
+Tests the scenario where an array of tanks and a formula with identical quantities are provided.
+Creates an array with three tanks and sets their capacities.
+Creates an array with three wines and sets their quantities to be identical to the tank capacities.
+Calls the CalculateSimilarity method with the formula and tanks.
+Expects a new array of wines with all quantities set to zero since the formula and tanks are identical.
+Asserts that the returned wine objects have quantities equal to zero.
+`
+
+#### 16C
+
+**TITLE: CalculateSimilarity_ReturnsPositiveDifferences_WhenFormulaQuantitiesAreGreater():**
+
+`
+Tests the scenario where an array of tanks and a formula with greater quantities than the tanks are provided.
+Creates an array with three tanks and sets their capacities.
+Creates an array with three wines and sets their quantities to be greater than the tank capacities.
+Calls the CalculateSimilarity method with the formula and tanks.
+Expects a new array of wines with updated quantities representing the negative differences between the formula and the tanks.
+Asserts that the returned wine objects have the expected quantities.
+`
+
+#### 16D
+
+**TITLE: CalculateSimilarity_ReturnsNegativeDifferences_WhenTankQuantitiesAreSmaller():**
+
+`
+Tests the scenario where an array of tanks and a formula with smaller quantities than the tanks are provided.
+Creates an array with three tanks and sets their capacities.
+Creates an array with three wines and sets their quantities to be smaller than the tank capacities.
+Calls the CalculateSimilarity method with the formula and tanks.
+Expects a new array of wines with updated quantities representing the positive differences between the formula and the tanks.
+Asserts that the returned wine objects have the expected quantities.
+`
+
+### Seventeenth Test Part
+
+**TITLE: Generate Sum Combinations Tests Overview:**
+
+#### 17A
+
+**TITLE: GenerateSumCombinations_ReturnsEmptyList_WhenGivenEmptyInput():**
+
+`
+Tests the scenario where an empty array of tanks is provided. Creates an empty array of tanks.
+Calls the GenerateSumCombinations method with the empty array.
+Expects an empty list as the result.
+Asserts that the returned list has a count of 0.
+`
+
+#### 17B
+
+**TITLE: GenerateSumCombinations_ReturnsSingleCombination_WhenGivenSingleTank():**
+
+`
+Tests the scenario where a single tank is provided.
+Creates an array with a single tank and sets its capacity.
+Calls the GenerateSumCombinations method with the array of tanks.
+Expects a list with a single combination, which contains the tank capacity as the only element.
+Asserts that the returned list has a count of 1 and the single combination matches the expected array.
+`
+
+#### 17C
+
+**TITLE: GenerateSumCombinations_WhenCalledWithMultipleTanks_ReturnsCorrectCombinations():**
+
+`
+Tests the scenario where an array of multiple tanks is provided.
+Creates an array with three tanks and sets their capacities.
+Calls the GenerateSumCombinations method with the array of tanks.
+Expects a list of combinations representing all possible combinations of tank capacities.
+Asserts that the returned list has the expected count of combinations.
+`
+
+#### 17D
+
+**TITLE: GenerateSumCombinations_WhenCalledWithDifferentTanks_ReturnsCorrectCombinations():**
+
+`
+Tests the scenario where an array of tanks with different capacities is provided.
+Creates an array with four tanks and sets their capacities.
+Calls the GenerateSumCombinations method with the array of tanks.
+Expects a list of combinations representing all possible combinations of tank capacities.
+Asserts that the returned list has the expected count of combinations.
+`
+
+#### 17E
+
+**TITLE: GenerateSumCombinations_WhenCalledWithAdditionalTanks_ReturnsCorrectCombinations():**
+
+`
+Tests the scenario where an array of additional tanks is provided.
+Creates an array with five tanks and sets their capacities.
+Calls the GenerateSumCombinations method with the array of tanks.
+Expects a list of combinations representing all possible combinations of tank capacities.
+Asserts that the returned list has the expected count of combinations.
 `
