@@ -71,19 +71,19 @@ We have a configuration file where the user can enter the capacity of each tanks
 
 After entering all the parameters and validating them, the program calculates, as quickly as possible, the path between the tanks that the wine must take for the blends with the least amount of loss.
 
-The user has a return of numbers of steps, i.e. the numbers of times where the wine has been transfer (in different tanks or same tanks that an other wine), the similarity with the original formula and which tank has been useful for the blending.
+The user has a return of numbers of steps, i.e. the numbers of transfer of wine (in different tanks or same tanks that an other wine), the similarity with the original formula and which tank has been useful for the blending.
 
 #### B. Software architecture
 
 The software could be developed using a layered architecture[^4], with each layer responsible for a specific set of functionalities.
 
-The presentation layer[^5] would be the user interface that the Cellar Master[^6] and her team would interact with. This layer would be developed using .NET 6.0's WPF[^7] framework, which provides a modern, visually appealing interface with advanced data binding and styling capabilities.
+The presentation layer[^5] would be the user interface that the Cellar Master[^6] and her team would interact with.
 
-The business logic layer[^8] would handle the core functionality of the software, including the blending algorithms and data validation. This layer would be developed using C# and .NET 6.0's latest features, such as C# 10 and the new record types, to ensure maximum performance and maintainability.
+The business logic layer[^7] would handle the core functionality of the software, including the blending algorithms and data validation. This layer would be developed using C# and .NET 6.0's latest features, such as C# 10 and the new record types, to ensure maximum performance and maintainability.
 
-The data access layer[^9] would be responsible for handling data storage and retrieval, such as keeping track of the tanks and their current contents. This layer would be developed using .NET 6.0's EF Core[^10] framework, which provides a powerful and flexible ORM[^11] (Object-Relational Mapping) toolset for working with databases.
+The data access layer[^8] would be responsible for handling data storage and retrieval, such as keeping track of the tanks and their current contents. This layer would be developed using .NET 6.0's EF Core[^9] framework, which provides a powerful and flexible ORM[^10] (Object-Relational Mapping) toolset for working with databases.
 
-To ensure that the software is reliable and fault-tolerant, it would be designed using the SOLID principles[^12] and unit tested extensively using .NET 6.0's built-in testing framework. Additionally, the software could be deployed using Docker containers and managed using Kubernetes to ensure scalability and resilience.
+To ensure that the software is reliable and fault-tolerant, it would be designed using the SOLID principles[^11] and unit tested extensively using .NET 6.0's built-in testing framework.
 
 Overall, this architecture would provide a robust and scalable software solution for the Krug Champagne blending process, built using the latest and most advanced technologies in the .NET ecosystem.
 
@@ -91,7 +91,7 @@ Overall, this architecture would provide a robust and scalable software solution
 
 ##### 1. The tanks
 
-Tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation[^13] of the wine must be avoided.
+Tanks cannot be half full. They must be either empty or completely full. This constraint must be taken into account with great importance, as oxidation[^12] of the wine must be avoided.
 
 ##### 2. The Complexity
 
@@ -148,7 +148,7 @@ if ((val1 > val2) && (val1 > val3))
 
 ##### 5. Implementation
 
-The program is implemented by the technique of TDD[^14]. The program generate a general tree[^15] and use the BFS[^16] method and the pruning[^17] technique.
+The program is implemented by the technique of TDD[^13]. The program generate a general tree[^14] and use the BFS[^15] method and the pruning[^16] technique.
 
 #### D. How is it work ?
 
@@ -691,7 +691,7 @@ static int SimiPoint(int c, int d)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Count number of wine in a tank of Tank[]
 
 ```cs
 static int NbrWines(Tank[] a)
@@ -748,7 +748,7 @@ static int NbrTotalWine(Tank[] a)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-
+Calculate the similarity of wine between 2 array of tank
 
 ```cs
 static int NbrEachWine(Tank[] a, Tank[] b)
@@ -924,38 +924,34 @@ The presentation layer is the "Client" part thanks an interface to use the progr
 A person who supervises the making of wine in a winery.
 *source : [Merriam-Webster](https://www.merriam-webster.com/dictionary/cellar%20master)*
 
-[^7]: **WPF (Windows Presentation Foundation) :**
-It's a UI (user interface) framework that creates desktop client applications
-*source : [learn Microsoft](https://learn.microsoft.com/en-gb/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022)*
-
-[^8]: **Business logic layer :**
+[^7]: **Business logic layer :**
 Also known as the business processing of data, corresponding to the second tier "Server" of the diagram in Definition 4. It is the implementation of all the business rules and application logic.
 *source : [Wikipedia](https://fr.wikipedia.org/wiki/Architecture_trois_tiers)*
 
-[^9]: **Data access layer :**
+[^8]: **Data access layer :**
 Data access or persistent data is data that is intended to be retained over time or even permanently. This is the third tier "Database"  of the diagram in Definition 4.
 *source : [Wikipedia](https://fr.wikipedia.org/wiki/Architecture_trois_tiers)*
 
-[^10]: **EF Core (Entity Framework Core) :**
+[^9]: **EF Core (Entity Framework Core) :**
 Entity Framework (EF) Core is an extensible, open source, cross-platform version of Entity Framework. EF Core can serve as an object-relational mapper (O/RM), which allows .NET developers to work with a database using .NET objects and eliminates the need for much of the data access code that typically must be written. It supports many database engines.
 With EF Core, data is accessed using a model. A model consists of entity classes and a context object that represents a session with the database. The context object allows the interrogation and registration of data. With this, it can generate a model from an existing database, manually code a model to match the database.
 Once a model is created, it is possible to use EF Migrations to create a database from the model, allowing the database to grow as the model changes.
 *source : [learn Microsoft](https://learn.microsoft.com/en-gb/ef/core/)*
 
-[^11]: **ORM (Object-Relational Mapping) :**
+[^10]: **ORM (Object-Relational Mapping) :**
 The ORM is the layer that links object-oriented programming (OOP) to relational databases and simplifies the interaction between the two.
 *source : [Free code camp](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/)*
 
-[^12]: **SOLID principles :**
+[^11]: **SOLID principles :**
 The SOLID Principles are five principles of Object-Oriented class design. They are a set of rules and best practices to follow while designing a class structure.
 The 5 principles are : Single Responsibility (a class should do one thing and therefore it should have only a single reason to change) / Open-Closed (classes should be open for extension and closed to modification) / Liskov Substitution (subclasses should be substitutable for their base classes) / Interface Segregation (separating the interfaces) / Dependency Inversion (classes should depend upon interfaces or abstract classes instead of concrete classes and functions)
 *source : [Free code camp](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/)*
 
-[^13]: **Oxydation :**
+[^12]: **Oxydation :**
 Chimical reaction between body and oxygen. If the wine is oxydised, it's not usable anymore.
 *source : [Le Robert](https://dictionnaire.lerobert.com/google-dictionnaire-fr?param=oxydation)*
 
-[^14]: **TDD (Test-Driven Development):**
+[^13]: **TDD (Test-Driven Development):**
 TDD can be represent by the formula `TDD = Refactor + TFD` (Test First Development)
 The first steps of TFD is to quickly add a test, basically just enough code to fail.
 Next you run your tests to ensure that the new test does in fact fail.
@@ -965,18 +961,18 @@ The fourth step is to run your tests again. If they fail you need to update your
 TDD is primarily a specification technique with an effect of ensuring that your source code is thoroughly tested. However, there is more to testing than this. Particularly at scale you'll still need to consider other testing techniques. Much of this testing can also be done early in your initiative.
 *source : [Agile data](http://agiledata.org/essays/tdd.html)*
 
-[^15]: **General tree :**
+[^14]: **General tree :**
 A tree is an abstract data type that represents a hierarchical tree structure with a set of nodes connected in a "parent-child" fashion. They are made up of several elements : a node, the root (the top-most element of a tree, a node with no parent) and a leaf (a bottom-most element of a tree, has no children).
 There is also another type of tree called a "binary tree". Its special feature is that it has only two children (left and right) for each nodes.
 When we have multiple trees, we call that a forest.
 Other vocabulary : sibling (two or more nodes that share the same parent), heigth (the distance from the root to the furthest leaf, counting the nodes)
 *source : [Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure)) / [tree lesson by Christopher Diggins](doc_link/trees.pptx)*
 
-[^16]: **BFS (Breadth First Search):**
+[^15]: **BFS (Breadth First Search):**
 It's an algorithm for searching for data in a tree (binary or not) starting from the root and first visiting each child who is a sister (at the same height in the tree) before moving on to the "grandchildren".
 The depth-first search (DFS) method also includes: pre-order (self, child A, child B), in-order (child A, self, child B), post-order (child A, child B, self)
 *source : [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search#Time_and_space_complexity) / [tree lesson by Christopher Diggins](doc_link/trees.pptx)*
 
-[^17]: **Pruning :**
+[^16]: **Pruning :**
 This involves deleting branches of a tree that are no longer needed. This makes the programme faster and more efficient.
 *source : [DEV Community](https://dev.to/ml_82/what-is-pruning-in-decision-tree-30e0#:~:text=Pruning%20is%20a%20technique%20used,the%20tree%20by%20reducing%20overfitting.)*
