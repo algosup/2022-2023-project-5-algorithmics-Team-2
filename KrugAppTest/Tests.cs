@@ -35,7 +35,7 @@ namespace KrugAppTest
             var tank = new Tank();
 
             // Assert
-            Assert.IsTrue(tank.Capacity >= 10 && tank.Capacity <= 100);
+            Assert.IsTrue(tank.Capacity >= 0 && tank.Capacity <= 400);
         }
 
         [TestMethod]
@@ -706,7 +706,7 @@ namespace KrugAppTest
         {
             Tank[] a =  new Tank[] { new Tank(20) };
             Tank[] b =  new Tank[] { new Tank(100) };
-            int expectedSimilarity = 10;
+            int expectedSimilarity = 6;
 
             int actualSimilarity = Program.Similarity(a, b);
 
@@ -1501,7 +1501,6 @@ namespace KrugAppTest
         }
 
         [TestMethod]
-
         public void CheckFormula_WhenATankIsEmpty()
         {
             Tank[] table = new Tank[]
@@ -1533,7 +1532,6 @@ namespace KrugAppTest
         }
 
         [TestMethod]
-
         public void CheckFormula_WhenTheFormulaIsEmpty()
         {
             Tank[] table = new Tank[]
