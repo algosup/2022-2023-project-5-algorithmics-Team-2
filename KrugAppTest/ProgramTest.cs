@@ -1,4 +1,5 @@
-﻿using KrugApp;
+﻿using System.Threading.Tasks;
+using KrugApp;
 
 
 namespace KrugAppTest
@@ -254,7 +255,8 @@ namespace KrugAppTest
         [TestMethod]
         public void NbrTank_AllTanksWithNonZeroQuantity_ReturnsTotalTankCount()
         {
-            try {
+            try
+            {
                 Tank[] tanks = new Tank[]
                 {
                 new Tank(new Wine[] { new Wine(30), new Wine(10) }),
@@ -314,7 +316,8 @@ namespace KrugAppTest
         [TestMethod]
         public void NbrTotalWine_TankArrayWithZeroQuantity_ReturnsZero()
         {
-            try {
+            try
+            {
                 Tank[] tanks = new Tank[]
                 {
                     new Tank(100),
@@ -329,7 +332,7 @@ namespace KrugAppTest
             {
                 Console.WriteLine(e.Message);
             }
-            
+
         }
 
         [TestMethod]
@@ -554,6 +557,70 @@ namespace KrugAppTest
 
             // Assert
             Assert.AreEqual(0, result);
+        }
+    }
+
+    [TestClass]
+    public class CSVToFormula
+    {
+        [TestMethod]
+        public void CSVToFormula_One()
+        {
+            var path = "/Users/clementine/Desktop/Projects/2022-2023-project-5-algorithmics-Team-2/KrugAppTest/formulaTest.csv";
+
+            var result = Program.CSVToFormula(path);
+
+            Wine[] expectation = new Wine[] { new Wine(0), new Wine(4), new Wine(0), new Wine(3) };
+
+            var a = String.Empty;
+            var c = String.Empty;
+
+            foreach (var b in expectation)
+                a = a + "," + b.ToString();
+
+            a = a.TrimStart(',');
+
+
+            foreach (var b in result)
+                c = c + "," + b.ToString();
+
+            c = c.TrimStart(',');
+
+            Assert.AreEqual(a, c);
+            //CollectionAssert.AreEqual(expectation, result);
+
+        }
+
+        [TestMethod]
+        public void CSVToFormula_Two()
+        {
+
+            try
+            {
+                var path = "/Users/clementine/Desktop/Projects/2022-2023-project-5-algorithmics-Team-2/KrugAppTest/formulaTest.csv";
+
+                var result = Program.CSVToFormula(path);
+
+                Wine[] expectation = new Wine[] { new Wine(3), new Wine(4), new Wine(0), new Wine(3) };
+
+                var a = String.Empty;
+                var c = String.Empty;
+
+                foreach (var b in expectation)
+                    a = a + "," + b.ToString();
+
+                a = a.TrimStart(',');
+
+
+                foreach (var b in result)
+                    c = c + "," + b.ToString();
+
+                c = c.TrimStart(',');
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
