@@ -123,9 +123,9 @@ namespace KrugApp
         {
             if (c == d)
                 return 2;
-            else if (c > d && c / 2 > d)
+            else if (c > d && c / 2 <= d)
                 return 1;
-            else if (c < d && c > d / 2)
+            else if (c < d && d / 2 <= c)
                 return 1;
             else
                 return 0;

@@ -62,6 +62,11 @@ namespace KrugApp
         /// <param name="total"> Array of the wines' capacity.</param>
         public Tank(Wine[] total)
         {
+            if (total.Sum(wine => wine.Quantity) == 0)
+            {
+                throw new Exception("The total quantity of wine is too small for the tank.");
+            }
+
             if(total.Length == MAX_WINES)
             {
                 if (total.Sum(wine => wine.Quantity) > MAX_CAPACITY)
@@ -106,7 +111,7 @@ namespace KrugApp
         /// </summary>
         /// <param name="tanks">The array of tanks to transfer from.</param>
         /// <returns>A new tank with the combined capacity and quantity from the input tanks.</returns>
-        public Tank TankFrom(Tank[] tanks)
+        public static Tank TankFrom(Tank[] tanks)
         {
             float totalCapacity = tanks.Sum(tank => tank.Capacity);
             Wine[] totalWines = new Wine[MAX_WINES];
@@ -154,14 +159,12 @@ namespace KrugApp
             return res;
         }
 
-
-
         /// <summary>
         /// Calculates the percentages of the total capacity for each tank in the provided array.
         /// </summary>
         /// <param name="tanks">The array of tanks.</param>
         /// <returns>An array of tanks with the calculated percentages.</returns>
-        public Tank[] CalculatePercentages(Tank[] tanks)
+        public static Tank[] CalculatePercentages(Tank[] tanks)
         {
             float total = tanks.Sum(tank => tank.Capacity);
 
@@ -174,18 +177,19 @@ namespace KrugApp
         /// <param name="formula">An array representing the desired quantities of wines in the final mix.</param>
         /// <param name="tanks">An array of tanks containing the current quantities of wines.</param>
         /// <returns>An array of wines representing the differences between the desired quantities and the tank quantities.</returns>
-        public Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
+        public static Wine[] CalculateSimilarity(Wine[] formula, Tank[] tanks)
         {
-            Wine[] tank1 = tanks.SelectMany(tank => tank.Wine).ToArray();
             Wine[] diff = new Wine[formula.Length];
-
+        
             for (int i = 0; i < formula.Length; i++)
             {
-                diff[i] = new Wine(formula[i].Quantity - tank1[i].Quantity);
+                int quantityDifference = (int)(tanks[i].Capacity - formula[i].Quantity);
+                diff[i] = new Wine(quantityDifference);
             }
-
+        
             return diff;
         }
+
 
         // Operator overloads
 
@@ -210,44 +214,47 @@ namespace KrugApp
 
         }
 
-
         public static List<int[]> GenerateSumCombinations(Tank[] values)
         {
             List<int[]> result = new List<int[]>();
-
+        
             for (int i = 0; i < values.Length; i++)
             {
                 int[] combination = new int[values.Length];
                 GenerateSumCombinations(values, values[i].Capacity, combination, result, i, 0);
             }
-
+        
             return result;
         }
-
-
-        private static void GenerateSumCombinations(Tank[] tanks, int target, int[] combination, List<int[]> result, int startIndex, int length)
+        
+        private static void GenerateSumCombinations(Tank[] values, int remainingCapacity, int[] combination, List<int[]> result, int currentIndex, int currentTankIndex)
         {
-            if (target == 0 && length > 1)
+            if (remainingCapacity == 0)
             {
-                // Found a valid combination that sums up to the target and has more than one element
-                int[] validCombination = new int[length];
-                Array.Copy(combination, validCombination, length);
-                result.Add(validCombination);
+                // We have reached the desired sum, add the combination to the result
+                result.Add((int[])combination.Clone());
                 return;
             }
 
-            if (target < 0 || startIndex == tanks.Length)
+            if (currentTankIndex >= values.Length || remainingCapacity < 0 || currentIndex >= combination.Length)
             {
-                // The current combination exceeds the target value or reached the end of the values array, backtrack
+                // We have exhausted all tanks, exceeded the remaining capacity, or filled the combination array, backtrack
                 return;
             }
 
-            // Exclude the current value and move to the next index
-            GenerateSumCombinations(tanks, target, combination, result, startIndex + 1, length);
+            // Skip the current tank and move to the next one
+            GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
 
-            // Include the current value and continue with the same index
-            combination[length] = tanks[startIndex].Capacity;
-            GenerateSumCombinations(tanks, target - tanks[startIndex].Capacity, combination, result, startIndex, length + 1);
+            // Try using the current tank if it doesn't exceed remaining capacity
+            if (values[currentTankIndex].Capacity <= remainingCapacity)
+            {
+                combination[currentIndex] = values[currentTankIndex].Capacity;
+                GenerateSumCombinations(values, remainingCapacity - values[currentTankIndex].Capacity, combination, result, currentIndex + 1, currentTankIndex);
+                combination[currentIndex] = 0; // Reset the value to 0 for backtracking
+
+                // Move to the next tank with the same remaining capacity
+                GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
+            }
         }
 
         ///<summary>
