@@ -3,7 +3,7 @@ using KrugApp;
 namespace KrugAppTest
 {
     [TestClass]
-    public class TankConstructor
+    public class TankConstructorTests
     {
         [TestMethod]
         public void Tank_DefaultConstructor_CreatesTankWithRandomCapacity()
@@ -62,7 +62,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class TankCapacity
+    public class TankCapacityTests
     {
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class TankWine
+    public class TankWineTests
     {
 
         [TestMethod]
@@ -228,7 +228,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class OperatorPlus
+    public class OperatorPlusTests
     {
         [TestMethod]
         public void OperatorPlus_AddTwoZeroQuantityWines_ReturnsWineWithZeroQuantity()
@@ -302,7 +302,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class OperatorSubstract
+    public class OperatorSubstractTests
     {
         [TestMethod]
         public void OperatorMinus_SubtractZeroQuantityWine_ReturnsOriginalQuantity()
@@ -362,7 +362,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class OperatorMultiply
+    public class OperatorMultiplyTests
     {
         [TestMethod]
         public void OperatorMultiply_MultiplyTwoZeroQuantityWines_ReturnsWineWithZeroQuantity()
@@ -436,7 +436,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class OperatorDivide
+    public class OperatorDivideTests
     {
 
         [TestMethod]
@@ -508,7 +508,7 @@ namespace KrugAppTest
     }
 
     [TestClass]
-    public class TankTests
+    public class NodeTraversalTests
     {
         [TestMethod]
         public void TestNodeTraversal()
@@ -876,7 +876,7 @@ namespace KrugAppTest
         }
     }
 
-    public class FillWithOneWine
+    public class FillWithOneWineTests
     {
         [TestMethod]
         public void FillWithOneWine_1()
