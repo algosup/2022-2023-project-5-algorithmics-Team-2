@@ -13,6 +13,7 @@ namespace KrugApp
             T? parentNode { get; set; }
             T value { get; set; }
             ICollection<T> childNodes { get; set; }
+            Tuple<int?, Tuple<int, int>, int?> Step { get; set; }
         }
     }
 }

@@ -32,7 +32,6 @@
                 node = node.ParentNode;
             }
 
-
             // Check if the node is too similar to any sister node
             if (this.ParentNode != null)
                 for(int i = 0; i < this.ParentNode.ChildNodes.Count; i++) // Very slow, but still faster than adding every node
@@ -132,7 +131,6 @@
             }
             return possibleChilds;
         }
-
 
         public void GenerateChilds(int depth, List<Tuple<int, int>>[] combinaison)
         {

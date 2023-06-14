@@ -10,16 +10,16 @@ namespace KrugApp
             stopWatch.Start();
 
             // Will be changed to a user input
-            Tank[] tanks = new Tank[330];
+            Tank[] tanks = new Tank[20];
             Random random = new Random();
             for (int i = 0; i < tanks.Length; i++)
-                tanks[i] = new Tank(random.Next(10,100));
+                tanks[i] = new Tank(random.Next(1,10));
 
             // Will be changed to a user input
             Wine[] formula = new Wine[Tank.MAX_WINES];
 
             // Will be changed to a user input
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 5; i++)
                 tanks[i].FillWithOneWine(i);
 
             // Generate all possible combinaisons (ligther than storing them in each tank of each node)
@@ -32,7 +32,7 @@ namespace KrugApp
 
             var a = new TankTree((Tank[])tanks.Clone());
             // Create the tree with a depth defined by the programmer
-            tankTree.GenerateChilds(1, combinaison);
+            tankTree.GenerateChilds(4, combinaison);
 
             //TODO Breadth search for the best solution
             /*TankTree? solutionNode = tankTree.BreadthSearch(formula);
@@ -54,7 +54,7 @@ namespace KrugApp
             Console.WriteLine("RunTime " + elapsedTime);
 
             Console.WriteLine("\n\tDone \t" + tankTree.ChildNodes.Count);
-            Console.WriteLine();
+           Console.WriteLine();
         }
     }
 }
