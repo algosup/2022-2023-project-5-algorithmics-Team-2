@@ -1,12 +1,4 @@
-﻿using System;
-using System.Linq;
-using KrugApp;
-
-using System.Data;
-using System.Data.OleDb;
-using System.Globalization;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace KrugApp
 {
@@ -14,150 +6,23 @@ namespace KrugApp
     {
         public static void Main(string[] args)
         {
-            string csvFilePath = "formulaTest.csv";
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
 
-            Wine[] wines = CSVToFormula(csvFilePath);
+            // Will be changed to a user input
+            Tank[] tanks = new Tank[20];
+            Random random = new Random();
+            for (int i = 0; i < tanks.Length; i++)
+                tanks[i] = new Tank(random.Next(1,10));
 
-            //for (var i = 0; i < wines.Length; i++)
-            //{
-            //    Console.WriteLine($" {i} -> Quantity: {wines[i].Quantity}");
-            //}
-            var a = String.Empty;
+            // Will be changed to a user input
+            Wine[] formula = new Wine[Tank.MAX_WINES];
 
-            foreach (var b in wines)
-                a = a + "," + b.ToString();
+            // Will be changed to a user input
+            for (int i = 0; i < 5; i++)
+                tanks[i].FillWithOneWine(i);
 
-            a = a.TrimStart(',');
-
-            Console.WriteLine(a);
-
-            string filePath = "tank.csv";
-            Tank[] tanks = CSVToTank(filePath, wines.Length);
-            Console.WriteLine(tanks.Length);
-            foreach (Tank tank in tanks)
-            {
-                //Console.WriteLine($"Tank Capacity: {tank.Capacity}");
-                //Console.WriteLine("Wines:");
-                if (tank.Wine != null)
-                {
-                    foreach (Wine wine in tank.Wine)
-                    {
-                        Console.WriteLine($"- Quantity: {wine.Quantity}");
-                    }
-                }
-                Console.WriteLine();
-            }
-
-
-        }
-
-        /// <summary>
-        /// This function compare multiple criteria to know the similarity between two Tank[]
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns>The similarity indicator between 0(opposite) and 10(same)</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public static int Similarity(Tank[] a, Tank[] b)
-        {
-            if (a == null || b == null || a.Length == 0 || b.Length == 0)
-                throw new ArgumentException("Both arrays must have at least one element.");
-
-            // Number of used tank
-            var usedTank = SimiPoint(NbrTank(a), NbrTank(b));
-
-            // Number of wines in the tanks
-            var nbrWine = SimiPoint(NbrWines(a), NbrWines(b));
-
-            // The total quantity of all the wines
-            var nbrQuan = SimiPoint(NbrTotalWine(a), NbrTotalWine(b));
-
-            // The quantity for each wines
-            var QuanWine = NbrEachWine(a, b);
-
-            var similarity = usedTank + nbrWine + nbrQuan + QuanWine;
-
-            if (similarity == 8)
-                similarity += 2;
-            else if (similarity == 7)
-                similarity += 1;
-
-            // return similarity (int)
-            return similarity;
-
-        }
-
-        /// <summary>
-        /// Calculates the similarity point between two integers.
-        /// </summary>
-        /// <param name="c">The first integer.</param>
-        /// <param name="d">The second integer.</param>
-        /// <returns>The similarity point based on the comparison between the two integers.</returns>
-        public static int SimiPoint(int c, int d)
-        {
-            if (c == d)
-                return 2;
-            else if (c > d && c / 2 <= d)
-                return 1;
-            else if (c < d && d / 2 <= c)
-                return 1;
-            else
-                return 0;
-        }
-
-        /// <summary>
-        /// Calculates the number of wines in an array of tanks.
-        /// </summary>
-        /// <param name="a">An array of Tank objects representing tanks.</param>
-        /// <returns>The number of wines in the array of tanks.</returns>
-        public static int NbrWines(Tank[] a)
-        {
-            var d = 0; // number of wines
-            for (var i = 0; i < a.Length; i++)
-                for (var j = 0; j < a[i].Wine.Length; j++)
-                    if ((int)a[i].Wine[j].Quantity > 0)
-                        d += 1;
-            return d;
-        }
-
-        /// <summary>
-        /// Calculates the number of tanks with non-zero quantity of wine.
-        /// </summary>
-        /// <param name="a">An array of Tank objects representing tanks.</param>
-        /// <returns>The number of tanks with non-zero quantity of wine.</returns>
-        public static int NbrTank(Tank[] a)
-        {
-            float c = 0; // Quantity of wine in the tank
-            var d = 0; // number of used tank
-            foreach (var tank in a)
-            {
-                foreach (var wine in tank.Wine)
-                    c += wine.Quantity;
-
-                if (c != 0)
-                    d += 1;
-                c = 0;
-            }
-            return d;
-        }
-
-        /// <summary>
-        /// Calculates the total quantity of wine in an array of tanks.
-        /// </summary>
-        /// <param name="a">An array of Tank objects representing tanks.</param>
-        /// <returns>The total quantity of wine in the array of tanks.</returns>
-        public static int NbrTotalWine(Tank[] a)
-        {
-            int wine1 = 0;
-            for (int i = 0; i < a.Length; i++)
-            {
-                for (int j = 0; j < a[i].Wine.Length; j++)
-                {
-                    wine1 += (int)a[i].Wine[j].Quantity;
-                }
-            }
-            return wine1;
-        }
+            // possibility of transfert
 
         /// <summary>
         /// Calculates the number of wines based on a comparison between two arrays of tanks.
@@ -356,6 +221,5 @@ namespace KrugApp
             return a;
         }
     }
-
-
 }
+

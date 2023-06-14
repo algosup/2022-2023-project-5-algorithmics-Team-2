@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Threading.Tasks;
-
-namespace KrugApp
+﻿namespace KrugApp
 {
     public class Tank
     {
         public const int MIN_CAPACITY = 1;
         public const int MAX_CAPACITY = 200;
 
-        public const int MAX_WINES = 4;
-
-        public int Capacity { get; set; }
+        public const int MAX_WINES = 400;
+        public bool IsEmpty { get; set; }
+            
+        public float Capacity { get; }
         public Wine[] Wine { get; set; }
-        //public int[][] Node { get; set; }
+
 
         /// <summary>
         /// Creates a tank with a random capacity between 10 and 100
@@ -23,41 +20,29 @@ namespace KrugApp
             Random rnd = new Random();
             this.Capacity = rnd.Next(MIN_CAPACITY, MAX_CAPACITY);
             this.Wine = new Wine[MAX_WINES];
+            //this.Steps = new List<Tuple<int, int>>();
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
+            this.IsEmpty = true;
         }
+
 
         /// <summary>
         /// Creates a tank with a define capacity
         /// </summary>
-        /// <param name="capacity">The capacity of the tank.</param>
-        public Tank(int capacity)
+        /// <param name="capacity"></param>
+        public Tank(float capacity)
         {
-            if (capacity < MIN_CAPACITY || capacity > MAX_CAPACITY)
-                throw new ArgumentException($"Capacity must be between {MIN_CAPACITY} and {MAX_CAPACITY}");
             this.Capacity = capacity;
             this.Wine = new Wine[MAX_WINES];
             for (int i = 0; i < MAX_WINES; i++)
                 this.Wine[i] = new Wine();
+            //this.Steps = new List<Tuple<int, int>>();
+            this.IsEmpty = true;
         }
 
         /// <summary>
-        /// Creates a tank with a specified amount of wine at a given index.
-        /// </summary>
-        /// <param name="wine">The amount of wine to be stored.</param>
-        /// <param name="index">The index of the wine in the tank.</param>
-        public Tank(float wine, int index)
-        {
-            this.Capacity = (int)wine;
-            this.Wine = new Wine[MAX_WINES];
-            for (int i = 0; i < MAX_WINES; i++)
-                this.Wine[i] = new Wine();
-
-            this.Wine[index].Quantity = wine;
-        }
-
-        /// <summary>
-        /// Returns the total quantity of a tank, that have multiple wines in it.
+        /// Return the total quantity of a tank, that have multiple wines in it.
         /// </summary>
         /// <param name="total"> Array of the wines' capacity.</param>
         public Tank(Wine[] total)
@@ -75,6 +60,8 @@ namespace KrugApp
                     throw new Exception("The total quantity of wine is too small for the tank.");
                 this.Capacity = (int)total.Sum(wine => wine.Quantity);
                 this.Wine = total;
+                //this.Steps = new List<Tuple<int, int>>();
+                this.IsEmpty = false;
             }
             else
             {
@@ -83,47 +70,27 @@ namespace KrugApp
         }
 
         /// <summary>
-        /// Empties the contents of the specified array by setting all elements to their default values.
-        /// </summary>
-        /// <typeparam name="T">The type of elements in the array.</typeparam>
-        /// <param name="array">The array to be emptied.</param>
-        public static void EmptyTank<T>(Wine[] array)
-        {
-            Array.Clear(array, 0, array.Length);
-        }
-
-
-        /// <summary>
-        /// Fill the tank with only one wine.
+        /// Fill the tank with only one wine
         /// </summary>
         /// <param name="indexOfWine">The index of where the wine is.</param>
         public void FillWithOneWine(int indexOfWine)
         {
             if (this.Wine.Sum(wine => wine.Quantity) == 0)
+            {
                 this.Wine[indexOfWine].Quantity = this.Capacity;
+                this.IsEmpty = false;
+            }
             else
                 throw new Exception("Cannot fill a full tank.");
         }
 
-
+        /*
         /// <summary>
         /// Transfers the total quantity of wines from an array of tanks into a new tank.
         /// </summary>
         /// <param name="tanks">The array of tanks to transfer from.</param>
         /// <returns>A new tank with the combined capacity and quantity from the input tanks.</returns>
-        public static Tank TankFrom(Tank[] tanks)
-        {
-            float totalCapacity = tanks.Sum(tank => tank.Capacity);
-            Wine[] totalWines = new Wine[MAX_WINES];
-
-            for (int i = 0; i < MAX_WINES; i++)
-            {
-                float totalQuantity = tanks.Sum(tank => tank.Wine[i].Quantity);
-                totalWines[i] = new Wine(totalQuantity);
-            }
-
-            return new Tank(totalWines);
-        }
+       
 
         /// <summary>
         /// Return an array of tanks with the wine from the target tank.
@@ -132,32 +99,7 @@ namespace KrugApp
         /// <param name="tank">Target tank to receive the transferred wine.</param>
         /// <returns>An array of tanks with transferred quantities.</returns>
         /// <remarks>The tank receivers need to be empty, and their total capacity needs to be equal to the capacity of the initial tank.</remarks>
-        public static Tank[] TransferTo(Tank[] tanks, Tank tank)
-        {
-            if (tanks.Sum(t => t.Wine.Sum(w => w.Quantity)) != 0)
-            {
-                throw new Exception("Cannot transfer if the total quantity of wine in the tanks is not zero.");
-            }
-
-            if (tanks.Sum(t => t.Capacity) != tank.Capacity)
-            {
-                throw new Exception("Cannot transfer if the total capacity of the tanks is not equal to the capacity of the target tank.");
-            }
-
-            Tank[] res = new Tank[tanks.Length];
-
-            for (int j = 0; j < tanks.Length; j++)
-            {
-                res[j] = new Tank(tanks[j].Capacity);
-
-                for (int i = 0; i < Tank.MAX_WINES; i++)
-                {
-                    res[j].Wine[i].Quantity = (tank.Wine[i].Quantity / tank.Capacity) * tanks[j].Capacity;
-                }
-
-            }
-            return res;
-        }
+        */
 
         /// <summary>
         /// Calculates the percentages of the total capacity for each tank in the provided array.
@@ -190,8 +132,27 @@ namespace KrugApp
             return diff;
         }
 
+        public static Tank[] splitTanks(Tank tankInput, Tank[] tanks)
+        {
+            if (tankInput.Capacity != tanks.Sum(tank => tank.Capacity))
+            {
+                throw new Exception("The total capacity of the tanks is not equal to the capacity of the target tank." + tanks.Sum(tank => tank.Capacity) + "=/=" + tankInput.Capacity);
+            }
 
-        // Operator overloads
+            foreach(Tank tank in tanks)
+                if (tank.Wine.Sum(wine => wine.Quantity) != 0)
+                    throw new Exception("Cannot transfer if the total quantity of wine in the output tanks is not zero.");
+
+            var res = new Tank[tanks.Length];
+            
+            for (int i = 0; i < tanks.Length; i++)
+            {
+                res[i] = tankInput * (tanks[i].Capacity / tankInput.Capacity);
+                res[i].IsEmpty = false;
+            }
+            
+            return res;
+        }
 
         /// <summary>
         /// Adds two tanks together, combining their capacity and wine quantities.
@@ -202,108 +163,145 @@ namespace KrugApp
         /// <remarks>If the total quantity of wines is higer or lower than the capacity of the tank, it will return an error.</remarks>
         public static Tank operator +(Tank tank1, Tank tank2)
         {
-            Tank tank = new Tank(tank1.Capacity + tank2.Capacity);
 
-            for (int i = 0; i < tank.Wine.Length; i++)
-                tank.Wine[i] = tank1.Wine[i] + tank2.Wine[i];
+            var wine = new Wine[tank1.Wine.Length];
+            for(int i = 0; i < tank1.Wine.Length; i++)
+            {
+                wine[i] = new Wine(tank1.Wine[i].Quantity + tank2.Wine[i].Quantity);
+            }
+
+            Tank tank = new Tank(wine);
+
+            tank.IsEmpty = false;
 
             if (tank.Capacity == tank.Wine.Sum(tank => tank.Quantity) || tank.Wine.Sum(tank => tank.Quantity) == 0)
                 return tank;
             else
-                throw new Exception("The tank is neither full nor empty.");
-
+                throw new Exception("capacity : " + tank1.Capacity + " with " + tank1.Wine.Sum(wine => wine.Quantity) + "\n" +
+                    "capacity : " + tank2.Capacity + " with " + tank2.Wine.Sum(wine => wine.Quantity) + "\n" +
+                    "capacity : " + tank.Capacity + " with " + tank.Wine.Sum(wine => wine.Quantity) + "\n" );
         }
 
-        public static List<int[]> GenerateSumCombinations(Tank[] values)
+        public static Tank operator /(Tank tank, float divider)
         {
-            List<int[]> result = new List<int[]>();
-        
-            for (int i = 0; i < values.Length; i++)
+            if (divider == 0)
+                throw new DivideByZeroException();
+
+            Tank res = new Tank(tank.Capacity / divider);
+            for (int i = 0; i < res.Wine.Length; i++)
             {
-                int[] combination = new int[values.Length];
-                GenerateSumCombinations(values, values[i].Capacity, combination, result, i, 0);
-            }
-        
-            return result;
-        }
-        
-        private static void GenerateSumCombinations(Tank[] values, int remainingCapacity, int[] combination, List<int[]> result, int currentIndex, int currentTankIndex)
-        {
-            if (remainingCapacity == 0)
-            {
-                // We have reached the desired sum, add the combination to the result
-                result.Add((int[])combination.Clone());
-                return;
+                res.Wine[i].Quantity = tank.Wine[i].Quantity / divider;
             }
 
-            if (currentTankIndex >= values.Length || remainingCapacity < 0 || currentIndex >= combination.Length)
-            {
-                // We have exhausted all tanks, exceeded the remaining capacity, or filled the combination array, backtrack
-                return;
-            }
+            if (res.Wine.Sum(wine => wine.Quantity) != res.Capacity)
+                throw new Exception("capacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "L in wine\nDivider : " + divider);
 
-            // Skip the current tank and move to the next one
-            GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
-
-            // Try using the current tank if it doesn't exceed remaining capacity
-            if (values[currentTankIndex].Capacity <= remainingCapacity)
-            {
-                combination[currentIndex] = values[currentTankIndex].Capacity;
-                GenerateSumCombinations(values, remainingCapacity - values[currentTankIndex].Capacity, combination, result, currentIndex + 1, currentTankIndex);
-                combination[currentIndex] = 0; // Reset the value to 0 for backtracking
-
-                // Move to the next tank with the same remaining capacity
-                GenerateSumCombinations(values, remainingCapacity, combination, result, currentIndex, currentTankIndex + 1);
-            }
+            return res;
         }
 
-        ///<summary>
-        /// Traverse the nodes of the tree
-        ///</summary>
-        public Wine[] TraverseNodes(Wine[] nodes)
+        public static Tank operator *(Tank tank, float multiplier)
         {
-            Wine[] copiedNodes = new Wine[nodes.Length];
-            Array.Copy(nodes, copiedNodes, nodes.Length);
+            Tank res = new Tank(tank.Capacity * multiplier);
 
-            for (int i = 0; i < copiedNodes.Length; i++)
+            for (int i = 0; i < res.Wine.Length; i++)
             {
-                Wine currentNode = copiedNodes[i];
-
-                currentNode.Quantity = Tank.MAX_WINES - currentNode.Quantity + 1;
+                res.Wine[i].Quantity = tank.Wine[i].Quantity * multiplier;
             }
 
-            return copiedNodes;
+            if (Math.Abs(res.Wine.Sum(wine => wine.Quantity) - Math.Round(res.Capacity, 2)) > 0.1)// If the difference is more than 0.1 unit
+                throw new Exception("Quantity" + tank.Capacity +"\ncapacity : " + res.Capacity + " with " + res.Wine.Sum(wine => wine.Quantity) + "\nMultiplier : " + multiplier);
+
+            return res;
         }
 
-       public static bool CheckFormula(Tank[] table, Wine[] formula, float a)
+        /// <summary>
+        /// O(n^2)
+        /// </summary>
+        /// <param name="tanks"></param>
+        public static List<Tuple<int,int>> GenerateCombinaison(Tank tank, Tank[] tanks)
         {
-            int i = 0;
-            var res = false;
-            float c = 0;
-           
-            foreach (var tanks in table)
+            var tempTupleList = new List<Tuple<int, int>>();
+            for (int i = 0; i < tanks.Length - 1; i++)
+                if (tanks[i].Capacity < tank.Capacity)
+                    for (int j = i + 1; j < tanks.Length; j++)
+                        if (tanks[j].Capacity < tank.Capacity)
+                            if (tanks[i].Capacity + tanks[j].Capacity == tank.Capacity)
+                                tempTupleList.Add(new Tuple<int, int>(i, j));
+            return tempTupleList;
+        }
+
+        private void empty()
+        {
+            foreach (Wine wine in this.Wine)
             {
-                foreach (var wine in tanks.Wine)
+                wine.Quantity = 0;
+            }
+            this.IsEmpty = true;
+        }
+
+        public static Tank[] getStateAfterStep(Tank[] input, Tuple<int?, Tuple<int, int>, int?> step)
+        {
+            var currentState = new Tank[input.Length];
+            for (int i = 0; i < input.Length; i++)
+            {
+                currentState[i] = new Tank(input[i].Capacity);
+                for (int j = 0; j < input[i].Wine.Length; j++)
                 {
-                    if (i < formula.Length && i < tanks.Wine.Length)
-                    {
-                        c = Math.Abs(formula[i].Quantity - tanks.Wine[i].Quantity);
+                    currentState[i].Wine[j].Quantity = input[i].Wine[j].Quantity;
+                }
+                currentState[i].IsEmpty = input[i].IsEmpty;
+            }
 
-                            if (c > a)
-                            {
-                                res = false;
-                            break;
-                            }
-                            if (c <= a)
-                            {
-                                res = true;
-                            }
-                    
-                    }
-                    i++;
+            if (step.Item1 != null) // (source => (target1 , target 2))
+            {
+                if (!currentState[step.Item1.Value].IsEmpty && currentState[step.Item2.Item1].IsEmpty && currentState[step.Item2.Item2].IsEmpty)
+                {
+                    var split = splitTanks(currentState[step.Item1.Value], new Tank[] { currentState[step.Item2.Item1], currentState[step.Item2.Item2] });
+
+                    currentState[step.Item2.Item1].Wine = split[0].Wine;
+                    currentState[step.Item2.Item1].IsEmpty = split[0].IsEmpty;
+
+                    currentState[step.Item2.Item2].Wine = split[1].Wine;
+                    currentState[step.Item2.Item2].IsEmpty = split[1].IsEmpty;
+
+                    currentState[step.Item1.Value].empty(); ;
                 }
             }
-            return res;
+            else // ((source1, source2) => target)
+            {
+                if (step.Item3 == null) // impossible case
+                    throw new Exception("Not supposed to be null.");
+
+                if (currentState[step.Item3.Value].IsEmpty && !currentState[step.Item2.Item1].IsEmpty && !currentState[step.Item2.Item2].IsEmpty) // Fill the tank only if it is empty
+                {
+                    //currentState[step.Item2.Item1] + currentState[step.Item2.Item2];
+
+                    var tmp = new Tank(currentState[step.Item2.Item1].Capacity + currentState[step.Item2.Item2].Capacity);
+                    tmp.Wine = new Wine[currentState[step.Item2.Item1].Wine.Length];
+                    for(int i = 0; i < tmp.Wine.Length; i++)
+                    {
+                        tmp.Wine[i] = new Wine(currentState[step.Item2.Item1].Wine[i].Quantity + currentState[step.Item2.Item2].Wine[i].Quantity);
+                    }
+                    if (tmp.Capacity == currentState[step.Item3.Value].Capacity)
+                    {
+                        currentState[step.Item3.Value].Wine = tmp.Wine;
+                        currentState[step.Item3.Value].IsEmpty = false;
+
+                        currentState[step.Item2.Item1].empty();
+                        currentState[step.Item2.Item2].empty();
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid step : \n"+
+                            "Indexes  (("+step.Item2.Item1+"."+step.Item2.Item2+")=>"+step.Item3+")"+" .\n" +
+                            "capacity ((" + currentState[step.Item2.Item1].Capacity + "." + currentState[step.Item2.Item2].Capacity + ")=>" + currentState[step.Item3.Value].Capacity + ")" + " .\n" +
+                            "Tank at index " + step.Item3.Value + " or " + "has capacity of " + tmp.Capacity + " or " + currentState[step.Item3.Value].Capacity + ".\n" +
+                            "The capacity of the tank should be equal to the sum of the capacities of the two tanks.\n" +
+                            "The capacities of the tanks are " + currentState[step.Item2.Item1].Capacity + " and " + currentState[step.Item2.Item2].Capacity + ".");
+                    }
+                }
+            }
+            return currentState;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KrugApp
+﻿namespace KrugApp
 {
     public class Wine 
     {
@@ -46,6 +44,7 @@ namespace KrugApp
             else
                 throw new DivideByZeroException("Cannot divide by zero.");
         }
+
 
         public override string ToString()
         {
