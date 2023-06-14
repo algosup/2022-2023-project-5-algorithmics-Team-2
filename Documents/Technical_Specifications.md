@@ -511,9 +511,7 @@ public static bool CheckFormula(Tank[] table, Wine[] formula, float a)
                     {
                         res = true;
 
-                    }
-                            
-                        
+                    }   
             }
             i++;
         }
@@ -639,71 +637,41 @@ namespace KrugApp
 The Main function will call up all the functions it needs to calculate the mix and make verification.
 
 ```cs
-static void Main(string[] args)
+public static void Main(string[] args)
 {
-    var tanksIn = ReadCSV("./formulaTest.csv");
+    string csvFilePath = "formulaTest.csv";
 
-    // Define the wines and their quantities in the given formula
-    Wine[] formula = new Wine[]
+    Wine[] wines = CSVToFormula(csvFilePath);
+
+    //for (var i = 0; i < wines.Length; i++)
+    //{
+    //    Console.WriteLine($" {i} -> Quantity: {wines[i].Quantity}");
+    //}
+    var a = String.Empty;
+
+    foreach (var b in wines)
+        a = a + "," + b.ToString();
+
+    a = a.TrimStart(',');
+
+    Console.WriteLine(a);
+
+    string filePath = "tank.csv";
+    Tank[] tanks = CSVToTank(filePath, wines.Length);
+    Console.WriteLine(tanks.Length);
+    foreach (Tank tank in tanks)
     {
-        new Wine(2),
-        new Wine(8),
-        new Wine(250),
-        new Wine(150),
-    };
-
-    // Create an array of tanks
-    Tank[] tanks = new Tank[10];
-    for (int i = 0; i < tanks.Length; i++)
-        tanks[i] = new Tank();
-
-    foreach (Tank t in tanks)
-    {
-        Console.WriteLine("Object : "+t);
-        Console.WriteLine("Capacity : " + ((int)t.Capacity));
-        Console.WriteLine("Total wine : " + t.Wine.Sum(w => w.Quantity));
+        //Console.WriteLine($"Tank Capacity: {tank.Capacity}");
+        //Console.WriteLine("Wines:");
+        if (tank.Wine != null)
+        {
+            foreach (Wine wine in tank.Wine)
+            {
+                Console.WriteLine($"- Quantity: {wine.Quantity}");
+            }
+        }
+        Console.WriteLine();
     }
-    tanks.OrderBy(tank => tank.Capacity);
-
-    Tank[] tankArrayA = new Tank[]
-    {
-        new Tank(100),
-        new Tank(new Wine[] { new Wine(70), new Wine(40), new Wine(0), new Wine(1) }),
-        //new Tank(100),
-        new Tank(100),
-        //new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
-        //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) })
-    };
-
-    Tank[] tankArrayB = new Tank[]
-    {
-        //new Tank(new Wine[] { new Wine(0), new Wine(71), new Wine(5), new Wine(9) }),
-        new Tank(new Wine[] { new Wine(0), new Wine(0), new Wine(120), new Wine(60) }),
-        new Tank(100),
-        //new Tank(new Wine[] { new Wine(60), new Wine(0), new Wine(0), new Wine(0) }),
-        new Tank(new Wine[] { new Wine(8), new Wine(41), new Wine(28), new Wine(3) }),
-        //new Tank(new Wine[] { new Wine(1), new Wine(4), new Wine(0), new Wine(90) }),
-    };
-
-    Console.WriteLine("Similarity of the nodes: " + Similarity(tankArrayA, tankArrayB) + " / 10");
-
-    Tank[] table = new Tank[]
-    {
-        new Tank(100),
-        new Tank(new Wine[] {new Wine(50), new Wine(40), new Wine(60), new Wine(10) }),
-    };
-
-    Wine[] formul = new Wine[]
-    {
-        new Wine(50),
-        new Wine(40),
-        new Wine(60),
-        new Wine(10),
-    };
-    float a = 2.0f;
-
-    // Call the CheckFormula function from File1
-    Console.WriteLine("The formula is similar with the wine in the tank ? " + Tank.CheckFormula(table, formul, a));
 }
 ```
 
@@ -819,7 +787,7 @@ static int NbrTotalWine(Tank[] a)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Calculate the similarity of wine between 2 array of tank
+Calculate the similarity of wine between 2 array of tank.
 
 ```cs
 static int NbrEachWine(Tank[] a, Tank[] b)
@@ -848,6 +816,30 @@ static int NbrEachWine(Tank[] a, Tank[] b)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
+Calculates the number of tanks in the array of tank call "a" that have at least two wines.
+
+```cs
+public static int NbrMix(Tank[] a)
+{
+    var sum = 0;
+    var total = 0;
+    for (var i = 0; i < a.Length; i++)
+    {
+        for (var j = 0; j < a[i].Wine.Length; j++)
+        {
+            if (a[i].Wine[j].Quantity >= 1)
+                sum++;
+        }
+        if (sum >= 2)
+            total++;
+        sum = 0;
+    }
+    return total;
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
 Check if the child node moves away from the target in relation to a parent node and return a booleen.
 
 ```cs
@@ -865,40 +857,106 @@ public static bool IsMovingAway(Tank[] parent, Tank[] child, Tank[] target)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
-Reads the CSV file and returns a List of Wine objects
+Parses a CSV file containing wine data and returns an array of Wine objects based on the specified quantity index.
 
 ```cs
-static Wine[] ReadCSV(string path)
+static Wine[] CSVToFormula(string path)
 {
-    var reader = new StreamReader(File.OpenRead(path));
-    List<string> wine_name = new List<string>();
-    List<float> quantity = new List<float>();
+    int quantityIndex = 1;
+    using (var reader = new StreamReader(path))
+    {
+        List<Wine> wines = new List<Wine>();
 
-    reader.ReadLine();
-            
-    while (!reader.EndOfStream)
-    {
-        var line = reader.ReadLine();
-        var values = line.Split(',');
-                
-        wine_name.Add(values[0]);
-        quantity.Add(float.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture));
-                
+        // Skip the header line
+        reader.ReadLine();
+
+            while (!reader.EndOfStream)
+        {
+            var line = reader.ReadLine();
+            var values = line.Split(',');
+
+            // Parse the quantity value from the CSV column
+            float quantity = float.Parse(values[quantityIndex]);
+
+            // Replace -1 with 0
+            if (quantity == -1)
+            {
+                quantity = 0;
+            }
+
+            wines.Add(new Wine(quantity));
+        }
+
+        return wines.ToArray();
     }
-    foreach (var column1 in wine_name)
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Counts the number of lines in a CSV file given in the parameter "filepath".
+
+```cs
+static int CountLinesInCSV(string filePath)
+{
+    try
     {
-        Console.WriteLine(column1);
+        int lineCount = 0;
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            while (reader.ReadLine() != null)
+            {
+                lineCount++;
+            }
+        }
+        return lineCount;
     }
-    foreach (var column2 in quantity)
+    catch (IOException e)
     {
-        Console.WriteLine(column2);
+        Console.WriteLine("An error occurred while reading the CSV file: " + e.Message);
+        return 0;
     }
-    var wines = new Wine[wine_name.Count];
-    for (int i = 0; i < wine_name.Count; i++)
+}
+```
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+Parses a CSV file given in parameter "path" containing tank data and returns an array of Tank objects. The parameter "size" is the size of the Wine array in each Tank object.
+
+```cs
+public static Tank[] CSVToTank(string path, int size)
+{
+    using (var reader = new StreamReader(path))
     {
-        wines[i] = new Wine(quantity[i]);
+        int lines = CountLinesInCSV(path);
+        Tank[] tanks = new Tank[lines];
+        var i = 0;
+
+        // Skip the header row
+        reader.ReadLine();
+
+        while (!reader.EndOfStream)
+        {
+            var line = reader.ReadLine();
+            var values = line.Split(',');
+
+            var tank = new Tank();
+            tank.Capacity = int.Parse(values[0]);
+
+            int wineIndex = int.Parse(values[1]);
+            tank.Wine = new Wine[size];
+            for (var j = 0; j < size; j++)
+            {
+                tank.Wine[j] = new Wine();
+                if (wineIndex > -1)
+                    tank.Wine[j].Quantity = (j == wineIndex) ? tank.Capacity : 0;
+            }
+            tanks[i] = tank;
+            i++;
+        }
+
+        return tanks;
     }
-    return wines;
 }
 ```
 
