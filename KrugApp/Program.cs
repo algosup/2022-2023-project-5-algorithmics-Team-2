@@ -64,14 +64,45 @@ namespace KrugApp
 
             var bestNode = TankTree.Search(tree, formula);
 
-            Console.ForegroundColor = ConsoleColor.Green;
             var tmpNode = bestNode;
             while (tmpNode.ParentNode != null)
             {
                 if (tmpNode.Step.Item1 != null)
-                    Console.WriteLine($"Split tank number {tmpNode.Step.Item1} into tanks {tmpNode.Step.Item2.Item1} and {tmpNode.Step.Item2.Item2}");
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Split ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("tank number ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item1);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" into tanks ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item2.Item1);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" and ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item2.Item2 + "\n");
+                }
                 else
-                    Console.WriteLine($"Merge into tank number {tmpNode.Step.Item3} tanks {tmpNode.Step.Item2.Item1} and {tmpNode.Step.Item2.Item2}");
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("Merge ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("into tank number ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item3);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" tanks ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item2.Item1);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" and ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(tmpNode.Step.Item2.Item2 + "\n");
+
+                }
+                Console.ResetColor();
                 tmpNode = tmpNode.ParentNode;
             }
             // Print the closest tank to the formula from the best node
