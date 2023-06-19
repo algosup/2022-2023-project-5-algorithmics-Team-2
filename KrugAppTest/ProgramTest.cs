@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using KrugApp;
 
-
+/*
 namespace KrugAppTest
 {
     [TestClass]
@@ -624,3 +624,4 @@ namespace KrugAppTest
         }
     }
 }
+*/

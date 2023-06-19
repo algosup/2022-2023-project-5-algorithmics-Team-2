@@ -124,12 +124,23 @@
 
                     // Keep track of the step that generated the child
                     childNode.Step = Step;
-                    // Add the new state to the possible childs if it is valid
-                    if (childNode.IsValid())
-                        possibleChilds.Add(childNode);
+
+
+                    // Add the new state to the possible childs if it is valid (pruning)                    
+                    //if (childNode.IsValid())
+                    possibleChilds.Add(childNode);
                 }
             }
             return possibleChilds;
+        }
+
+        public int CountNodes()
+        {
+            // count every node of the tree
+            int count = 1;
+            foreach (var child in this.ChildNodes)
+                count += child.CountNodes();
+            return count;
         }
 
         public void GenerateChilds(int depth, List<Tuple<int, int>>[] combinaison)
@@ -139,7 +150,6 @@
                 var possibleChilds = this.GetPossibleChilds(combinaison);
                 foreach (var childNode in possibleChilds)
                 {
-                    // This might change the value of the parent node, need to check
                     childNode.ParentNode = this;
                     this.ChildNodes.Add(childNode);
                     childNode.GenerateChilds(depth - 1, combinaison);
@@ -148,26 +158,80 @@
         }
 
         // todo FINISH THE BREADTH SEARCH
-        public TankTree? BreadthSearch(Wine[] formula)
+
+        private static float DiffFormula(Tank[] tanks, Wine[] formula)
         {
-            // Look for the node with the tank that has the closest combinaison of wine to the formula
-            TankTree? closestNode = null;
-            int closestDistance = int.MaxValue;
-            foreach (var node in this.ChildNodes)
+            float lowest = float.MaxValue;
+            foreach (var tank in tanks)
             {
-                int distance = 0;
-
-
-
-
-                    
-                if (distance < closestDistance)
+                if (tank.IsEmpty)
+                    continue;
+                float diff = 0;
+                for (int i = 0; i < tank.Wine.Length; i++)
                 {
-                    closestDistance = distance;
-                    closestNode = node;
+                    diff += Math.Abs(tank.Wine[i].Quantity - formula[i].Quantity);
+                }
+                if (diff < lowest)
+                    lowest = diff;
+            }
+            return lowest;
+        }
+
+        public static TankTree Search(TankTree tree, Wine[] formula)
+        {
+            // Look at all the leafs of the tree and return the best solution
+            TankTree bestSolution = tree;
+            float bestScore = float.MaxValue;
+
+            foreach (var node in tree.ChildNodes)
+            {
+                if (node.ChildNodes.Count == 0)
+                {
+                    float score = DiffFormula(node.value, formula);
+                    if (score < bestScore)
+                    {
+                        bestScore = score;
+                        bestSolution = node;
+                    }
+                }
+                else
+                {
+                    var solution = Search(node, formula);
+                    if (solution != null)
+                    {
+                        float score = DiffFormula(solution.value, formula);
+                        if (score < bestScore)
+                        {
+                            bestScore = score;
+                            bestSolution = solution;
+                        }
+                    }
                 }
             }
-            return closestNode;
+            // return the best solution
+            return bestSolution;
+        }
+
+        public static Tank bestTank(TankTree node, Wine[] formula)
+        {
+            var bestTank = node.value[0];
+            float bestScore = float.MaxValue;
+            foreach (var tank in node.value) 
+            {
+                if (tank.IsEmpty)
+                    continue;
+                float score = 0;
+                for (int i = 0; i < tank.Wine.Length; i++)
+                {
+                    score += Math.Abs(tank.Wine[i].Quantity - formula[i].Quantity);
+                }
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    bestTank = tank;
+                }
+            }
+            return bestTank;
         }
     }
 }

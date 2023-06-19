@@ -5,10 +5,10 @@
         public const int MIN_CAPACITY = 1;
         public const int MAX_CAPACITY = 200;
 
-        public const int MAX_WINES = 400;
+        public const int MAX_WINES = 40;
         public bool IsEmpty { get; set; }
             
-        public float Capacity { get; }
+        public float Capacity { get; set; }
         public Wine[] Wine { get; set; }
 
 
