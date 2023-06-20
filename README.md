@@ -43,10 +43,10 @@ The objective of the project is to implement a program who blend many wines to r
 
 ## Links to documents
 
-### Specifications
+### Specificationss
 
-- [Functional Specifications](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Functional_Specifications.md)
-- [Technical Specifications](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Technical_Specifications.md)
+- [Functional Specificationss](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Functional_Specificationss.md)
+- [Technical Specificationss](https://github.com/algosup/2022-2023-project-5-algorithmics-Team-2/blob/Management/Documents/Technical_Specificationss.md)
 
 ### Tests
 
