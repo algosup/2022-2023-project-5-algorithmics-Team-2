@@ -108,16 +108,17 @@ namespace KrugApp
             // Print the closest tank to the formula from the best node
             Tank best = TankTree.bestTank(bestNode, formula);
 
-            Console.WriteLine("\tTank : ");
-            foreach(var wine in best.Wine)
+            Console.WriteLine("Tank :\tFormula :");
+            for (int i = 0; i < formula.Length || i < best.Wine.Length; i++)
             {
-                Console.Write(wine.Quantity + " ");
-            }
-
-            Console.WriteLine("\n\tFormula : ");
-            foreach (var wine in formula)
-            {
-                Console.Write(wine.Quantity + " ");
+                Console.ForegroundColor = ConsoleColor.White;
+                if (best.Wine[i].Quantity != 0)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(best.Wine[i].Quantity + "\t");
+                Console.ForegroundColor = ConsoleColor.White;
+                if (formula[i].Quantity != 0)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(formula[i].Quantity + "\n");
             }
 
             Console.ResetColor();
